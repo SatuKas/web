@@ -6,6 +6,8 @@ import * as React from 'react';
 import {
   Controller,
   FormProvider,
+  SubmitErrorHandler,
+  SubmitHandler,
   useFormContext,
   useFormState,
   type ControllerProps,
@@ -134,13 +136,24 @@ export function FormMessage({ className, ...props }: React.ComponentProps<'p'>) 
   );
 }
 
-type FormProps = React.ComponentProps<typeof FormProvider> &
-  Pick<React.ComponentProps<'form'>, 'onSubmit' | 'className'>;
+type FormProps<TFieldValues extends FieldValues = FieldValues> = React.ComponentProps<
+  typeof FormProvider<TFieldValues>
+> & {
+  className?: string;
+  onSubmit: SubmitHandler<TFieldValues>;
+  onError?: SubmitErrorHandler<TFieldValues>;
+};
 
-const Form = ({ children, onSubmit, className, ...props }: FormProps) => {
+const Form = <TFieldValues extends FieldValues = FieldValues>({
+  children,
+  onSubmit,
+  className,
+  onError,
+  ...props
+}: FormProps<TFieldValues>) => {
   return (
     <FormProvider {...props}>
-      <Box as="form" onSubmit={onSubmit} className={className}>
+      <Box as="form" className={className} {...(onSubmit && { onSubmit: props.handleSubmit(onSubmit, onError) })}>
         {children}
       </Box>
     </FormProvider>

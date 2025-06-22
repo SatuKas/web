@@ -1,5 +1,44 @@
 {
   "common": {
-    "clickMe": "Klik saya"
+    "login": "Masuk",
+    "register": "Daftar"
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Halaman tidak ditemukan",
+    "button": "Kembali"
+  },
+  "auth": {
+    "login": {
+      "title": "Selamat Datang",
+      "subtitle": "Masuk ke akun Anda"
+    },
+    "continueWith": "Lanjutkan dengan",
+    "dontHaveAccount": "Belum punya akun?",
+    "form": {
+      "label": {
+        "email": "Email",
+        "password": "Kata Sandi",
+        "forgotPassword": "Lupa Kata Sandi?"
+      },
+      "placeholder": {
+        "email": "Masukkan email Anda",
+        "password": "Masukkan kata sandi Anda"
+      },
+      "message": {
+        "toast": {
+          "error": "Terjadi kesalahan saat login",
+          "success": "Berhasil login"
+        },
+        "error": {
+          "emailRequired": "Email wajib diisi",
+          "passwordRequired": "Kata sandi wajib diisi",
+          "invalidEmail": "Email tidak valid",
+          "invalidPassword": "Kata sandi tidak valid",
+          "passwordMinLength": "Kata sandi minimal 8 karakter"
+        },
+        "success": "Berhasil login"
+      }
+    }
   }
 }
