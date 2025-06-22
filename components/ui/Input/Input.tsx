@@ -3,6 +3,10 @@ import * as React from 'react';
 import FormInputWraper from '@/components/shared/FormInputWraper';
 import { cn } from '@/libs/cn/index';
 import { DefaultInputProps } from '@/types/client/ui';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { useState } from 'react';
+import Button from '../Button';
+import Stack from '../Stack';
 
 type InputProps = React.ComponentProps<'input'> & DefaultInputProps;
 
@@ -22,10 +26,29 @@ const InputComponent = ({ className, type, ...props }: React.ComponentProps<'inp
   );
 };
 
-const Input = ({ label, labelDirection, name, ...props }: InputProps) => {
+const Input = ({ label, labelDirection, name, required, type, ...props }: InputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <FormInputWraper label={label} labelDirection={labelDirection} name={name}>
-      <InputComponent {...props} />
+    <FormInputWraper label={label} labelDirection={labelDirection} name={name} required={required}>
+      <Stack className="relative">
+        <InputComponent name={name} type={showPassword ? 'text' : type} {...props} />
+        {type === 'password' && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute right-2 top-1/2 -translate-y-1/2 dark:hover:bg-transparent hover:bg-transparent"
+            onClick={handleShowPassword}
+          >
+            {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+          </Button>
+        )}
+      </Stack>
     </FormInputWraper>
   );
 };

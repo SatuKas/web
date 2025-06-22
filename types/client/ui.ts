@@ -5,4 +5,5 @@ export type DefaultInputProps = {
   labelDirection?: LabelDirection;
   name?: string;
   description?: string;
+  required?: boolean;
 };
