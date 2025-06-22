@@ -1,4 +1,4 @@
-import TranslationProvider from '@/components/hoc/TranslationProvider';
+import AppProvider from '@/components/hoc/AppProvider';
 import type { Metadata } from 'next';
 import { getLocale } from 'next-intl/server';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <TranslationProvider>{children}</TranslationProvider>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );
