@@ -1,0 +1,69 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+yarn.lock
+package-lock.json
+
+# testing
+/coverage
+
+# production
+/dist
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env.*
+.vscode/settings.json
+
+# ci/cd
+.gitlab-ci.yml
+Dockerfile
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+.prettierignore
+.eslintignore
+.husky/
+.gitignore
+.gitkeep
+.eslintrc.json
+.prettierrc.
+.commitlintrc.json
+.storybook/*
+.releaserc.json
+.npmignore
+.npmrc
+babel.config.js
+rollup.config.js
+tsconfig.json
+vite.config.*
+
+/src/stories
+/src/assets
+/archive
+
+# Docker
+docker-compose.yml
+Dockerfile-storybook
+
+# Snapshot
+*.snap
+
+# Zip
+*.zip
+
+
