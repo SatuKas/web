@@ -45,7 +45,7 @@ const Input = ({ label, labelDirection, name, required, type, ...props }: InputP
             className="absolute right-2 top-1/2 -translate-y-1/2 dark:hover:bg-transparent hover:bg-transparent"
             onClick={handleShowPassword}
           >
-            {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+            {showPassword ? <EyeIcon className="text-primary" /> : <EyeOffIcon />}
           </Button>
         )}
       </Stack>

@@ -1,7 +1,15 @@
 {
   "common": {
     "login": "Masuk",
-    "register": "Daftar"
+    "register": "Daftar",
+    "message": {
+      "error": {
+        "maxCharacter": "Maksimal {max} karakter",
+        "minCharacter": "Minimal {min} karakter"
+      },
+      "success": {},
+      "toast": {}
+    }
   },
   "notFound": {
     "title": "404",
@@ -13,31 +21,53 @@
       "title": "Selamat Datang",
       "subtitle": "Masuk ke akun Anda"
     },
+    "register": {
+      "title": "Daftar Akun",
+      "subtitle": "Daftar akun Anda"
+    },
     "continueWith": "Atau lanjutkan dengan",
     "dontHaveAccount": "Belum punya akun?",
+    "alreadyHaveAccount": "Sudah punya akun?",
     "form": {
       "label": {
+        "name": "Nama",
+        "username": "Username",
         "email": "Email",
         "password": "Kata Sandi",
+        "confirmPassword": "Konfirmasi Kata Sandi",
         "forgotPassword": "Lupa Kata Sandi?"
       },
       "placeholder": {
+        "name": "Masukkan nama Anda",
+        "username": "Masukkan username Anda",
         "email": "Masukkan email Anda",
-        "password": "Masukkan kata sandi Anda"
+        "password": "Masukkan kata sandi Anda",
+        "confirmPassword": "Masukkan kembali kata sandi Anda"
       },
       "message": {
         "toast": {
-          "error": "Terjadi kesalahan saat login",
-          "success": "Berhasil login"
+          "errorLogin": "Terjadi kesalahan saat masuk",
+          "successLogin": "Berhasil masuk",
+          "errorRegister": "Terjadi kesalahan saat mendaftar akun",
+          "successRegister": "Berhasil mendaftarkan akun"
         },
         "error": {
           "emailRequired": "Email wajib diisi",
           "passwordRequired": "Kata sandi wajib diisi",
+          "nameRequired": "Nama wajib diisi",
+          "usernameRequired": "Username wajib diisi",
           "invalidEmail": "Email tidak valid",
           "invalidPassword": "Kata sandi tidak valid",
-          "passwordMinLength": "Kata sandi minimal 8 karakter"
+          "passwordMinLength": "Kata sandi minimal 8 karakter",
+          "passwordMaxLength": "Kata sandi maksimal 20 karakter",
+          "passwordNotAllowed": "Kata sandi hanya boleh mengandung huruf, angka, dan karakter khusus",
+          "confirmPasswordRequired": "Konfirmasi kata sandi wajib diisi",
+          "confirmPasswordNotMatch": "Konfirmasi kata sandi tidak cocok"
         },
-        "success": "Berhasil login"
+        "success": {
+          "login": "Berhasil masuk",
+          "register": "Berhasil mendaftarkan akun"
+        }
       }
     }
   }
