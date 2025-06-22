@@ -1,4 +1,5 @@
-import Button from '@/components/ui/Button/Button';
+import ThemeToggle from '@/components/shared/ThemeToggle';
+import Button from '@/components/ui/Button';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
@@ -37,7 +38,8 @@ export default function Home() {
           >
             Read our docs
           </a>
-          <Button loading>{t('common.clickMe')}</Button>
+          <Button className="transition-all duration-700 delay-300 hover:scale-105">{t('common.clickMe')}</Button>
+          <ThemeToggle />
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
