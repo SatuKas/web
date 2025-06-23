@@ -10,7 +10,23 @@
       },
       "success": {},
       "toast": {}
+    },
+    "theme": {
+      "title": "Tema Aplikasi",
+      "light": "Terang",
+      "dark": "Gelap",
+      "system": "Sistem"
     }
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "settings": "Pengaturan",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "profile": "Profil",
+    "help": "Bantuan",
+    "privacy": "Privasi",
+    "theme": "Tema Aplikasi"
   },
   "notFound": {
     "title": "404",
