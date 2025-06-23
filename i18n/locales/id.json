@@ -2,6 +2,7 @@
   "common": {
     "login": "Masuk",
     "register": "Daftar",
+    "back": "Kembali",
     "message": {
       "error": {
         "maxCharacter": "Maksimal {max} karakter",
@@ -35,7 +36,10 @@
         "email": "Email",
         "password": "Kata Sandi",
         "confirmPassword": "Konfirmasi Kata Sandi",
-        "forgotPassword": "Lupa Kata Sandi?"
+        "forgotPassword": "Lupa Kata Sandi?",
+        "loginWithApple": "Masuk dengan Apple",
+        "loginWithGoogle": "Masuk dengan Google",
+        "loginWithFacebook": "Masuk dengan Facebook"
       },
       "placeholder": {
         "name": "Masukkan nama Anda",
@@ -63,10 +67,6 @@
           "passwordNotAllowed": "Kata sandi hanya boleh mengandung huruf, angka, dan karakter khusus",
           "confirmPasswordRequired": "Konfirmasi kata sandi wajib diisi",
           "confirmPasswordNotMatch": "Konfirmasi kata sandi tidak cocok"
-        },
-        "success": {
-          "login": "Berhasil masuk",
-          "register": "Berhasil mendaftarkan akun"
         }
       }
     }

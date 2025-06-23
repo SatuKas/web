@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button';
 import Form, { FormField } from '@/components/ui/Form';
 import Input from '@/components/ui/Input';
 import Stack from '@/components/ui/Stack';
+import Tooltip from '@/components/ui/Tooltip';
 import Typography from '@/components/ui/Typography';
 import { AUTH_CONFIG } from '@/config/app';
 import { FORGOT_PASSWORD_PATH_URL, REGISTER_PATH_URL } from '@/constants/routes';
@@ -39,6 +40,7 @@ const LoginForm = () => {
               type="email"
               placeholder={t('auth.form.placeholder.email')}
               label={t('auth.form.label.email')}
+              required
               {...field}
             />
           )}
@@ -52,6 +54,7 @@ const LoginForm = () => {
                 type="password"
                 placeholder={t('auth.form.placeholder.password')}
                 label={t('auth.form.label.password')}
+                required
                 {...field}
               />
             )}
@@ -75,18 +78,24 @@ const LoginForm = () => {
               </Typography>
             </Box>
             <Box className="grid grid-cols-3 gap-4">
-              <Button variant="outline" type="button" className="w-full fill-primary">
-                <AppleBrand />
-                <span className="sr-only">Login with Apple</span>
-              </Button>
-              <Button variant="outline" type="button" className="w-full fill-primary">
-                <GoogleBrand />
-                <span className="sr-only">Login with Google</span>
-              </Button>
-              <Button variant="outline" type="button" className="w-full fill-primary">
-                <MetaBrand />
-                <span className="sr-only">Login with Meta</span>
-              </Button>
+              <Tooltip content={t('auth.form.label.loginWithApple')}>
+                <Button variant="outline" type="button" className="w-full fill-primary">
+                  <AppleBrand />
+                  <span className="sr-only">{t('auth.form.label.loginWithApple')}</span>
+                </Button>
+              </Tooltip>
+              <Tooltip content={t('auth.form.label.loginWithGoogle')}>
+                <Button variant="outline" type="button" className="w-full fill-primary">
+                  <GoogleBrand />
+                  <span className="sr-only">{t('auth.form.label.loginWithGoogle')}</span>
+                </Button>
+              </Tooltip>
+              <Tooltip content={t('auth.form.label.loginWithFacebook')}>
+                <Button variant="outline" type="button" className="w-full fill-primary">
+                  <MetaBrand />
+                  <span className="sr-only">{t('auth.form.label.loginWithFacebook')}</span>
+                </Button>
+              </Tooltip>
             </Box>
           </>
         ) : null}
