@@ -12,3 +12,4 @@ export const FORGOT_PASSWORD_PATH_URL = '/auth/forgot-password';
 
 // Dashboard Routes
 export const DASHBOARD_PATH_URL = '/dashboard';
+export const DUMMY_PATH_URL = '/not-found';

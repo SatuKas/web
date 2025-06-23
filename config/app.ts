@@ -1,6 +1,7 @@
 import ImageMeta from '@/assets/image/image-meta.png';
 import LogoIcon from '@/assets/image/logo-icon.svg';
 import LogoText from '@/assets/image/logo-text.svg';
+import { SIDEBAR_MENU_ITEM } from './menu';
 
 export const APP_NAME = 'My Cool App';
 export const APP_DESCRIPTION = 'My Cool App Description';
@@ -18,3 +19,5 @@ export const AUTH_CONFIG = {
   socialMedia: true,
   legalConscern: true,
 };
+
+export const APP_SIDEBAR_MENU = SIDEBAR_MENU_ITEM;
