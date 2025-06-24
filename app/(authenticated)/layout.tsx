@@ -1,9 +1,9 @@
-import DashboardLayout from '@/components/layout/DashboardLayout';
+import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout';
 
 export default async function RootAuthenticatedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <DashboardLayout>{children}</DashboardLayout>;
+  return <AuthenticatedLayout>{children}</AuthenticatedLayout>;
 }

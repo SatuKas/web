@@ -1,8 +1,7 @@
-// import DashboardPage from '@/components/page/dashboard/DashboardPage';
+import DashboardPage from '@/components/page/authenticated/DashboardPage';
 
 const DashboardPageRoute = () => {
-  //   return <DashboardPage />;
-  return <div>DashboardPage</div>;
+  return <DashboardPage />;
 };
 
 export default DashboardPageRoute;

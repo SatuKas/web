@@ -2,11 +2,11 @@ import AppSidebar from '@/components/ui/Sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/Sidebar/Sidebar';
 import { ReactNode } from 'react';
 
-interface DashboardLayoutProps {
+interface AuthenticatedLayoutProps {
   children: ReactNode;
 }
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const AuthenticatedLayout = ({ children }: AuthenticatedLayoutProps) => {
   return (
     <SidebarProvider
       style={
@@ -16,10 +16,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar />
+      <AppSidebar variant="inset" />
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
 };
 
-export default DashboardLayout;
+export default AuthenticatedLayout;
