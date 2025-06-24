@@ -14,6 +14,7 @@ import {
 
 interface ThemeToggleProps {
   children?: React.ReactNode;
+  isMobile?: boolean;
 }
 
 export const ThemeIcon = () => {
@@ -27,7 +28,7 @@ export const ThemeIcon = () => {
   );
 };
 
-function ThemeToggle({ children }: ThemeToggleProps) {
+function ThemeToggle({ children, isMobile }: ThemeToggleProps) {
   const { setTheme, theme } = useTheme();
   const t = useTranslations();
 
@@ -42,7 +43,7 @@ function ThemeToggle({ children }: ThemeToggleProps) {
           </Button>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" side="right">
+      <DropdownMenuContent side={isMobile ? 'bottom' : 'right'} align={isMobile ? 'end' : 'start'}>
         <DropdownMenuCheckboxItem checked={theme === 'light'} onCheckedChange={() => setTheme('light')}>
           {t('common.theme.light')}
         </DropdownMenuCheckboxItem>
