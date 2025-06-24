@@ -14,12 +14,13 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
 } from './Sidebar';
 import UserMenuItem from './UserMenuItem';
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -41,6 +42,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
       <SidebarFooter>
         <UserMenuItem user={USER_MOCK} />
       </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   );
 };
