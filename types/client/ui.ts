@@ -62,3 +62,8 @@ export enum SidebarTitle {
   PRIVACY = 'privacy',
   THEME = 'theme',
 }
+
+export type BreadcrumbLinkItem = {
+  title: string;
+  url?: string;
+};
