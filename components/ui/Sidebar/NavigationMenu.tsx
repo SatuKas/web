@@ -31,6 +31,7 @@ interface NavigationMenuProps extends React.ComponentPropsWithoutRef<typeof Side
 
 interface NavigationActionProps {
   items: SidebarMenuActionItem[];
+  isMobile?: boolean;
 }
 
 const NavigationLink = ({
@@ -47,9 +48,9 @@ const NavigationLink = ({
   );
 };
 
-const NavigationAction = ({ items }: NavigationActionProps) => {
+const NavigationAction = ({ items, isMobile }: NavigationActionProps) => {
   const t = useTranslations();
-  const { isMobile } = useSidebar();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -64,9 +65,11 @@ const NavigationAction = ({ items }: NavigationActionProps) => {
         align={isMobile ? 'end' : 'start'}
       >
         {items.map((action) => (
-          <DropdownMenuItem key={action.title}>
-            {action.icon}
-            <span className="select-none">{t(`sidebar.${action.title}` as TranslationKeys)}</span>
+          <DropdownMenuItem key={action.title} asChild>
+            <NavigationLink href={action.url}>
+              {action.icon}
+              <span className="select-none">{t(`menu.${action.title}` as TranslationKeys)}</span>
+            </NavigationLink>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
@@ -77,20 +80,21 @@ const NavigationAction = ({ items }: NavigationActionProps) => {
 const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
   const { menu, title } = items;
   const t = useTranslations();
+  const { isMobile } = useSidebar();
 
   return (
     <SidebarGroup {...props}>
-      {title && <SidebarGroupLabel>{t(`sidebar.${title}` as TranslationKeys)}</SidebarGroupLabel>}
+      {title && <SidebarGroupLabel>{t(`menu.${title}` as TranslationKeys)}</SidebarGroupLabel>}
       <SidebarGroupContent className="flex flex-col gap-2 ">
         <SidebarMenu className="transition-all duration-200 animate-in slide-in-from-top-2">
           {menu.map((item) =>
             item.title !== SidebarTitle.THEME ? (
               <Collapsible key={item.title} asChild className="group/collapsible">
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton tooltip={item.title} asChild>
+                  <SidebarMenuButton tooltip={t(`menu.${item.title}` as TranslationKeys)} asChild>
                     <NavigationLink href={item.url}>
                       {item.icon}
-                      <span className="select-none">{t(`sidebar.${item.title}` as TranslationKeys)}</span>
+                      <span className="select-none">{t(`menu.${item.title}` as TranslationKeys)}</span>
                       {item.subMenu && (
                         <CollapsibleTrigger asChild>
                           <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 hover:cursor-pointer" />
@@ -98,7 +102,7 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                       )}
                     </NavigationLink>
                   </SidebarMenuButton>
-                  {item.action ? <NavigationAction items={item.action} /> : null}
+                  {item.action ? <NavigationAction items={item.action} isMobile={isMobile} /> : null}
                   {item.subMenu ? (
                     <CollapsibleContent>
                       <SidebarMenuSub className="transition-all duration-200 animate-in slide-in-from-top-2">
@@ -106,10 +110,10 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton asChild>
                               <NavigationLink href={subItem.url}>
-                                <span className="select-none">{t(`sidebar.${subItem.title}` as TranslationKeys)}</span>
+                                <span className="select-none">{t(`menu.${subItem.title}` as TranslationKeys)}</span>
                               </NavigationLink>
                             </SidebarMenuSubButton>
-                            {item.action ? <NavigationAction items={item.action} /> : null}
+                            {item.action ? <NavigationAction items={item.action} isMobile={isMobile} /> : null}
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
@@ -119,8 +123,8 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
               </Collapsible>
             ) : (
               <SidebarMenuItem key={item.title}>
-                <ThemeToggle key={item.title}>
-                  <SidebarMenuButton tooltip={item.title}>
+                <ThemeToggle key={item.title} isMobile={isMobile}>
+                  <SidebarMenuButton tooltip={t('common.theme.title')}>
                     <ThemeIcon /> {t('common.theme.title')}
                   </SidebarMenuButton>
                 </ThemeToggle>
