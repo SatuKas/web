@@ -6,10 +6,11 @@ import Box from '@/components/ui/Box';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/Collapsible';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/DropdownMenu';
 import { TranslationKeys } from '@/types/client/locale';
-import { SidebarMenuActionItem, SidebarMenuGroup, SidebarTitle } from '@/types/client/ui';
+import { SidebarMenuActionItem, SidebarMenuGroup, SidebarMenuItem, SidebarTitle } from '@/types/client/ui';
 import { ChevronRight, Ellipsis } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 import {
   SidebarGroup,
@@ -18,7 +19,7 @@ import {
   SidebarMenu,
   SidebarMenuAction,
   SidebarMenuButton,
-  SidebarMenuItem,
+  SidebarMenuItem as SidebarMenuItemComponent,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
@@ -81,6 +82,15 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
   const { menu, title } = items;
   const t = useTranslations();
   const { isMobile } = useSidebar();
+  const pathname = usePathname();
+
+  const isChiledActive = (item: SidebarMenuItem) => {
+    return (
+      item.subMenu?.some((subItem) => {
+        return pathname.startsWith(subItem.url || '');
+      }) || pathname === item.url
+    );
+  };
 
   return (
     <SidebarGroup {...props}>
@@ -89,9 +99,13 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
         <SidebarMenu className="transition-all duration-200 animate-in slide-in-from-top-2">
           {menu.map((item) =>
             item.title !== SidebarTitle.THEME ? (
-              <Collapsible key={item.title} asChild className="group/collapsible">
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton tooltip={t(`menu.${item.title}` as TranslationKeys)} asChild>
+              <Collapsible key={item.title} asChild defaultOpen={isChiledActive(item)} className="group/collapsible">
+                <SidebarMenuItemComponent key={item.title}>
+                  <SidebarMenuButton
+                    tooltip={t(`menu.${item.title}` as TranslationKeys)}
+                    asChild
+                    isActive={pathname === item.url}
+                  >
                     <NavigationLink href={item.url}>
                       {item.icon}
                       <span className="select-none">{t(`menu.${item.title}` as TranslationKeys)}</span>
@@ -108,7 +122,7 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                       <SidebarMenuSub className="transition-all duration-200 animate-in slide-in-from-top-2">
                         {item.subMenu?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild>
+                            <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
                               <NavigationLink href={subItem.url}>
                                 <span className="select-none">{t(`menu.${subItem.title}` as TranslationKeys)}</span>
                               </NavigationLink>
@@ -119,16 +133,16 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                       </SidebarMenuSub>
                     </CollapsibleContent>
                   ) : null}
-                </SidebarMenuItem>
+                </SidebarMenuItemComponent>
               </Collapsible>
             ) : (
-              <SidebarMenuItem key={item.title}>
+              <SidebarMenuItemComponent key={item.title}>
                 <ThemeToggle key={item.title} isMobile={isMobile}>
                   <SidebarMenuButton tooltip={t('common.theme.title')}>
                     <ThemeIcon /> {t('common.theme.title')}
                   </SidebarMenuButton>
                 </ThemeToggle>
-              </SidebarMenuItem>
+              </SidebarMenuItemComponent>
             )
           )}
         </SidebarMenu>
