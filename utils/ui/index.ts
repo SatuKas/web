@@ -1,6 +1,6 @@
-import { BreadcrumbLinkItem } from '@/types/client/ui';
+import { BreadcrumbLinkItem, MenuTranslationKeys } from '@/types/client/ui';
 
-export const breadcrumbHelper = (title: string, url?: string): BreadcrumbLinkItem => {
+export const breadcrumbHelper = (title: MenuTranslationKeys, url?: string): BreadcrumbLinkItem => {
   return {
     title,
     url,
