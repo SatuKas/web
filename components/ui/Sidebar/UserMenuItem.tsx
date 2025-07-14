@@ -1,6 +1,6 @@
 'use client';
 
-import { BellIcon, CreditCardIcon, LogOutIcon, MoreVerticalIcon, UserCircleIcon } from 'lucide-react';
+import { LogOutIcon, MoreVerticalIcon, UserCircleIcon } from 'lucide-react';
 
 import Avatar from '@/components/ui/Avatar/Avatar';
 import {
@@ -13,6 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/Sidebar/Sidebar';
+import { PROFILE_PATH_URL } from '@/constants/routes';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 const UserMenuItem = ({
   user,
@@ -24,7 +27,7 @@ const UserMenuItem = ({
   };
 }) => {
   const { isMobile } = useSidebar();
-
+  const t = useTranslations();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -59,23 +62,17 @@ const UserMenuItem = ({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <UserCircleIcon />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCardIcon />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <BellIcon />
-                Notifications
+              <DropdownMenuItem asChild>
+                <Link href={PROFILE_PATH_URL}>
+                  <UserCircleIcon />
+                  {t('menu.profile')}
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOutIcon />
-              Log out
+              {t('common.logout')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

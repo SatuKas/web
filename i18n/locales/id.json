@@ -1,6 +1,7 @@
 {
   "common": {
     "login": "Masuk",
+    "logout": "Keluar",
     "register": "Daftar",
     "back": "Kembali",
     "message": {
