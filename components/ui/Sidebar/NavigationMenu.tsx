@@ -40,8 +40,18 @@ const NavigationLink = ({
   href,
   ...props
 }: PropsWithChildren<{ href?: string }> & Omit<ComponentPropsWithoutRef<typeof Link>, 'as' | 'href'>) => {
+  const { isMobile, setOpenMobile } = useSidebar();
   return href ? (
-    <Link href={href} {...props}>
+    <Link
+      href={href}
+      onClick={() => {
+        console.log('duaw');
+        if (isMobile) {
+          setOpenMobile(false);
+        }
+      }}
+      {...props}
+    >
       {children}
     </Link>
   ) : (
