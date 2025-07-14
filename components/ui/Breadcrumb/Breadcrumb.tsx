@@ -6,6 +6,7 @@ import * as React from 'react';
 
 import { cn } from '@/libs/cn/index';
 import { BreadcrumbLinkItem } from '@/types/client/ui';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../DropdownMenu';
 
@@ -91,15 +92,16 @@ export function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps
 }
 
 const Breadcrumb = ({ items }: BreadcrumbProps) => {
+  const t = useTranslations();
   const renderItem = (item: BreadcrumbLinkItem, lastChild?: boolean) => {
     return (
       <BreadcrumbItem key={item.title} className={cn({ 'hidden md:block': !lastChild })}>
         {item.url && !lastChild ? (
           <BreadcrumbLink asChild>
-            <Link href={item.url}>{item.title}</Link>
+            <Link href={item.url}>{t(item.title)}</Link>
           </BreadcrumbLink>
         ) : (
-          <BreadcrumbPage>{item.title}</BreadcrumbPage>
+          <BreadcrumbPage>{t(item.title)}</BreadcrumbPage>
         )}
       </BreadcrumbItem>
     );
