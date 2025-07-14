@@ -1,4 +1,5 @@
 import { TooltipContent } from '@/components/ui/Tooltip/Tooltip';
+import { TranslationKeys } from './locale';
 
 export type LabelDirection = 'vertical' | 'horizontal';
 
@@ -63,7 +64,9 @@ export enum SidebarTitle {
   THEME = 'theme',
 }
 
+export type MenuTranslationKeys = Extract<TranslationKeys, `menu.${string}`>;
+
 export type BreadcrumbLinkItem = {
-  title: string;
+  title: MenuTranslationKeys;
   url?: string;
 };
