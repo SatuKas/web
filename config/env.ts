@@ -13,8 +13,8 @@ const validateEnvVar = (key: string, value: string | undefined): string => {
 };
 
 const env = {
-  MAIN_DOMAIN: validateEnvVar('MAIN_DOMAIN', process.env.MAIN_DOMAIN),
-  BASE_API_URL: validateEnvVar('BASE_API_URL', process.env.BASE_API_URL),
+  MAIN_DOMAIN: validateEnvVar('NEXT_PUBLIC_MAIN_DOMAIN', process.env.NEXT_PUBLIC_MAIN_DOMAIN),
+  BASE_API_URL: validateEnvVar('NEXT_PUBLIC_BASE_API_URL', process.env.NEXT_PUBLIC_BASE_API_URL),
 };
 
 export default env;

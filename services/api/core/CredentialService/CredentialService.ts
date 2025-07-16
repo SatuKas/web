@@ -1,43 +1,29 @@
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookieKey';
-import axios, { AxiosError } from 'axios';
-import AuthCredential from './types/credential';
+'use client';
 
-type Config = {
-  refreshTokenEndpoint: string;
-  revokeTokenEndpoint: string;
-  storage: Storage;
-};
+import env from '@/config/env';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookie';
+import { LOGIN_PATH_URL } from '@/constants/routes';
+import { AuthCookie } from '@/libs/cookie/authCookie';
+import * as ApiRoute from '@/services/api/routes';
+import { RefreshTokenResponse } from '@/types/api/auth';
+import { ApiResponse } from '@/types/api/common';
+import axios, { AxiosError, AxiosInstance } from 'axios';
+import AuthCredential, { TokenPayload } from './types/credential';
 
-/**
- * Service for handling credentials such as access and refresh tokens.
- * Implements the ICredential interface.
- */
 export class CredentialService implements AuthCredential {
-  protected storage: Storage;
-  protected refreshTokenEndpoint: string;
-  protected revokeTokenEndpoint: string;
+  protected authStorage: AuthCookie;
+  private client: AxiosInstance;
+  readonly REFRESH_TOKEN_ENDPOINT = ApiRoute.AUTH_REFRESH_TOKEN_PATH;
+  readonly REVOKE_TOKEN_ENDPOINT = ApiRoute.AUTH_LOGOUT_PATH;
 
   readonly REFRESH_TOKEN_KEY = REFRESH_TOKEN_KEY;
   readonly ACCESS_TOKEN_KEY = ACCESS_TOKEN_KEY;
 
-  /**
-   * Constructs a new CredentialService instance.
-   * @param storage - The storage mechanism to use for storing tokens.
-   * @param refreshTokenEndpoint - The endpoint to request new tokens.
-   * @param revokeTokenEndpoint - The endpoint to revoke tokens.
-   */
-  constructor({ storage, refreshTokenEndpoint, revokeTokenEndpoint }: Config) {
-    this.storage = storage;
-    this.refreshTokenEndpoint = refreshTokenEndpoint;
-    this.revokeTokenEndpoint = revokeTokenEndpoint;
-  }
-
-  getAccessToken(): string | null {
-    return this.storage.getItem(this.ACCESS_TOKEN_KEY);
-  }
-
-  getRefreshToken(): string | null {
-    return this.storage.getItem(this.REFRESH_TOKEN_KEY);
+  constructor() {
+    this.authStorage = new AuthCookie();
+    this.client = axios.create({
+      baseURL: env.BASE_API_URL + ApiRoute.getApiVersion(),
+    });
   }
 
   /**
@@ -47,20 +33,29 @@ export class CredentialService implements AuthCredential {
   async requestNewTokens(): Promise<void> {
     try {
       const body = {
-        refresh_token: this.getRefreshToken(),
+        refresh_token: this.authStorage.getAuthToken().refreshToken,
       };
-      const response = await axios.post(this.refreshTokenEndpoint, body, {
+      const response = await this.client.post<ApiResponse<RefreshTokenResponse>>(this.REFRESH_TOKEN_ENDPOINT, body, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
 
       const { data } = response.data;
-      if (data.access) {
-        this.setAccessToken(data.access);
+      if (data.token) {
+        this.authStorage.setAuthToken({
+          token: {
+            accessToken: data.token.access_token,
+            refreshToken: data.token.refresh_token,
+          },
+          expires: {
+            accessToken: data.expires.access_token,
+            refreshToken: data.expires.refresh_token,
+          },
+        });
       }
     } catch (error) {
-      this.clearTokens();
+      this.authStorage.removeAuthToken();
       throw error;
     }
   }
@@ -69,15 +64,15 @@ export class CredentialService implements AuthCredential {
    * Revokes the current tokens.
    * @throws Will throw an error if the request fails.
    */
-  async revokeTokens(): Promise<void> {
-    await axios
+  private async revokeTokens(): Promise<void> {
+    await this.client
       .post(
-        this.revokeTokenEndpoint,
+        this.REVOKE_TOKEN_ENDPOINT,
         {},
         {
           headers: {
             'content-type': 'application/json',
-            Authorization: `Bearer ${this.getAccessToken()}`,
+            Authorization: `Bearer ${this.authStorage.getAuthToken().accessToken}`,
           },
         }
       )
@@ -88,24 +83,33 @@ export class CredentialService implements AuthCredential {
           throw error;
         }
       });
-
-    this.clearTokens();
   }
 
-  private removeAccessToken(): void {
-    this.storage.removeItem(this.ACCESS_TOKEN_KEY);
+  /**
+   * The handler function to be called on logout.
+   */
+  async logoutHandler(autoRedirect = true) {
+    await this.revokeTokens()
+      .then((res) => {
+        console.info('logout success from assessment', res);
+      })
+      .catch((error) => {
+        console.error('logout error', error);
+        return error;
+      })
+      .finally(() => {
+        this.authStorage.removeAuthToken();
+        if (autoRedirect) {
+          window.open(LOGIN_PATH_URL, '_self');
+        }
+      });
   }
 
-  private setAccessToken(token: string): void {
-    this.storage.setItem(this.ACCESS_TOKEN_KEY, token);
+  loginHandler(payload: TokenPayload): void {
+    this.authStorage.setAuthToken(payload);
   }
 
-  private removeRefreshToken(): void {
-    this.storage.removeItem(this.REFRESH_TOKEN_KEY);
-  }
-
-  private clearTokens(): void {
-    this.removeAccessToken();
-    this.removeRefreshToken();
+  getAccessToken(): string | null {
+    return this.authStorage.getAuthToken().accessToken;
   }
 }

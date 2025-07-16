@@ -16,7 +16,7 @@ export const APP_IMAGE_META = ImageMeta.src;
 export const AUTH_CONFIG = {
   signUp: true,
   forgotPassword: true,
-  socialMedia: true,
+  socialMedia: false,
   legalConscern: true,
 };
 

@@ -10,20 +10,29 @@ export default interface AuthCredential {
   getAccessToken(): string | null;
 
   /**
-   * Retrieves the current refresh token.
-   * @returns {string | null} The refresh token if available, otherwise null.
-   */
-  getRefreshToken(): string | null;
-
-  /**
    * Requests new access and refresh tokens.
    * @returns {Promise<void>} A promise that resolves when the tokens are successfully requested.
    */
   requestNewTokens(): Promise<void>;
 
   /**
-   * Revokes the current access and refresh tokens.
-   * @returns {Promise<void>} A promise that resolves when the tokens are successfully revoked.
+   * The handler function to be called on logout.
    */
-  revokeTokens(): Promise<void>;
+  logoutHandler(): Promise<void>;
+
+  /**
+   * The handler function to be called on login.
+   */
+  loginHandler(payload: TokenPayload): void;
 }
+
+export type TokenPayload = {
+  token: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  expires: {
+    accessToken: number;
+    refreshToken: number;
+  };
+};

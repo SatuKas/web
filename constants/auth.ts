@@ -1,12 +1,12 @@
 import AuthImage from '@/assets/image/auth-default-image.svg';
-import { LoginPayload, RegisterPayload } from '@/types/client/auth';
+import { LoginData, RegisterData } from '@/types/client/auth';
 
-export const LOGIN_FORM_DEFAULT_VALUES: LoginPayload = {
+export const LOGIN_FORM_DEFAULT_VALUES: LoginData = {
   email: '',
   password: '',
 };
 
-export const REGISTER_FORM_DEFAULT_VALUES: RegisterPayload = {
+export const REGISTER_FORM_DEFAULT_VALUES: RegisterData = {
   name: '',
   username: '',
   email: '',

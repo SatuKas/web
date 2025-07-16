@@ -1,3 +1,4 @@
+import { DEFAULT_COOKIE_CONFIG } from '@/constants/cookie';
 import Cookies, { CookieSetOptions } from 'universal-cookie';
 
 /**
@@ -19,8 +20,8 @@ export class CookieStorage implements Storage {
    * Creates an instance of CookieStorage.
    * @param config - Configuration options for setting cookies.
    */
-  constructor(config: CookieSetOptions) {
-    this.cookies = new Cookies(null, config);
+  constructor(config?: CookieSetOptions) {
+    this.cookies = new Cookies(null, config ?? DEFAULT_COOKIE_CONFIG);
     this.length = this.cookies.getAll().length;
   }
 

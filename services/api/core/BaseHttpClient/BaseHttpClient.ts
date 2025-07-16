@@ -1,10 +1,8 @@
 import env from '@/config/env';
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookieKey';
-import { LOGIN_PATH_URL } from '@/constants/routes';
-import { CookieStorage } from '@/libs/cookie';
 import AuthCredential, { CredentialService } from '@/services/api/core/CredentialService';
 import * as ApiRoute from '@/services/api/routes';
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { ApiResponse, ExceptionCode } from '@/types/api/common';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
 
 type Config = {
   withCredential?: boolean;
@@ -28,8 +26,6 @@ export class BaseHttpClient {
    */
   private crendential: AuthCredential;
 
-  private cookieStorage: CookieStorage;
-
   /**
    * Constructs a new instance of BaseHttpClient.
    * @param credential - The credential object used for obtaining access tokens.
@@ -37,44 +33,14 @@ export class BaseHttpClient {
    * @param logoutHandler - The handler function to be called on logout.
    */
   constructor({ withCredential }: Config) {
-    this.cookieStorage = new CookieStorage({
-      domain: env.MAIN_DOMAIN,
-      path: '/',
-    });
-
-    this.crendential = new CredentialService({
-      storage: this.cookieStorage,
-      refreshTokenEndpoint: ApiRoute.AUTH_REFRESH_TOKEN_PATH,
-      revokeTokenEndpoint: ApiRoute.AUTH_LOGOUT_PATH,
-    });
+    this.crendential = new CredentialService();
     this.client = axios.create({
-      baseURL: env.BASE_API_URL,
+      baseURL: env.BASE_API_URL + ApiRoute.getApiVersion(),
     });
     this.withCredential = withCredential ?? true;
 
     this.initializeRequestInterceptor();
     this.initializeResponseInterceptor();
-  }
-
-  /**
-   * The handler function to be called on logout.
-   */
-  private async logoutHandler() {
-    await this.crendential
-      .revokeTokens()
-      .then((res) => {
-        console.info('logout success from assessment', res);
-      })
-      .catch((error) => {
-        console.error('logout error', error);
-        return error;
-      })
-      .finally(() => {
-        this.cookieStorage.removeItem(ACCESS_TOKEN_KEY);
-        this.cookieStorage.removeItem(REFRESH_TOKEN_KEY);
-
-        window.open(LOGIN_PATH_URL, '_self');
-      });
   }
 
   /**
@@ -104,18 +70,36 @@ export class BaseHttpClient {
       async (response) => {
         return response.data;
       },
-      async (error) => {
+      async (error: AxiosError<ApiResponse<any>>) => {
         const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
-        const responseStatus = error.response?.data?.code ?? error.response?.status;
+        const responseStatus = error.code ?? error.response?.status;
+        const responseData = error.response?.data;
+
+        // Handle connection errors first
+        if (!error.response) {
+          console.log({ error });
+          // Network error - no response from server
+          const networkError: ApiResponse<null> = {
+            status: 'error',
+            message: this.getNetworkErrorMessage(error),
+
+            error: {
+              code: ExceptionCode.NETWORK_ERROR,
+            },
+            data: null,
+          };
+          return Promise.reject(networkError);
+        }
+
         if (responseStatus === 401) {
           // if the response status is 401 and the same request has been retried before,
           // then logout and reject the promise otherwise try to refresh the token
           if (originalRequest._retry) {
-            this.logoutHandler();
-            return Promise.reject(error);
+            this.crendential.logoutHandler();
+            return Promise.reject(responseData);
           } else {
             try {
-              await this.requestNewToken();
+              await this.crendential.requestNewTokens();
               originalRequest._retry = true; // Mark the request as retried
               return this.client.request(originalRequest);
             } catch (error) {
@@ -123,17 +107,28 @@ export class BaseHttpClient {
             }
           }
         }
-        return Promise.reject(error);
+        return Promise.reject(responseData);
       }
     );
   }
 
-  private async requestNewToken() {
-    try {
-      await this.crendential.requestNewTokens();
-    } catch (error) {
-      this.logoutHandler();
-      return Promise.reject(error);
+  /**
+   * Get user-friendly network error message
+   */
+  private getNetworkErrorMessage(error: AxiosError): string {
+    switch (error.code) {
+      case 'ERR_NETWORK':
+        return 'No internet connection. Please check your network.';
+      case 'ECONNREFUSED':
+        return 'Server is not responding. Please try again later.';
+      case 'ETIMEDOUT':
+        return 'Request timeout. Please try again.';
+      case 'ENOTFOUND':
+        return 'Server not found. Please check the URL.';
+      case 'ECONNRESET':
+        return 'Connection was reset. Please try again.';
+      default:
+        return 'Network error occurred. Please try again.';
     }
   }
 
