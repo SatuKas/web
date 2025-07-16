@@ -14,8 +14,10 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/Sidebar/Sidebar';
 import { PROFILE_PATH_URL } from '@/constants/routes';
+import useLogoutMutation from '@/hooks/module/auth/query/useLogoutMutation';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import Spinner from '../Spinner';
 
 const UserMenuItem = ({
   user,
@@ -28,6 +30,7 @@ const UserMenuItem = ({
 }) => {
   const { isMobile } = useSidebar();
   const t = useTranslations();
+  const { logout, isLoadingLogout } = useLogoutMutation();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -70,8 +73,8 @@ const UserMenuItem = ({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOutIcon />
+            <DropdownMenuItem onClick={logout} disabled={isLoadingLogout}>
+              {isLoadingLogout ? <Spinner /> : <LogOutIcon />}
               {t('common.logout')}
             </DropdownMenuItem>
           </DropdownMenuContent>
