@@ -8,8 +8,24 @@ import { useState } from 'react';
 import Button from '../Button';
 import Stack from '../Stack';
 
+/**
+ * InputProps extends the default input props and custom DefaultInputProps.
+ * - label: string | undefined; // label text for the input
+ * - labelDirection: 'vertical' | 'horizontal' | undefined; // label position
+ * - name: string; // input name attribute
+ * - required: boolean | undefined; // whether input is required
+ * - type: string; // input type (e.g., text, password)
+ * (other props inherited from React.ComponentProps<'input'>)
+ */
 type InputProps = React.ComponentProps<'input'> & DefaultInputProps;
 
+/**
+ * InputComponent
+ * Simple wrapper for native input element with custom styling.
+ * @param className - custom class for styling
+ * @param type - input type (text, password, etc)
+ * @param props - other input props
+ */
 const InputComponent = ({ className, type, ...props }: React.ComponentProps<'input'>) => {
   return (
     <input
@@ -26,9 +42,25 @@ const InputComponent = ({ className, type, ...props }: React.ComponentProps<'inp
   );
 };
 
+/**
+ * Input
+ * Main input component with label and password visibility toggle.
+ * @param label - input label
+ * @param labelDirection - label position (vertical/horizontal)
+ * @param name - input name
+ * @param required - is input required
+ * @param type - input type (text, password, etc)
+ * @param props - other input props
+ */
 const Input = ({ label, labelDirection, name, required, type, ...props }: InputProps) => {
+  // showPassword state is used to toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
 
+  /**
+   * handleShowPassword
+   * Toggle password visibility when eye icon is clicked.
+   * Prevents default button behavior and stops event propagation.
+   */
   const handleShowPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -38,7 +70,9 @@ const Input = ({ label, labelDirection, name, required, type, ...props }: InputP
   return (
     <FormInputWraper label={label} labelDirection={labelDirection} name={name} required={required}>
       <Stack className="relative">
+        {/* If showPassword is true, input type is 'text', otherwise use the original type */}
         <InputComponent name={name} type={showPassword ? 'text' : type} {...props} />
+        {/* Show eye icon button only if input type is password */}
         {type === 'password' && (
           <Button
             variant="ghost"

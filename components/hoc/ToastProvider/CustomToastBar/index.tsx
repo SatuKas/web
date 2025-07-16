@@ -4,13 +4,27 @@ import { CircleCheck, CircleX, Info, TriangleAlert } from 'lucide-react';
 import { useMemo } from 'react';
 import { ToastType } from '..';
 
+/**
+ * Props for CustomToastBar component.
+ */
 interface CustomToastBarProps {
-  type: ToastType;
-  message: string;
-  errorId?: string;
+  type: ToastType; // Toast type, determines color and icon (e.g. 'success', 'error', etc)
+  message: string; // Main message to display in the toast
+  errorId?: string; // Optional error ID, shown for error toasts
 }
 
+/**
+ * CustomToastBar is a UI component for displaying a styled toast notification.
+ * It adapts its color scheme and icon based on the toast type.
+ *
+ * @param {CustomToastBarProps} props - Props for the toast bar
+ * @returns {JSX.Element}
+ */
 const CustomToastBar = ({ type, message, errorId }: CustomToastBarProps) => {
+  /**
+   * Memoized color scheme based on toast type.
+   * This ensures the color classes only recalculate when 'type' changes.
+   */
   const { light, main, textColor, background } = useMemo(() => {
     switch (type) {
       case 'success':
@@ -51,6 +65,10 @@ const CustomToastBar = ({ type, message, errorId }: CustomToastBarProps) => {
     }
   }, [type]);
 
+  /**
+   * Memoized icon selection based on toast type.
+   * This ensures the icon only recalculates when 'type' changes.
+   */
   const icon = useMemo(() => {
     switch (type) {
       case 'success':
@@ -68,13 +86,17 @@ const CustomToastBar = ({ type, message, errorId }: CustomToastBarProps) => {
 
   return (
     <>
+      {/* Left colored bar for visual indicator */}
       <div className={clsx('w-[8px] rounded-s-lg', main)} />
+      {/* Main toast container */}
       <div className={clsx('flex gap-3 p-2 pr-3 items-center rounded-e-lg', background)}>
+        {/* Icon container */}
         <div
           className={clsx('flex flex-[1_0_32px] items-center justify-center w-8 h-8 rounded-full', light, textColor)}
         >
           {icon}
         </div>
+        {/* Message and optional error ID */}
         <div className="flex flex-col items-start justify-center text-sm">
           <p className="font-semibold text-foreground">{message}</p>
           {errorId && <p className="text-xs">ID: {errorId}</p>}

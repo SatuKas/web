@@ -10,14 +10,29 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../DropdownMenu';
 
+/**
+ * BreadcrumbProps
+ * @property items - array of breadcrumb link items to render in the breadcrumb navigation
+ */
 interface BreadcrumbProps {
-  items: BreadcrumbLinkItem[];
+  items: BreadcrumbLinkItem[]; // array of breadcrumb items to display
 }
 
+/**
+ * BreadcrumbComponent
+ * Wrapper for the breadcrumb navigation, renders a <nav> with proper aria attributes.
+ * @param props - all props for nav element
+ */
 export function BreadcrumbComponent({ ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
 }
 
+/**
+ * BreadcrumbList
+ * Renders the list container for breadcrumb items.
+ * @param className - custom class for styling
+ * @param props - all other props for ol element
+ */
 export function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
   return (
     <ol
@@ -31,16 +46,29 @@ export function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol
   );
 }
 
+/**
+ * BreadcrumbItem
+ * Renders a single breadcrumb item as a <li>.
+ * @param className - custom class for styling
+ * @param props - all other props for li element
+ */
 export function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
   return <li data-slot="breadcrumb-item" className={cn('inline-flex items-center gap-1.5', className)} {...props} />;
 }
 
+/**
+ * BreadcrumbLink
+ * Renders a breadcrumb link, optionally as a child component.
+ * @param asChild - if true, renders as a Slot for custom component, otherwise as <a>
+ * @param className - custom class for styling
+ * @param props - all other props for anchor element
+ */
 export function BreadcrumbLink({
   asChild,
   className,
   ...props
 }: React.ComponentProps<'a'> & {
-  asChild?: boolean;
+  asChild?: boolean; // if true, use Slot for custom component
 }) {
   const Comp = asChild ? Slot : 'a';
 
@@ -49,6 +77,12 @@ export function BreadcrumbLink({
   );
 }
 
+/**
+ * BreadcrumbPage
+ * Renders the current page in the breadcrumb, styled as non-interactive.
+ * @param className - custom class for styling
+ * @param props - all other props for span element
+ */
 export function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
@@ -62,6 +96,13 @@ export function BreadcrumbPage({ className, ...props }: React.ComponentProps<'sp
   );
 }
 
+/**
+ * BreadcrumbSeparator
+ * Renders a separator between breadcrumb items, default is a ChevronRight icon.
+ * @param children - custom separator, defaults to ChevronRight
+ * @param className - custom class for styling
+ * @param props - all other props for li element
+ */
 export function BreadcrumbSeparator({ children, className, ...props }: React.ComponentProps<'li'>) {
   return (
     <li
@@ -76,6 +117,12 @@ export function BreadcrumbSeparator({ children, className, ...props }: React.Com
   );
 }
 
+/**
+ * BreadcrumbEllipsis
+ * Renders an ellipsis icon for collapsed breadcrumb items.
+ * @param className - custom class for styling
+ * @param props - all other props for span element
+ */
 export function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
@@ -91,8 +138,22 @@ export function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps
   );
 }
 
+/**
+ * Breadcrumb
+ * Main component to render the breadcrumb navigation.
+ * Handles logic for displaying collapsed breadcrumbs if items > 3.
+ * @param items - array of breadcrumb link items
+ */
 const Breadcrumb = ({ items }: BreadcrumbProps) => {
   const t = useTranslations();
+
+  /**
+   * Render a single breadcrumb item.
+   * If not the last child and has a URL, renders as a link.
+   * Otherwise, renders as the current page.
+   * @param item - breadcrumb item to render
+   * @param lastChild - is this the last breadcrumb item (current page)
+   */
   const renderItem = (item: BreadcrumbLinkItem, lastChild?: boolean) => {
     return (
       <BreadcrumbItem key={item.title} className={cn({ 'hidden md:block': !lastChild })}>
@@ -107,6 +168,11 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
     );
   };
 
+  /**
+   * Render collapsed breadcrumb items as a dropdown menu.
+   * Only used when items.length > 3.
+   * @param items - array of breadcrumb items to collapse
+   */
   const renderOtherItems = (items: BreadcrumbLinkItem[]) => {
     return (
       <BreadcrumbItem key={items[0].title}>
@@ -133,12 +199,19 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
     );
   };
 
+  /**
+   * Memoized rendering of breadcrumb items.
+   * If more than 3 items, collapse the middle items into a dropdown.
+   * Otherwise, render all items with separators.
+   */
   const renderItems = React.useMemo(() => {
     const breadcrumbItems: React.ReactNode[] = [];
 
+    // If more than 3 items, collapse the middle items into a dropdown
     if (items.length > 3) {
       breadcrumbItems.push(renderItem(items[0]));
       breadcrumbItems.push(<BreadcrumbSeparator key="separator-1" />);
+      // Collapse all items except the first and last into a dropdown
       breadcrumbItems.push(renderOtherItems(items.slice(1)));
       breadcrumbItems.push(<BreadcrumbSeparator key="separator-2" />);
       breadcrumbItems.push(renderItem(items[items.length - 1], true));
@@ -146,6 +219,7 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
       return breadcrumbItems;
     }
 
+    // Render all items with separators if 3 or less
     return items.map((item, index) => (
       <React.Fragment key={item.title}>
         {renderItem(item, index === items.length - 1)}

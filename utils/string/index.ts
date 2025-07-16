@@ -1,5 +1,26 @@
-export const parseErrorString = (input: string): { message: string; errorId: string | undefined } => {
+/**
+ * Parses an error string to extract the main message and an optional error ID.
+ *
+ * @param {string} input - The error string to be parsed. Expected format: "Some error message [ID]: error-id".
+ * @returns {{
+ *   message: string; // The main error message, or the original input if parsing fails
+ *   errorId: string | undefined; // The extracted error ID if present, otherwise undefined
+ * }}
+ *
+ * @description
+ * This function uses regular expressions to extract the error message and error ID from a string.
+ * The expected format is: "Some error message [ID]: error-id".
+ * If the format does not match, it will return the original input as the message and undefined as the errorId.
+ */
+export const parseErrorString = (
+  input: string
+): {
+  message: string; // The main error message
+  errorId: string | undefined; // The error ID if found, otherwise undefined
+} => {
+  // Regex to capture everything before " [ID]:" as the message
   const messageMatch = input.match(/^(.*)\s\[ID\]:/);
+  // Regex to capture everything after "[ID]: " as the errorId
   const errorIdMatch = input.match(/\[ID\]:\s(.+)$/);
 
   if (messageMatch && errorIdMatch) {
@@ -8,6 +29,7 @@ export const parseErrorString = (input: string): { message: string; errorId: str
     return { message, errorId };
   }
 
+  // If the input doesn't match the expected format, return the whole input as message
   return { message: input, errorId: undefined };
 };
 

@@ -5,6 +5,13 @@ import * as React from 'react';
 
 import { cn } from '@/libs/cn/index';
 
+/**
+ * AvatarComponent is a wrapper for the Radix Avatar Root.
+ * Use this as the main container for the avatar.
+ *
+ * @param className - additional class names for styling
+ * @param props - other props passed to the Radix Avatar Root
+ */
 export function AvatarComponent({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Root>) {
   return (
     <AvatarPrimitive.Root
@@ -15,12 +22,24 @@ export function AvatarComponent({ className, ...props }: React.ComponentProps<ty
   );
 }
 
+/**
+ * AvatarImage is used to render the avatar image inside the AvatarComponent.
+ *
+ * @param className - additional class names for styling
+ * @param props - other props passed to the Radix Avatar Image
+ */
 export function AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
     <AvatarPrimitive.Image data-slot="avatar-image" className={cn('aspect-square size-full', className)} {...props} />
   );
 }
 
+/**
+ * AvatarFallback is used to render fallback content (like initials) if the image fails to load.
+ *
+ * @param className - additional class names for styling
+ * @param props - other props passed to the Radix Avatar Fallback
+ */
 export function AvatarFallback({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
   return (
     <AvatarPrimitive.Fallback
@@ -31,16 +50,36 @@ export function AvatarFallback({ className, ...props }: React.ComponentProps<typ
   );
 }
 
+/**
+ * AvatarProps
+ *
+ * image?: string;    // The image URL for the avatar
+ * fallback?: string; // The fallback content (e.g., initials) if image is not available
+ * alt?: string;      // The alt text for the avatar image
+ *
+ * Inherits all props from Radix Avatar Root.
+ */
 interface AvatarProps extends React.ComponentProps<typeof AvatarPrimitive.Root> {
-  image?: string;
-  fallback?: string;
-  alt?: string;
+  image?: string; // The image URL for the avatar
+  fallback?: string; // The fallback content (e.g., initials) if image is not available
+  alt?: string; // The alt text for the avatar image
 }
 
+/**
+ * Avatar is a composite component that renders an avatar image if available,
+ * otherwise renders fallback content. This is the main component to use.
+ *
+ * Logic:
+ * - If `image` is provided, AvatarImage will be rendered.
+ * - If `fallback` is provided, AvatarFallback will be rendered.
+ * - Both can be rendered together, but typically only one is visible at a time.
+ */
 const Avatar = ({ className, image, fallback, alt, ...props }: AvatarProps) => {
   return (
     <AvatarComponent className={className} {...props}>
+      {/* Render AvatarImage if image prop is provided */}
       {image && <AvatarImage src={image} alt={alt ?? 'avatar'} />}
+      {/* Render AvatarFallback if fallback prop is provided */}
       {fallback && <AvatarFallback>{fallback}</AvatarFallback>}
     </AvatarComponent>
   );

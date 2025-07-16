@@ -11,14 +11,29 @@ import useRegisterForm from '@/hooks/module/auth/useRegisterForm';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
+/**
+ * RegisterForm component for handling user registration.
+ *
+ * This component renders a registration form with fields for name, username, email, password, and confirm password.
+ * It uses react-hook-form (via useRegisterForm) for form state management and validation.
+ * The form also provides navigation to the login page for users who already have an account.
+ *
+ * - Handles form submission via onSubmit from useRegisterForm.
+ * - Uses next-intl for translation of all labels and placeholders.
+ * - Each field is wrapped in FormField for validation and error handling.
+ * - The submit button and login link are both translated.
+ */
 const RegisterForm = () => {
+  // useRegisterForm provides form state and submit handler
   const { form, onSubmit } = useRegisterForm();
 
+  // t is the translation function from next-intl
   const t = useTranslations();
 
   return (
     <Form onSubmit={onSubmit} className="p-6 md:p-8 w-full flex items-center justify-center" {...form}>
       <Stack gap={6} width="full">
+        {/* Title and subtitle */}
         <Stack className="text-center" align="center">
           <Typography variant={'h3'} className="text-2xl font-bold">
             {t('auth.register.title')}
@@ -27,6 +42,7 @@ const RegisterForm = () => {
             {t('auth.register.subtitle')}
           </Typography>
         </Stack>
+        {/* Name input field */}
         <FormField
           control={form.control}
           name="name"
@@ -40,6 +56,7 @@ const RegisterForm = () => {
             />
           )}
         />
+        {/* Username input field */}
         <FormField
           control={form.control}
           name="username"
@@ -53,6 +70,7 @@ const RegisterForm = () => {
             />
           )}
         />
+        {/* Email input field */}
         <FormField
           control={form.control}
           name="email"
@@ -66,6 +84,7 @@ const RegisterForm = () => {
             />
           )}
         />
+        {/* Password input field */}
         <FormField
           control={form.control}
           name="password"
@@ -79,6 +98,7 @@ const RegisterForm = () => {
             />
           )}
         />
+        {/* Confirm password input field */}
         <FormField
           control={form.control}
           name="confirmPassword"
@@ -92,9 +112,11 @@ const RegisterForm = () => {
             />
           )}
         />
+        {/* Submit button */}
         <Button type="submit" className="w-full">
           {t('common.login')}
         </Button>
+        {/* Link to login page for users who already have an account */}
         <Box className="text-center text-sm">
           {t('auth.alreadyHaveAccount')}{' '}
           <Link href={LOGIN_PATH_URL}>

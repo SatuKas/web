@@ -2,6 +2,11 @@ import { cn } from '@/libs/cn';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ElementType, HTMLAttributes, forwardRef } from 'react';
 
+/**
+ * typographyVariants
+ * Utility to generate Tailwind class names for different typography variants and font weights.
+ * Uses class-variance-authority (cva) for variant management.
+ */
 export const typographyVariants = cva('text-foreground', {
   variants: {
     variant: {
@@ -39,11 +44,24 @@ export const typographyVariants = cva('text-foreground', {
   },
 });
 
+/**
+ * TypographyProps
+ * Props for the Typography component.
+ *
+ * @property asChild - (optional) If true, renders as a child component. Not used in this implementation.
+ * @property as - (optional) Custom element type to render (e.g., 'span', 'div', etc).
+ * Other props are inherited from HTMLAttributes<HTMLParagraphElement> and VariantProps<typeof typographyVariants>.
+ */
 interface TypographyProps extends HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof typographyVariants> {
-  asChild?: boolean;
-  as?: ElementType;
+  asChild?: boolean; // If true, render as a child component (not used in this implementation)
+  as?: ElementType; // Custom element type to render (e.g., 'span', 'div', etc)
 }
 
+/**
+ * variantElementMap
+ * Maps each typography variant to its corresponding HTML element.
+ * This ensures semantic HTML output for each variant.
+ */
 const variantElementMap = {
   h1: 'h1',
   h2: 'h2',
@@ -61,8 +79,17 @@ const variantElementMap = {
   muted: 'p',
 } as const;
 
+/**
+ * Typography
+ * Reusable component for rendering semantic and styled text elements.
+ *
+ * - Selects the HTML element based on the `variant` or `as` prop.
+ * - Applies Tailwind classes based on the selected variant and weight.
+ * - Forwards ref to the rendered element.
+ */
 const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
   ({ className, variant, weight, as, children, ...props }, ref) => {
+    // Determine which HTML element to render: use `as` prop if provided, otherwise map from variant, fallback to 'p'
     const Component = as || (variant ? variantElementMap[variant] : 'p');
 
     return (

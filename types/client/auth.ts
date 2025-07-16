@@ -1,12 +1,18 @@
+/**
+ * Type for user login data.
+ */
 export type LoginData = {
-  email: string;
-  password: string;
+  email: string; // user's email address
+  password: string; // user's password (plain text, will be handled securely on backend)
 };
 
+/**
+ * Type for user registration data.
+ */
 export type RegisterData = {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  name: string; // user's full name
+  username: string; // unique username for the user
+  email: string; // user's email address
+  password: string; // password for account creation
+  confirmPassword: string; // must match password, used for validation on frontend
 };

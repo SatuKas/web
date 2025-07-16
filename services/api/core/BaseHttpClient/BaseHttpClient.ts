@@ -4,33 +4,32 @@ import * as ApiRoute from '@/services/api/routes';
 import { ApiResponse, ExceptionCode } from '@/types/api/common';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
 
+/**
+ * Config type for BaseHttpClient constructor.
+ * @property {boolean} [withCredential] - if true, will attach Authorization header with access token (default: true)
+ */
 type Config = {
-  withCredential?: boolean;
+  withCredential?: boolean; // whether to use credential for the request
 };
 
 /**
- * BaseHttpClient class provides a wrapper around Axios for making HTTP requests.
- * It includes request and response interceptors for handling authorization tokens
- * and automatic token refresh on 401 responses.
+ * BaseHttpClient is a wrapper for Axios to handle HTTP requests with built-in
+ * support for authentication, token refresh, and error handling.
+ *
+ * - Automatically attaches access token to requests (if withCredential is true)
+ * - Handles 401 errors by trying to refresh token and retrying the request
+ * - Handles network errors and returns user-friendly messages
  */
 export class BaseHttpClient {
-  private client: AxiosInstance;
+  private client: AxiosInstance; // Axios instance for making HTTP requests
+
+  private withCredential: boolean; // whether to use credential for the request
+
+  private crendential: AuthCredential; // credential service for token management
 
   /**
-   * Whether to use credential for the request.
-   */
-  private withCredential: boolean;
-
-  /**
-   * The credential object used for obtaining access tokens.
-   */
-  private crendential: AuthCredential;
-
-  /**
-   * Constructs a new instance of BaseHttpClient.
-   * @param credential - The credential object used for obtaining access tokens.
-   * @param baseUrl - The base URL for the Axios client.
-   * @param logoutHandler - The handler function to be called on logout.
+   * Create a new BaseHttpClient instance.
+   * @param {Config} param0 - config object
    */
   constructor({ withCredential }: Config) {
     this.crendential = new CredentialService();
@@ -44,7 +43,8 @@ export class BaseHttpClient {
   }
 
   /**
-   * Initializes the request interceptor to add the Authorization header.
+   * Set up Axios request interceptor to add Authorization header if token exists.
+   * This ensures every outgoing request (if withCredential is true) will have the access token.
    */
   private initializeRequestInterceptor() {
     this.client.interceptors.request.use(
@@ -53,7 +53,6 @@ export class BaseHttpClient {
         if (token && this.withCredential) {
           config.headers['Authorization'] = `Bearer ${token}`;
         }
-
         return config;
       },
       (error) => {
@@ -63,26 +62,29 @@ export class BaseHttpClient {
   }
 
   /**
-   * Initializes the response interceptor to handle token refresh on 401 responses.
+   * Set up Axios response interceptor to handle:
+   * - Network errors (no response from server)
+   * - 401 Unauthorized: try to refresh token and retry request once, otherwise logout
+   * - Other errors: just forward the error data
    */
   private initializeResponseInterceptor() {
     this.client.interceptors.response.use(
       async (response) => {
+        // Always return only the response data for successful requests
         return response.data;
       },
       async (error: AxiosError<ApiResponse<any>>) => {
+        // originalRequest is used to retry the request after token refresh
         const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
         const responseStatus = error.code ?? error.response?.status;
         const responseData = error.response?.data;
 
-        // Handle connection errors first
+        // Handle network errors (no response from server)
         if (!error.response) {
           console.log({ error });
-          // Network error - no response from server
           const networkError: ApiResponse<null> = {
             status: 'error',
             message: this.getNetworkErrorMessage(error),
-
             error: {
               code: ExceptionCode.NETWORK_ERROR,
             },
@@ -91,29 +93,32 @@ export class BaseHttpClient {
           return Promise.reject(networkError);
         }
 
+        // Handle 401 Unauthorized: try to refresh token and retry once
         if (responseStatus === 401) {
-          // if the response status is 401 and the same request has been retried before,
-          // then logout and reject the promise otherwise try to refresh the token
+          // If already retried, logout and reject
           if (originalRequest._retry) {
             this.crendential.logoutHandler();
             return Promise.reject(responseData);
           } else {
             try {
               await this.crendential.requestNewTokens();
-              originalRequest._retry = true; // Mark the request as retried
+              originalRequest._retry = true; // Mark as retried to avoid infinite loop
               return this.client.request(originalRequest);
             } catch (error) {
               return Promise.reject(error);
             }
           }
         }
+        // For other errors, just reject with the response data
         return Promise.reject(responseData);
       }
     );
   }
 
   /**
-   * Get user-friendly network error message
+   * Get a user-friendly message for network errors based on error code.
+   * @param {AxiosError} error - Axios error object
+   * @returns {string} - user-friendly error message
    */
   private getNetworkErrorMessage(error: AxiosError): string {
     switch (error.code) {
@@ -133,22 +138,25 @@ export class BaseHttpClient {
   }
 
   /**
-   * Sends a GET request to the specified URL.
-   * @param url - The URL to send the GET request to.
-   * @param config - Optional Axios request configuration.
-   * @returns A promise that resolves to the response data.
+   * Send a GET request.
+   * @template T
+   * @param {string} url - endpoint URL
+   * @param {AxiosRequestConfig} [config] - optional Axios config
+   * @returns {Promise<T>} - response data
    */
   protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    // Use Axios instance to send GET request
     const response = this.client.get(url, config);
     return response as Promise<T>;
   }
 
   /**
-   * Sends a POST request to the specified URL with the given data.
-   * @param url - The URL to send the POST request to.
-   * @param data - The data to include in the POST request.
-   * @param config - Optional Axios request configuration.
-   * @returns A promise that resolves to the response data.
+   * Send a POST request.
+   * @template T
+   * @param {string} url - endpoint URL
+   * @param {any} [data] - request body data
+   * @param {AxiosRequestConfig} [config] - optional Axios config
+   * @returns {Promise<T>} - response data
    */
   protected async post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
     const response = this.client.post(url, data, config);
@@ -156,11 +164,12 @@ export class BaseHttpClient {
   }
 
   /**
-   * Sends a PUT request to the specified URL with the given data.
-   * @param url - The URL to send the PUT request to.
-   * @param data - The data to include in the PUT request.
-   * @param config - Optional Axios request configuration.
-   * @returns A promise that resolves to the response data.
+   * Send a PUT request.
+   * @template T
+   * @param {string} url - endpoint URL
+   * @param {any} [data] - request body data
+   * @param {AxiosRequestConfig} [config] - optional Axios config
+   * @returns {Promise<T>} - response data
    */
   protected async put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
     const response = this.client.put(url, data, config);
@@ -168,13 +177,12 @@ export class BaseHttpClient {
   }
 
   /**
-   * Sends a PATCH request to the specified URL with the given data and configuration.
-   *
-   * @template T - The expected response type.
-   * @param {string} url - The URL to send the PATCH request to.
-   * @param {any} [data] - The data to be sent in the body of the PATCH request.
-   * @param {AxiosRequestConfig} [config] - Optional configuration for the Axios request.
-   * @returns {Promise<T>} - A promise that resolves to the response of type T.
+   * Send a PATCH request.
+   * @template T
+   * @param {string} url - endpoint URL
+   * @param {any} [data] - request body data
+   * @param {AxiosRequestConfig} [config] - optional Axios config
+   * @returns {Promise<T>} - response data
    */
   protected async patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
     const response = this.client.patch(url, data, config);
@@ -182,10 +190,11 @@ export class BaseHttpClient {
   }
 
   /**
-   * Sends a DELETE request to the specified URL.
-   * @param url - The URL to send the DELETE request to.
-   * @param config - Optional Axios request configuration.
-   * @returns A promise that resolves to the response data.
+   * Send a DELETE request.
+   * @template T
+   * @param {string} url - endpoint URL
+   * @param {AxiosRequestConfig} [config] - optional Axios config
+   * @returns {Promise<T>} - response data
    */
   protected async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     const response = this.client.delete(url, config);

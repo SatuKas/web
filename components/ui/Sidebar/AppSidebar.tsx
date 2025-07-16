@@ -18,12 +18,25 @@ import {
 } from './Sidebar';
 import UserMenuItem from './UserMenuItem';
 
+/**
+ * AppSidebar component renders the main sidebar for the application.
+ *
+ * @param props - All props are forwarded to the Sidebar component.
+ *
+ * The sidebar includes:
+ * - App logo and name at the top, which links to the dashboard.
+ * - Main navigation menu items, rendered from APP_SIDEBAR_MENU.
+ * - Optional menu items at the bottom of the menu list.
+ * - User menu at the footer, showing user info and actions.
+ * - SidebarRail for visual sidebar rail.
+ */
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
+            {/* Logo and app name, clicking this navigates to dashboard */}
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <Link href={DASHBOARD_PATH_URL}>
                 <Image src={APP_LOGO.icon} alt="logo" width={20} height={20} />
@@ -34,14 +47,21 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
+        {/* Render main sidebar menu items */}
         {APP_SIDEBAR_MENU.map((item, index) => (
-          <NavigationMenu key={`${item.title}-${index}`} items={item} />
+          <NavigationMenu
+            key={`${item.title}-${index}`} // Use title and index to ensure unique key
+            items={item} // items: menu group object
+          />
         ))}
+        {/* Render optional menu items, placed at the bottom using mt-auto */}
         <NavigationMenu items={SIDEBAR_OPTIONAL_MENU_ITEM} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
+        {/* User menu section, shows user info and actions */}
         <UserMenuItem user={USER_MOCK} />
       </SidebarFooter>
+      {/* SidebarRail is a visual element for the sidebar */}
       <SidebarRail />
     </Sidebar>
   );

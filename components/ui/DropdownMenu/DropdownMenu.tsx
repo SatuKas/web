@@ -6,18 +6,38 @@ import * as React from 'react';
 
 import { cn } from '@/libs/cn/index';
 
+/**
+ * DropdownMenu is the root component for the dropdown menu.
+ * Accepts all props from Radix DropdownMenuPrimitive.Root.
+ */
 export function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
 }
 
+/**
+ * DropdownMenuPortal is used to render dropdown content in a React portal.
+ * Accepts all props from Radix DropdownMenuPrimitive.Portal.
+ */
 export function DropdownMenuPortal({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>) {
   return <DropdownMenuPrimitive.Portal data-slot="dropdown-menu-portal" {...props} />;
 }
 
+/**
+ * DropdownMenuTrigger is the button or element that toggles the dropdown menu.
+ * Accepts all props from Radix DropdownMenuPrimitive.Trigger.
+ */
 export function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
   return <DropdownMenuPrimitive.Trigger data-slot="dropdown-menu-trigger" {...props} />;
 }
 
+/**
+ * DropdownMenuContent is the container for the dropdown menu items.
+ * @param className - custom class for styling
+ * @param sideOffset - offset from the trigger element (default: 4)
+ * Accepts all other props from Radix DropdownMenuPrimitive.Content.
+ *
+ * Note: onCloseAutoFocus is prevented to avoid focus jump when menu closes.
+ */
 export function DropdownMenuContent({
   className,
   sideOffset = 4,
@@ -28,7 +48,7 @@ export function DropdownMenuContent({
       <DropdownMenuPrimitive.Content
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
-        onCloseAutoFocus={(e) => e.preventDefault()}
+        onCloseAutoFocus={(e) => e.preventDefault()} // Prevent focus from returning to trigger on close
         className={cn(
           'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md',
           className
@@ -39,18 +59,29 @@ export function DropdownMenuContent({
   );
 }
 
+/**
+ * DropdownMenuGroup is used to group related menu items.
+ * Accepts all props from Radix DropdownMenuPrimitive.Group.
+ */
 export function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
   return <DropdownMenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />;
 }
 
+/**
+ * DropdownMenuItem represents a single actionable item in the dropdown.
+ * @param className - custom class for styling
+ * @param inset - if true, adds left padding for visual hierarchy
+ * @param variant - 'default' or 'destructive' (for dangerous actions)
+ * Accepts all other props from Radix DropdownMenuPrimitive.Item.
+ */
 export function DropdownMenuItem({
   className,
   inset,
   variant = 'default',
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
-  inset?: boolean;
-  variant?: 'default' | 'destructive';
+  inset?: boolean; // if true, adds left padding
+  variant?: 'default' | 'destructive'; // style variant for the item
 }) {
   return (
     <DropdownMenuPrimitive.Item
@@ -66,6 +97,13 @@ export function DropdownMenuItem({
   );
 }
 
+/**
+ * DropdownMenuCheckboxItem is a menu item with a checkbox.
+ * @param className - custom class for styling
+ * @param children - label or content
+ * @param checked - checked state of the checkbox
+ * Accepts all other props from Radix DropdownMenuPrimitive.CheckboxItem.
+ */
 export function DropdownMenuCheckboxItem({
   className,
   children,
@@ -82,6 +120,7 @@ export function DropdownMenuCheckboxItem({
       checked={checked}
       {...props}
     >
+      {/* Show check icon when checked */}
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckIcon className="size-4" />
@@ -92,10 +131,20 @@ export function DropdownMenuCheckboxItem({
   );
 }
 
+/**
+ * DropdownMenuRadioGroup is a container for radio items.
+ * Accepts all props from Radix DropdownMenuPrimitive.RadioGroup.
+ */
 export function DropdownMenuRadioGroup({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
   return <DropdownMenuPrimitive.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />;
 }
 
+/**
+ * DropdownMenuRadioItem is a menu item with a radio button.
+ * @param className - custom class for styling
+ * @param children - label or content
+ * Accepts all other props from Radix DropdownMenuPrimitive.RadioItem.
+ */
 export function DropdownMenuRadioItem({
   className,
   children,
@@ -110,6 +159,7 @@ export function DropdownMenuRadioItem({
       )}
       {...props}
     >
+      {/* Show circle icon when selected */}
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
           <CircleIcon className="size-2 fill-current" />
@@ -120,12 +170,18 @@ export function DropdownMenuRadioItem({
   );
 }
 
+/**
+ * DropdownMenuLabel is a non-interactive label for grouping menu items.
+ * @param className - custom class for styling
+ * @param inset - if true, adds left padding for visual hierarchy
+ * Accepts all other props from Radix DropdownMenuPrimitive.Label.
+ */
 export function DropdownMenuLabel({
   className,
   inset,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Label> & {
-  inset?: boolean;
+  inset?: boolean; // if true, adds left padding
 }) {
   return (
     <DropdownMenuPrimitive.Label
@@ -137,6 +193,11 @@ export function DropdownMenuLabel({
   );
 }
 
+/**
+ * DropdownMenuSeparator is a horizontal line to separate menu sections.
+ * @param className - custom class for styling
+ * Accepts all other props from Radix DropdownMenuPrimitive.Separator.
+ */
 export function DropdownMenuSeparator({
   className,
   ...props
@@ -150,6 +211,11 @@ export function DropdownMenuSeparator({
   );
 }
 
+/**
+ * DropdownMenuShortcut is used to display keyboard shortcuts or hints on the right side of a menu item.
+ * @param className - custom class for styling
+ * Accepts all other props for a span element.
+ */
 export function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
@@ -160,17 +226,28 @@ export function DropdownMenuShortcut({ className, ...props }: React.ComponentPro
   );
 }
 
+/**
+ * DropdownMenuSub is the container for a submenu.
+ * Accepts all props from Radix DropdownMenuPrimitive.Sub.
+ */
 export function DropdownMenuSub({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>) {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />;
 }
 
+/**
+ * DropdownMenuSubTrigger is the menu item that opens a submenu.
+ * @param className - custom class for styling
+ * @param inset - if true, adds left padding for visual hierarchy
+ * @param children - label or content
+ * Accepts all other props from Radix DropdownMenuPrimitive.SubTrigger.
+ */
 export function DropdownMenuSubTrigger({
   className,
   inset,
   children,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
-  inset?: boolean;
+  inset?: boolean; // if true, adds left padding
 }) {
   return (
     <DropdownMenuPrimitive.SubTrigger
@@ -183,11 +260,17 @@ export function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
+      {/* Chevron icon indicates submenu */}
       <ChevronRightIcon className="ml-auto size-4" />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }
 
+/**
+ * DropdownMenuSubContent is the container for submenu items.
+ * @param className - custom class for styling
+ * Accepts all other props from Radix DropdownMenuPrimitive.SubContent.
+ */
 export function DropdownMenuSubContent({
   className,
   ...props

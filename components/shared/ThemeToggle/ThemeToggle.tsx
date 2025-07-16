@@ -12,11 +12,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 
+/**
+ * Props for ThemeToggle component.
+ */
 interface ThemeToggleProps {
-  children?: React.ReactNode;
-  isMobile?: boolean;
+  children?: React.ReactNode; // Optional: custom trigger element for the dropdown
+  isMobile?: boolean; // Optional: if true, dropdown opens to bottom, otherwise to the right
 }
 
+/**
+ * ThemeIcon component displays sun and moon icons.
+ * The icon changes based on the current theme (light/dark) using CSS classes.
+ * The <span> is for screen readers to provide accessible label.
+ */
 export const ThemeIcon = () => {
   const t = useTranslations();
   return (
@@ -28,10 +36,20 @@ export const ThemeIcon = () => {
   );
 };
 
+/**
+ * ThemeToggle component provides a dropdown to switch between light, dark, and system themes.
+ * Uses next-themes for theme management and next-intl for translations.
+ *
+ * @param {ThemeToggleProps} props - Props for ThemeToggle
+ * @returns {JSX.Element}
+ */
 function ThemeToggle({ children, isMobile }: ThemeToggleProps) {
   const { setTheme, theme } = useTheme();
   const t = useTranslations();
 
+  // DropdownMenuCheckboxItem is used for each theme option.
+  // When an item is selected, setTheme is called to update the theme.
+  // The checked prop ensures the current theme is visually indicated.
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -43,7 +61,10 @@ function ThemeToggle({ children, isMobile }: ThemeToggleProps) {
           </Button>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent side={isMobile ? 'bottom' : 'right'} align={isMobile ? 'end' : 'start'}>
+      <DropdownMenuContent
+        side={isMobile ? 'bottom' : 'right'} // On mobile, dropdown opens to bottom; otherwise, to the right
+        align={isMobile ? 'end' : 'start'} // Alignment changes based on device
+      >
         <DropdownMenuCheckboxItem checked={theme === 'light'} onCheckedChange={() => setTheme('light')}>
           {t('common.theme.light')}
         </DropdownMenuCheckboxItem>

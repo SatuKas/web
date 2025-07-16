@@ -2,6 +2,11 @@ import { cn } from '@/libs/cn';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ElementType, HTMLAttributes, forwardRef } from 'react';
 
+/**
+ * stackVariants
+ * Utility for generating Tailwind-based flexbox utility classes using cva.
+ * This helps to easily compose flex layouts with different directions, alignments, justifications, wraps, gaps, widths, and heights.
+ */
 export const stackVariants = cva('flex', {
   variants: {
     direction: {
@@ -67,12 +72,51 @@ export const stackVariants = cva('flex', {
   },
 });
 
+/**
+ * StackProps
+ * Props for the Stack component.
+ *
+ * @property {ElementType} [as] - Custom component or tag to render as the root element (default: 'div')
+ * @property {string} [className] - Additional class names to apply
+ * @property {string} [direction] - Flex direction, see stackVariants for options
+ * @property {string} [align] - Flex align-items, see stackVariants for options
+ * @property {string} [justify] - Flex justify-content, see stackVariants for options
+ * @property {string} [wrap] - Flex wrap, see stackVariants for options
+ * @property {string|number} [gap] - Gap between children, see stackVariants for options
+ * @property {string} [width] - Width of the stack, see stackVariants for options
+ * @property {string} [height] - Height of the stack, see stackVariants for options
+ * ...HTMLAttributes<HTMLDivElement> - All other native div props
+ */
 interface StackProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof stackVariants> {
-  as?: ElementType;
+  as?: ElementType; // custom element or component to render, default is 'div'
 }
 
+/**
+ * Stack
+ * A flexible layout component based on flexbox, with easy props for direction, alignment, gap, etc.
+ *
+ * Uses forwardRef to allow parent components to access the underlying DOM node.
+ *
+ * @example
+ * <Stack direction="row" gap={4} align="center">...</Stack>
+ */
 const Stack = forwardRef<HTMLDivElement, StackProps>(
-  ({ className, as: Component = 'div', direction, align, justify, wrap, gap, width, height, ...props }, ref) => {
+  (
+    {
+      className,
+      as: Component = 'div', // allow custom element/component, default to 'div'
+      direction,
+      align,
+      justify,
+      wrap,
+      gap,
+      width,
+      height,
+      ...props
+    },
+    ref
+  ) => {
+    // Compose the className using stackVariants and any additional className passed in
     return (
       <Component
         ref={ref}
@@ -94,7 +138,7 @@ const Stack = forwardRef<HTMLDivElement, StackProps>(
   }
 );
 
-Stack.displayName = 'Stack';
+Stack.displayName = 'Stack'; // for better debugging in React DevTools
 
 export type { StackProps };
 export default Stack;

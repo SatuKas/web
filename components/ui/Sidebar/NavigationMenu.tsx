@@ -26,15 +26,32 @@ import {
   useSidebar,
 } from './Sidebar';
 
+/**
+ * Props for NavigationMenu component.
+ * @property items - Sidebar menu group data (contains menu items and group title)
+ * (other props inherited from SidebarGroup)
+ */
 interface NavigationMenuProps extends React.ComponentPropsWithoutRef<typeof SidebarGroup> {
-  items: SidebarMenuGroup;
+  items: SidebarMenuGroup; // Sidebar menu group data
 }
 
+/**
+ * Props for NavigationAction component.
+ * @property items - List of action items (e.g. edit, delete, etc)
+ * @property isMobile - Optional, if true, menu will be rendered for mobile context
+ */
 interface NavigationActionProps {
-  items: SidebarMenuActionItem[];
-  isMobile?: boolean;
+  items: SidebarMenuActionItem[]; // List of action items
+  isMobile?: boolean; // Is this rendered in mobile sidebar
 }
 
+/**
+ * NavigationLink
+ * Wrapper for navigation links in sidebar.
+ * If href is provided, renders a Next.js Link.
+ * If not, renders a Box as a fallback.
+ * On mobile, clicking a link will close the sidebar.
+ */
 const NavigationLink = ({
   children,
   href,
@@ -45,7 +62,7 @@ const NavigationLink = ({
     <Link
       href={href}
       onClick={() => {
-        console.log('duaw');
+        // On mobile, close the sidebar after navigation
         if (isMobile) {
           setOpenMobile(false);
         }
@@ -59,6 +76,12 @@ const NavigationLink = ({
   );
 };
 
+/**
+ * NavigationAction
+ * Renders a dropdown menu for sidebar action items (e.g. more actions).
+ * @param items - List of action items to display in dropdown
+ * @param isMobile - If true, dropdown opens at bottom, else at right
+ */
 const NavigationAction = ({ items, isMobile }: NavigationActionProps) => {
   const t = useTranslations();
 
@@ -88,13 +111,25 @@ const NavigationAction = ({ items, isMobile }: NavigationActionProps) => {
   );
 };
 
+/**
+ * NavigationMenu
+ * Main sidebar navigation menu component.
+ * Renders menu groups, menu items, submenus, and theme toggle.
+ * Handles active state and submenu open state based on current pathname.
+ */
 const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
   const { menu, title } = items;
   const t = useTranslations();
   const { isMobile } = useSidebar();
   const pathname = usePathname();
 
+  /**
+   * Checks if a menu item or any of its submenus is active (matches current pathname).
+   * @param item - Sidebar menu item
+   * @returns true if active, false otherwise
+   */
   const isChiledActive = (item: SidebarMenuItem) => {
+    // Check if any submenu is active, or the item itself is active
     return (
       item.subMenu?.some((subItem) => {
         return pathname.startsWith(subItem.url || '');
@@ -104,11 +139,13 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
 
   return (
     <SidebarGroup {...props}>
+      {/* Render group label if title exists */}
       {title && <SidebarGroupLabel>{t(`menu.${title}` as TranslationKeys)}</SidebarGroupLabel>}
       <SidebarGroupContent className="flex flex-col gap-2 ">
         <SidebarMenu className="transition-all duration-200 animate-in slide-in-from-top-2">
           {menu.map((item) =>
             item.title !== SidebarTitle.THEME ? (
+              // Collapsible for menu item with possible submenu
               <Collapsible key={item.title} asChild defaultOpen={isChiledActive(item)} className="group/collapsible">
                 <SidebarMenuItemComponent key={item.title}>
                   <SidebarMenuButton
@@ -119,6 +156,7 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                     <NavigationLink href={item.url}>
                       {item.icon}
                       <span className="select-none">{t(`menu.${item.title}` as TranslationKeys)}</span>
+                      {/* Show chevron if has submenu */}
                       {item.subMenu && (
                         <CollapsibleTrigger asChild>
                           <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 hover:cursor-pointer" />
@@ -126,7 +164,9 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                       )}
                     </NavigationLink>
                   </SidebarMenuButton>
+                  {/* Render action dropdown if item has actions */}
                   {item.action ? <NavigationAction items={item.action} isMobile={isMobile} /> : null}
+                  {/* Render submenu if exists */}
                   {item.subMenu ? (
                     <CollapsibleContent>
                       <SidebarMenuSub className="transition-all duration-200 animate-in slide-in-from-top-2">
@@ -137,6 +177,7 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                                 <span className="select-none">{t(`menu.${subItem.title}` as TranslationKeys)}</span>
                               </NavigationLink>
                             </SidebarMenuSubButton>
+                            {/* Render action dropdown for submenu if parent has actions */}
                             {item.action ? <NavigationAction items={item.action} isMobile={isMobile} /> : null}
                           </SidebarMenuSubItem>
                         ))}
@@ -146,6 +187,7 @@ const NavigationMenu = ({ items, ...props }: NavigationMenuProps) => {
                 </SidebarMenuItemComponent>
               </Collapsible>
             ) : (
+              // Special case: Theme toggle menu item
               <SidebarMenuItemComponent key={item.title}>
                 <ThemeToggle key={item.title} isMobile={isMobile}>
                   <SidebarMenuButton tooltip={t('common.theme.title')}>
