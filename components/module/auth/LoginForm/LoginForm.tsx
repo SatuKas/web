@@ -17,12 +17,17 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 const LoginForm = () => {
-  const { form, onSubmit } = useLoginForm();
+  const { form, onSubmit, isLoadingLogin, onError } = useLoginForm();
 
   const t = useTranslations();
 
   return (
-    <Form onSubmit={onSubmit} className="p-6 md:p-8 w-full flex items-center justify-center" {...form}>
+    <Form
+      onSubmit={onSubmit}
+      onError={onError}
+      className="p-6 md:p-8 w-full flex items-center justify-center"
+      {...form}
+    >
       <Stack gap={6} width="full">
         <Stack className="text-center" align="center">
           <Typography variant={'h3'} className="text-2xl font-bold">
@@ -67,7 +72,7 @@ const LoginForm = () => {
             </Link>
           ) : null}
         </Stack>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isLoadingLogin} loading={isLoadingLogin}>
           {t('common.login')}
         </Button>
         {AUTH_CONFIG.socialMedia ? (
