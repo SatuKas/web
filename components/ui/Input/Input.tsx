@@ -31,6 +31,7 @@ const Input = ({ label, labelDirection, name, required, type, ...props }: InputP
 
   const handleShowPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     setShowPassword(!showPassword);
   };
 
@@ -42,6 +43,7 @@ const Input = ({ label, labelDirection, name, required, type, ...props }: InputP
           <Button
             variant="ghost"
             size="icon"
+            type="button"
             className="absolute right-2 top-1/2 -translate-y-1/2 dark:hover:bg-transparent hover:bg-transparent"
             onClick={handleShowPassword}
           >
