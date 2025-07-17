@@ -4,6 +4,7 @@ import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import * as React from 'react';
 
 import { cn } from '@/libs/cn/index';
+import Skeleton from '../Skeleton';
 
 /**
  * AvatarComponent is a wrapper for the Radix Avatar Root.
@@ -63,6 +64,7 @@ interface AvatarProps extends React.ComponentProps<typeof AvatarPrimitive.Root> 
   image?: string; // The image URL for the avatar
   fallback?: string; // The fallback content (e.g., initials) if image is not available
   alt?: string; // The alt text for the avatar image
+  isLoading?: boolean;
 }
 
 /**
@@ -74,13 +76,14 @@ interface AvatarProps extends React.ComponentProps<typeof AvatarPrimitive.Root> 
  * - If `fallback` is provided, AvatarFallback will be rendered.
  * - Both can be rendered together, but typically only one is visible at a time.
  */
-const Avatar = ({ className, image, fallback, alt, ...props }: AvatarProps) => {
+const Avatar = ({ className, image, fallback, alt, isLoading, ...props }: AvatarProps) => {
   return (
     <AvatarComponent className={className} {...props}>
+      {isLoading && <Skeleton className="size-full" />}
       {/* Render AvatarImage if image prop is provided */}
-      {image && <AvatarImage src={image} alt={alt ?? 'avatar'} />}
+      {!isLoading && image && <AvatarImage src={image} alt={alt ?? 'avatar'} />}
       {/* Render AvatarFallback if fallback prop is provided */}
-      {fallback && <AvatarFallback>{fallback}</AvatarFallback>}
+      {!isLoading && fallback && <AvatarFallback>{fallback[0].toLocaleUpperCase()}</AvatarFallback>}
     </AvatarComponent>
   );
 };
