@@ -39,7 +39,11 @@ const useLoginMutation = () => {
   >({
     mutationKey: [LOGIN_QUERY_KEY],
     // mutationFn: function to call login API with provided payload
-    mutationFn: (payload: LoginPayload) => authService.login(payload),
+    mutationFn: (payload: LoginPayload) =>
+      authService.login({
+        ...payload,
+        device_id: credentialService?.getDeviceId() ?? undefined,
+      }),
     onSuccess: (data) => {
       // If credentialService is available, handle token storage and session
       if (credentialService) {
@@ -52,6 +56,7 @@ const useLoginMutation = () => {
             accessToken: data.expires.access_token, // access token expiry timestamp
             refreshToken: data.expires.refresh_token, // refresh token expiry timestamp
           },
+          device: data.device,
         });
         // Redirect user to dashboard after successful login
         router.push(DASHBOARD_PATH_URL);
