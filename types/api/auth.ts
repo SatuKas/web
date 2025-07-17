@@ -4,6 +4,7 @@
 export type LoginPayload = {
   email: string; // user's email address
   password: string; // user's password
+  device_id?: string; // device id
 };
 
 /**
@@ -26,6 +27,7 @@ type TokenResponse = {
  */
 export type LoginResponse = TokenResponse & {
   id: string; // unique user identifier
+  device: string; // device id
 };
 
 /**
