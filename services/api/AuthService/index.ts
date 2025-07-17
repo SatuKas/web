@@ -1,6 +1,7 @@
 import { BaseHttpClient } from '@/services/api/core/BaseHttpClient';
 import { AUTH_LOGIN_PATH } from '@/services/api/routes';
-import { LoginPayload } from '@/types/api/auth';
+import { LoginPayload, LoginResponse } from '@/types/api/auth';
+import { ApiResponse } from '@/types/api/common';
 
 /**
  * AuthService handles authentication-related API requests.
@@ -16,6 +17,6 @@ export class AuthService extends BaseHttpClient {
    */
   async login(payload: LoginPayload) {
     // POST request to login endpoint with user credentials
-    return this.post(AUTH_LOGIN_PATH, payload).then((res: any) => res.data);
+    return this.post<ApiResponse<LoginResponse>>(AUTH_LOGIN_PATH, payload).then((res) => res.data);
   }
 }
