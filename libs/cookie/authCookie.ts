@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookie';
+import { ACCESS_TOKEN_KEY, DEVICE_ID_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookie';
 import { TokenPayload } from '@/services/api/core/CredentialService/types/credential';
 import { CookieStorage } from './cookie';
 
@@ -41,6 +41,10 @@ export class AuthCookie extends CookieStorage {
     this.setItem(REFRESH_TOKEN_KEY, payload.token.refreshToken, {
       expires: expires.refreshToken,
     });
+
+    if (payload.device) {
+      this.setItem(DEVICE_ID_KEY, payload.device);
+    }
   }
 
   /**
@@ -59,6 +63,7 @@ export class AuthCookie extends CookieStorage {
     return {
       accessToken: this.getItem(ACCESS_TOKEN_KEY), // string | undefined
       refreshToken: this.getItem(REFRESH_TOKEN_KEY), // string | undefined
+      device: this.getItem(DEVICE_ID_KEY), // string | undefined
     };
   }
 }

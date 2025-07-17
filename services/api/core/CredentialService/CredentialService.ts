@@ -86,7 +86,7 @@ export class CredentialService implements AuthCredential {
       .catch((error: AxiosError) => {
         // If the error is a 401, it means the token is already invalid
         // so we can just ignore it, otherwise, we can throw the error
-        if (error.response?.status !== 401) {
+        if (error.status !== 401) {
           throw error;
         }
       });
@@ -102,7 +102,7 @@ export class CredentialService implements AuthCredential {
     await this.revokeTokens()
       .then((res) => {
         // Logout success, just log info
-        console.info('logout success from assessment', res);
+        console.info('logout success', res);
       })
       .catch((error) => {
         // Log error but still continue to remove tokens and redirect
@@ -137,5 +137,9 @@ export class CredentialService implements AuthCredential {
    */
   getAccessToken(): string | null {
     return this.authStorage.getAuthToken().accessToken;
+  }
+
+  getDeviceId(): string | null {
+    return this.authStorage.getAuthToken().device;
   }
 }

@@ -1,7 +1,7 @@
 import env from '@/config/env';
 import AuthCredential, { CredentialService } from '@/services/api/core/CredentialService';
 import * as ApiRoute from '@/services/api/routes';
-import { ApiResponse, ExceptionCode } from '@/types/api/common';
+import { ApiResponse, ExceptionCode, ResponseStatus } from '@/types/api/common';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
 
 /**
@@ -76,17 +76,17 @@ export class BaseHttpClient {
       async (error: AxiosError<ApiResponse<any>>) => {
         // originalRequest is used to retry the request after token refresh
         const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
-        const responseStatus = error.code ?? error.response?.status;
         const responseData = error.response?.data;
+        const responseStatus = responseData?.code;
 
         // Handle network errors (no response from server)
         if (!error.response) {
-          console.log({ error });
           const networkError: ApiResponse<null> = {
-            status: 'error',
+            status: ResponseStatus.ERROR,
             message: this.getNetworkErrorMessage(error),
+            code: ExceptionCode.INTERNAL_SERVER_ERROR,
             error: {
-              code: ExceptionCode.NETWORK_ERROR,
+              details: [],
             },
             data: null,
           };
@@ -94,7 +94,15 @@ export class BaseHttpClient {
         }
 
         // Handle 401 Unauthorized: try to refresh token and retry once
-        if (responseStatus === 401) {
+        if (
+          responseStatus &&
+          [
+            ExceptionCode.INVALID_TOKEN,
+            ExceptionCode.EXPIRED_TOKEN,
+            ExceptionCode.REVOKED_TOKEN,
+            ExceptionCode.UNAUTHORIZED_USER,
+          ].includes(responseStatus)
+        ) {
           // If already retried, logout and reject
           if (originalRequest._retry) {
             this.crendential.logoutHandler();
@@ -105,6 +113,7 @@ export class BaseHttpClient {
               originalRequest._retry = true; // Mark as retried to avoid infinite loop
               return this.client.request(originalRequest);
             } catch (error) {
+              this.crendential.logoutHandler();
               return Promise.reject(error);
             }
           }

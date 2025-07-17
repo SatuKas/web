@@ -11,6 +11,12 @@ export default interface AuthCredential {
   getAccessToken(): string | null;
 
   /**
+   * Get the current device id from storage or memory.
+   * Returns null if the device id is not available.
+   */
+  getDeviceId(): string | null;
+
+  /**
    * Request new access and refresh tokens, usually by calling the authentication API.
    * Should be called when tokens are expired or invalid.
    * Returns a promise that resolves when the operation is complete.
@@ -43,4 +49,5 @@ export type TokenPayload = {
     accessToken: number; // access token expiry timestamp (in seconds or ms, depending on implementation)
     refreshToken: number; // refresh token expiry timestamp (in seconds or ms, depending on implementation)
   };
+  device?: string; // device id
 };
