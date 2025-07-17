@@ -16,8 +16,8 @@ function QueryProvider({ children }: PropsWithChildren) {
     queryCache: new QueryCache({
       // Handle errors globally for all queries
       onError: (error) => {
-        // If the error code is SERVER_ERROR, show a toast notification with the error message
-        if ((error as unknown as ApiResponse<any>)?.error?.code === ExceptionCode.SERVER_ERROR) {
+        // If the error code is INTERNAL_SERVER_ERROR, show a toast notification with the error message
+        if ((error as unknown as ApiResponse<any>)?.code === ExceptionCode.INTERNAL_SERVER_ERROR) {
           toast.error(error.message);
         }
       },
@@ -25,8 +25,8 @@ function QueryProvider({ children }: PropsWithChildren) {
     mutationCache: new MutationCache({
       // Handle errors globally for all mutations
       onError: (error) => {
-        // If the error code is SERVER_ERROR, show a toast notification with the error message
-        if ((error as unknown as ApiResponse<any>)?.error?.code === ExceptionCode.SERVER_ERROR) {
+        // If the error code is INTERNAL_SERVER_ERROR, show a toast notification with the error message
+        if ((error as unknown as ApiResponse<any>)?.code === ExceptionCode.INTERNAL_SERVER_ERROR) {
           toast.error(error.message);
         }
       },
