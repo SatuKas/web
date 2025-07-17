@@ -1,7 +1,6 @@
 import { APP_LOGO, APP_NAME, APP_SIDEBAR_MENU } from '@/config/app';
 import { SIDEBAR_OPTIONAL_MENU_ITEM } from '@/config/menu';
 import { DASHBOARD_PATH_URL } from '@/constants/routes';
-import { USER_MOCK } from '@/mocks/user';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -59,7 +58,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
       </SidebarContent>
       <SidebarFooter>
         {/* User menu section, shows user info and actions */}
-        <UserMenuItem user={USER_MOCK} />
+        <UserMenuItem />
       </SidebarFooter>
       {/* SidebarRail is a visual element for the sidebar */}
       <SidebarRail />

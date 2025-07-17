@@ -1,5 +1,6 @@
 import AppSidebar from '@/components/ui/Sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/Sidebar/Sidebar';
+import { UserProvider } from '@/contexts/UserContext';
 import { ReactNode } from 'react';
 
 /**
@@ -27,8 +28,10 @@ const AuthenticatedLayout = ({ children }: AuthenticatedLayoutProps) => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
-      <SidebarInset>{children}</SidebarInset>
+      <UserProvider>
+        <AppSidebar variant="inset" />
+        <SidebarInset>{children}</SidebarInset>
+      </UserProvider>
     </SidebarProvider>
   );
 };
