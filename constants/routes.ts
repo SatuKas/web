@@ -17,6 +17,8 @@ export const AUTH_PATH_URL = '/auth';
 export const LOGIN_PATH_URL = `${AUTH_PATH_URL}/login`;
 export const REGISTER_PATH_URL = `${AUTH_PATH_URL}/register`;
 export const FORGOT_PASSWORD_PATH_URL = `${AUTH_PATH_URL}/forgot-password`;
+export const RESET_PASSWORD_PATH_URL = `${AUTH_PATH_URL}/reset-password`;
+export const VERIFY_EMAIL_PATH_URL = `${AUTH_PATH_URL}/verify-email`;
 
 // Dashboard Routes
 export const DASHBOARD_PATH_URL = '/dashboard';
@@ -25,4 +27,10 @@ export const DUMMY_PATH_URL = '/not-found';
 
 // Public Routes
 export const PUBLIC_AUTH_ROUTES = [LOGIN_PATH_URL, REGISTER_PATH_URL];
-export const PUBLIC_ROUTES = [LANDING_PAGE_PATH_URL, LEGAL_PATH_URL, FORGOT_PASSWORD_PATH_URL];
+export const PUBLIC_ROUTES = [
+  LANDING_PAGE_PATH_URL,
+  LEGAL_PATH_URL,
+  FORGOT_PASSWORD_PATH_URL,
+  RESET_PASSWORD_PATH_URL,
+  VERIFY_EMAIL_PATH_URL,
+];
