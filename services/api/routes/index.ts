@@ -16,7 +16,7 @@ export const AUTH_LOGOUT_PATH = `${AUTH_PATH}/logout`;
 export const AUTH_REFRESH_TOKEN_PATH = `${AUTH_PATH}/refresh-token`;
 export const AUTH_VERIFY_EMAIL_PATH = `${AUTH_PATH}/verify-email/:token`;
 export const AUTH_FORGOT_PASSWORD_PATH = `${AUTH_PATH}/forgot-password`;
-export const AUTH_RESET_PASSWORD_PATH = `${AUTH_PATH}/reset-password/:token`;
+export const AUTH_RESET_PASSWORD_PATH = `${AUTH_PATH}/reset-password`;
 
 // User Path
 export const USER_PATH = '/user';

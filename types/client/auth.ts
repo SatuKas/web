@@ -20,3 +20,8 @@ export type RegisterData = {
 export type ForgotPasswordData = {
   email: string;
 };
+
+export type ResetPasswordData = {
+  password: string;
+  confirmPassword: string;
+};

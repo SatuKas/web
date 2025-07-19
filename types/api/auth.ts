@@ -11,6 +11,11 @@ export type ForgotPasswordPayload = {
   email: string;
 };
 
+export type ResetPasswordPayload = {
+  token: string;
+  password: string;
+};
+
 /**
  * Common structure for token-related API responses
  */
