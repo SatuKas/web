@@ -7,6 +7,10 @@ export type LoginPayload = {
   device_id?: string; // device id
 };
 
+export type ForgotPasswordPayload = {
+  email: string;
+};
+
 /**
  * Common structure for token-related API responses
  */

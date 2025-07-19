@@ -1,6 +1,6 @@
 import { BaseHttpClient } from '@/services/api/core/BaseHttpClient';
-import { AUTH_LOGIN_PATH } from '@/services/api/routes';
-import { LoginPayload, LoginResponse } from '@/types/api/auth';
+import { AUTH_FORGOT_PASSWORD_PATH, AUTH_LOGIN_PATH } from '@/services/api/routes';
+import { ForgotPasswordPayload, LoginPayload, LoginResponse } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
 
 /**
@@ -18,5 +18,9 @@ export class AuthService extends BaseHttpClient {
   async login(payload: LoginPayload) {
     // POST request to login endpoint with user credentials
     return this.post<ApiResponse<LoginResponse>>(AUTH_LOGIN_PATH, payload).then((res) => res.data);
+  }
+
+  async forgotPassword(payload: ForgotPasswordPayload) {
+    return this.post<ApiResponse<null>>(AUTH_FORGOT_PASSWORD_PATH, payload).then((res) => res.data);
   }
 }

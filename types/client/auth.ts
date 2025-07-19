@@ -16,3 +16,7 @@ export type RegisterData = {
   password: string; // password for account creation
   confirmPassword: string; // must match password, used for validation on frontend
 };
+
+export type ForgotPasswordData = {
+  email: string;
+};
