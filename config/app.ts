@@ -47,3 +47,5 @@ export const AUTH_CONFIG = {
  * Imported from config/menu.ts.
  */
 export const APP_SIDEBAR_MENU = SIDEBAR_MENU_ITEM;
+
+export const APP_COUNTDOWN_SECONDS = 60;
