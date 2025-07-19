@@ -7,6 +7,7 @@
     "send": "Kirim",
     "resendEmail": "Kirim Ulang Email",
     "resetPassword": "Atur Ulang Kata Sandi",
+    "saveNewPassword": "Simpan Kata Sandi Baru",
     "message": {
       "error": {
         "maxCharacter": "Maksimal {max} karakter",
@@ -33,8 +34,9 @@
     "theme": "Tema Aplikasi"
   },
   "notFound": {
-    "title": "404",
-    "subtitle": "Halaman tidak ditemukan",
+    "404": "404",
+    "title": "Oops!",
+    "subtitle": "Tidak ada halaman yang ditemukan 🙈",
     "button": "Kembali"
   },
   "auth": {
@@ -54,6 +56,10 @@
       "title": "Email Reset Kata Sandi",
       "subtitle": "Kami telah mengirimkan email ke {email} untuk mengatur ulang kata sandi Anda",
       "emailNotReceived": "Email tidak diterima?"
+    },
+    "resetPassword": {
+      "title": "Atur Ulang Kata Sandi",
+      "subtitle": "Silahkan atur ulang kata sandi Anda"
     },
     "continueWith": "Atau lanjutkan dengan",
     "dontHaveAccount": "Belum punya akun?",
@@ -82,7 +88,9 @@
           "errorLogin": "Terjadi kesalahan saat masuk",
           "successLogin": "Berhasil masuk",
           "errorRegister": "Terjadi kesalahan saat mendaftar akun",
-          "successRegister": "Berhasil mendaftarkan akun"
+          "successRegister": "Berhasil mendaftarkan akun",
+          "errorResetPassword": "Terjadi kesalahan saat mengatur ulang kata sandi",
+          "successResetPassword": "Berhasil mengatur ulang kata sandi"
         },
         "error": {
           "emailRequired": "Email wajib diisi",
