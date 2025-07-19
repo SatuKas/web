@@ -7,6 +7,7 @@ import { authService } from '@/services/api';
 import { LoginPayload, LoginResponse } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 /**
@@ -25,7 +26,7 @@ const useLoginMutation = () => {
   const router = useRouter(); // Next.js router for navigation
   // Destructure credentialService and its loading state from custom hook
   const { credentialService, isLoading: isLoadingCredentialService } = useCredentialService();
-
+  const t = useTranslations();
   /**
    * useMutation for login process.
    * - LoginResponse: expected response data type from login API
@@ -58,6 +59,7 @@ const useLoginMutation = () => {
           },
           device: data.device,
         });
+        toast.success(t('auth.form.message.toast.successLogin'));
         // Redirect user to dashboard after successful login
         router.push(DASHBOARD_PATH_URL);
       }
