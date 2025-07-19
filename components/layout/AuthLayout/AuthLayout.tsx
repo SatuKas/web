@@ -1,10 +1,7 @@
 import Box from '@/components/ui/Box';
-import Button from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import Stack from '@/components/ui/Stack';
-import { LANDING_PAGE_PATH_URL, PRIVACY_PATH_URL, TERMS_PATH_URL } from '@/constants/routes';
-import { ArrowLeft } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { PRIVACY_PATH_URL, TERMS_PATH_URL } from '@/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
@@ -30,25 +27,14 @@ interface AuthLayoutProps {
  * @param {AuthLayoutProps} props - Props for the component.
  */
 const AuthLayout = ({ children, image }: AuthLayoutProps) => {
-  const t = useTranslations(); // For internationalization
-
   return (
     <Box className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <Box className="w-full max-w-sm md:max-w-3xl">
         <Stack gap={6}>
-          <Card className="overflow-hidden p-0 min-h-[556px]">
-            <CardContent className="grid p-0 md:grid-cols-2 min-h-[556px]">
-              {/* Left side: back button and children */}
-              <Stack gap={3}>
-                <Stack align="center" direction="row" className="p-3 w-full">
-                  <Link href={LANDING_PAGE_PATH_URL}>
-                    <Button size={'sm'} variant={'outline'}>
-                      <ArrowLeft /> {t('common.back')}
-                    </Button>
-                  </Link>
-                </Stack>
-                {children}
-              </Stack>
+          <Card className="overflow-hidden p-0 min-h-[350px]">
+            <CardContent className="grid p-0 md:grid-cols-2 min-h-[350px]">
+              {/* Left side: auth form */}
+              {children}
               {/* Right side: illustration image, only visible on md+ screens */}
               <Box className="bg-muted relative hidden md:block">
                 <Image
