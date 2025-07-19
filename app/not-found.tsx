@@ -1,4 +1,6 @@
+import Button from '@/components/ui/Button';
 import { LANDING_PAGE_PATH_URL } from '@/constants/routes';
+import { ArrowLeft, Ghost } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -6,22 +8,26 @@ const NotFound = () => {
   const t = useTranslations();
 
   return (
-    <main className="h-screen w-full flex flex-col justify-center items-center">
-      <h1 className="text-9xl font-extrabold text-foreground tracking-widest">{t('notFound.title')}</h1>
-      <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">{t('notFound.subtitle')}</div>
-      <button className="mt-5">
-        <Link
-          href={LANDING_PAGE_PATH_URL}
-          className="relative inline-block text-sm hover:cursor-pointer font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
-        >
-          <span className="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"></span>
+    <section className="h-dvh w-full flex items-center justify-center bg-background px-6 py-12">
+      <div className="max-w-2xl w-full flex flex-col items-center text-center gap-8 animate-fadeIn">
+        <div className="relative flex justify-center items-center">
+          <Ghost className="w-24 h-24 text-muted-foreground animate-float z-10" />
+          <span className="absolute text-9xl font-extrabold text-primary/30 select-none">{t('notFound.404')}</span>
+        </div>
 
-          <span className="relative block px-8 py-3 bg-background border border-current">
-            <p>{t('notFound.button')}</p>
-          </span>
+        <div className="space-y-2">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight">{t('notFound.title')}</h1>
+          <p className="text-lg md:text-xl text-muted-foreground">{t('notFound.subtitle')}</p>
+        </div>
+
+        <Link href={LANDING_PAGE_PATH_URL} passHref>
+          <Button variant="default" size="lg">
+            <ArrowLeft className="w-4 h-4" />
+            {t('notFound.button')}
+          </Button>
         </Link>
-      </button>
-    </main>
+      </div>
+    </section>
   );
 };
 
