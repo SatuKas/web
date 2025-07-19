@@ -134,7 +134,7 @@ const ToastProvider = ({ children }: ToastProviderProps) => (
       {(t) =>
         t.type !== 'custom' ? (
           // For standard toasts, use ToastBar with custom style
-          <ToastBar toast={t} style={{ padding: 0, minWidth: '200px' }}>
+          <ToastBar toast={t} style={{ padding: 0, minWidth: '100px' }}>
             {({ message }) => message}
           </ToastBar>
         ) : (
