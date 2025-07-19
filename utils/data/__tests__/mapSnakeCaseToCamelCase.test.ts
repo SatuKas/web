@@ -233,11 +233,11 @@ describe('mapSnakeCaseToCamelCase', () => {
     });
 
     it('should handle primitive values', () => {
-      expect(mapSnakeCaseToCamelCase('string')).toBe('string');
-      expect(mapSnakeCaseToCamelCase(123)).toBe(123);
-      expect(mapSnakeCaseToCamelCase(true)).toBe(true);
-      expect(mapSnakeCaseToCamelCase(false)).toBe(false);
-      expect(mapSnakeCaseToCamelCase(null)).toBe(null);
+      expect(mapSnakeCaseToCamelCase('string' as any)).toBe('string');
+      expect(mapSnakeCaseToCamelCase(123 as any)).toBe(123);
+      expect(mapSnakeCaseToCamelCase(true as any)).toBe(true);
+      expect(mapSnakeCaseToCamelCase(false as any)).toBe(false);
+      expect(mapSnakeCaseToCamelCase(null as any)).toBe(null);
     });
 
     it('should handle Date objects', () => {
