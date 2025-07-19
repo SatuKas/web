@@ -4,6 +4,9 @@
     "logout": "Keluar",
     "register": "Daftar",
     "back": "Kembali",
+    "send": "Kirim",
+    "resendEmail": "Kirim Ulang Email",
+    "resetPassword": "Atur Ulang Kata Sandi",
     "message": {
       "error": {
         "maxCharacter": "Maksimal {max} karakter",
@@ -42,6 +45,15 @@
     "register": {
       "title": "Daftar Akun",
       "subtitle": "Daftar akun Anda"
+    },
+    "forgotPassword": {
+      "title": "Lupa Kata Sandi",
+      "subtitle": "Masukkan email Anda untuk mendapatkan kata sandi baru"
+    },
+    "sentEmailResetPassword": {
+      "title": "Email Reset Kata Sandi",
+      "subtitle": "Kami telah mengirimkan email ke {email} untuk mengatur ulang kata sandi Anda",
+      "emailNotReceived": "Email tidak diterima?"
     },
     "continueWith": "Atau lanjutkan dengan",
     "dontHaveAccount": "Belum punya akun?",
