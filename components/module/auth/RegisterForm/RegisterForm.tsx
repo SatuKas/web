@@ -1,5 +1,6 @@
 'use client';
 
+import EmailSent from '@/components/module/auth/EmailSent';
 import Box from '@/components/ui/Box';
 import Button from '@/components/ui/Button';
 import Form, { FormField } from '@/components/ui/Form';
@@ -25,12 +26,29 @@ import Link from 'next/link';
  */
 const RegisterForm = () => {
   // useRegisterForm provides form state and submit handler
-  const { form, onSubmit } = useRegisterForm();
+  const {
+    form,
+    onSubmit,
+    isLoadingRegister,
+    isSentEmail,
+    formattedTime,
+    isActive,
+    resendEmail,
+    isLoadingResendVerificationEmail,
+  } = useRegisterForm();
 
   // t is the translation function from next-intl
   const t = useTranslations();
 
-  return (
+  return isSentEmail ? (
+    <EmailSent
+      countDownTimeData={{ formattedTime, isActive }}
+      isLoading={isLoadingResendVerificationEmail}
+      resendEmail={resendEmail}
+      title={t('auth.sentEmailVerification.title')}
+      subtitle={t('auth.sentEmailVerification.subtitle', { email: form.getValues('email') || '' })}
+    />
+  ) : (
     <Form onSubmit={onSubmit} className="p-6 md:p-8 w-full flex items-center justify-center" {...form}>
       <Stack gap={6} width="full">
         {/* Title and subtitle */}
@@ -113,7 +131,7 @@ const RegisterForm = () => {
           )}
         />
         {/* Submit button */}
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isLoadingRegister} loading={isLoadingRegister}>
           {t('common.login')}
         </Button>
         {/* Link to login page for users who already have an account */}

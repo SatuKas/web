@@ -1,6 +1,5 @@
 'use client';
 
-import { toast } from '@/components/hoc/ToastProvider';
 import { authService } from '@/services/api';
 import { ForgotPasswordPayload } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
@@ -25,7 +24,6 @@ const useForgotPasswordMutation = () => {
     onError: (error) => {
       // Log error and show toast notification with error message
       console.log({ error });
-      toast.error(error.message || '');
     },
   });
 
