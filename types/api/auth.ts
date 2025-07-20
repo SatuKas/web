@@ -7,13 +7,43 @@ export type LoginPayload = {
   device_id?: string; // device id
 };
 
+/**
+ * Payload for forgot password API request
+ */
 export type ForgotPasswordPayload = {
-  email: string;
+  email: string; // user's email address to send the reset link
 };
 
+/**
+ * Payload for reset password API request
+ */
 export type ResetPasswordPayload = {
-  token: string;
-  password: string;
+  token: string; // token received from forgot password email
+  password: string; // new password to be set
+};
+
+/**
+ * Payload for user registration API request
+ */
+export type RegisterPayload = {
+  email: string; // user's email address
+  password: string; // user's password
+  name: string; // user's full name
+  username: string; // unique username for the user
+};
+
+/**
+ * Payload for resending verification email API request
+ */
+export type ResendVerificationEmailPayload = {
+  email: string; // user's email address to resend the verification link
+};
+
+/**
+ * Payload for verifying email API request
+ */
+export type VerifyEmailPayload = {
+  token: string; // verification token sent to user's email
 };
 
 /**
