@@ -1,6 +1,22 @@
 import { BaseHttpClient } from '@/services/api/core/BaseHttpClient';
-import { AUTH_FORGOT_PASSWORD_PATH, AUTH_LOGIN_PATH, AUTH_RESET_PASSWORD_PATH } from '@/services/api/routes';
-import { ForgotPasswordPayload, LoginPayload, LoginResponse, ResetPasswordPayload } from '@/types/api/auth';
+import {
+  AUTH_FORGOT_PASSWORD_PATH,
+  AUTH_LOGIN_PATH,
+  AUTH_REGISTER_PATH,
+  AUTH_RESEND_VERIFICATION_EMAIL_PATH,
+  AUTH_RESET_PASSWORD_PATH,
+  AUTH_VERIFY_EMAIL_PATH,
+} from '@/services/api/routes';
+import {
+  ForgotPasswordPayload,
+  LoginPayload,
+  LoginResponse,
+  RegisterPayload,
+  RegisterResponse,
+  ResendVerificationEmailPayload,
+  ResetPasswordPayload,
+  VerifyEmailPayload,
+} from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
 
 /**
@@ -20,11 +36,23 @@ export class AuthService extends BaseHttpClient {
     return this.post<ApiResponse<LoginResponse>>(AUTH_LOGIN_PATH, payload).then((res) => res.data);
   }
 
+  async register(payload: RegisterPayload) {
+    return this.post<ApiResponse<RegisterResponse>>(AUTH_REGISTER_PATH, payload).then((res) => res.data);
+  }
+
   async forgotPassword(payload: ForgotPasswordPayload) {
     return this.post<ApiResponse<null>>(AUTH_FORGOT_PASSWORD_PATH, payload).then((res) => res.data);
   }
 
   async resetPassword(payload: ResetPasswordPayload) {
     return this.post<ApiResponse<null>>(AUTH_RESET_PASSWORD_PATH, payload).then((res) => res.data);
+  }
+
+  async resendVerificationEmail(payload: ResendVerificationEmailPayload) {
+    return this.post<ApiResponse<null>>(AUTH_RESEND_VERIFICATION_EMAIL_PATH, payload).then((res) => res.data);
+  }
+
+  async verifyEmail(payload: VerifyEmailPayload) {
+    return this.post<ApiResponse<null>>(AUTH_VERIFY_EMAIL_PATH, payload).then((res) => res.data);
   }
 }
