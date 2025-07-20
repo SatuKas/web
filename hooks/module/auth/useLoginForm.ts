@@ -1,9 +1,14 @@
+import { APP_COUNTDOWN_SECONDS } from '@/config/app';
 import { LOGIN_FORM_DEFAULT_VALUES } from '@/constants/auth';
+import useCountdown from '@/hooks/common/useCountdown';
 import { LoginPayload } from '@/types/api/auth';
+import { ExceptionCode } from '@/types/api/common';
 import { LoginData } from '@/types/client/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import useLoginMutation from './query/useLoginMutation';
+import useResendVerificationMutation from './query/useResendVerificationMutation';
 import useLoginSchema from './useLoginSchema';
 
 /**
@@ -24,12 +29,27 @@ const useLoginForm = () => {
 
   // Get login mutation and loading state
   const { isLoadingLogin, login } = useLoginMutation();
+  const { resendVerificationEmail, isLoadingResendVerificationEmail } = useResendVerificationMutation();
+
+  const [isUserVerified, setIsUserVerified] = useState(false);
+  const { formattedTime, isActive, startCountdown } = useCountdown(APP_COUNTDOWN_SECONDS);
 
   // Initialize react-hook-form with zod resolver and default values
   const form = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
     defaultValues: LOGIN_FORM_DEFAULT_VALUES,
   });
+
+  const resendEmail = () => {
+    resendVerificationEmail(
+      { email: form.getValues('email') || '' },
+      {
+        onSuccess: () => {
+          startCountdown();
+        },
+      }
+    );
+  };
 
   /**
    * Handle form submission.
@@ -42,7 +62,14 @@ const useLoginForm = () => {
       email: data.email, // user's email address
       password: data.password, // user's password
     };
-    login(payload);
+    login(payload, {
+      onError: (error) => {
+        if (error.code === ExceptionCode.EMAIL_NOT_VERIFIED) {
+          resendEmail();
+          setIsUserVerified(true);
+        }
+      },
+    });
   };
 
   /**
@@ -55,7 +82,17 @@ const useLoginForm = () => {
     console.log({ errors });
   };
 
-  return { form, onSubmit, isLoadingLogin, onError };
+  return {
+    form,
+    onSubmit,
+    isLoadingLogin,
+    onError,
+    isUserVerified,
+    isLoadingResendVerificationEmail,
+    formattedTime,
+    isActive,
+    resendEmail,
+  };
 };
 
 export default useLoginForm;

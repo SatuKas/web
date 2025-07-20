@@ -3,6 +3,7 @@
 import AppleBrand from '@/assets/icon/AppleBrand';
 import GoogleBrand from '@/assets/icon/GoogleBrand';
 import MetaBrand from '@/assets/icon/MetaBrand';
+import EmailSent from '@/components/module/auth/EmailSent';
 import Box from '@/components/ui/Box';
 import Button from '@/components/ui/Button';
 import Form, { FormField } from '@/components/ui/Form';
@@ -24,11 +25,29 @@ import Link from 'next/link';
  * social login buttons and navigation links for forgot password and registration.
  */
 const LoginForm = () => {
-  const { form, onSubmit, isLoadingLogin, onError } = useLoginForm();
+  const {
+    form,
+    onSubmit,
+    isLoadingLogin,
+    onError,
+    isUserVerified,
+    formattedTime,
+    isActive,
+    resendEmail,
+    isLoadingResendVerificationEmail,
+  } = useLoginForm();
 
   const t = useTranslations();
 
-  return (
+  return isUserVerified ? (
+    <EmailSent
+      countDownTimeData={{ formattedTime, isActive }}
+      isLoading={isLoadingResendVerificationEmail}
+      resendEmail={resendEmail}
+      title={t('auth.sentEmailVerification.title')}
+      subtitle={t('auth.sentEmailVerification.subtitle', { email: form.getValues('email') || '' })}
+    />
+  ) : (
     <Form
       onSubmit={onSubmit}
       onError={onError}

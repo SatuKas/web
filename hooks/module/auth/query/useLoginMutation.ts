@@ -69,7 +69,6 @@ const useLoginMutation = () => {
     onError: (error) => {
       // Log error and show toast notification with error message
       console.log({ error });
-      toast.error(error.message || '');
     },
   });
 
