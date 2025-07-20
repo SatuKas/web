@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Next.js Dashboard Base Project
 
-## Getting Started
+A robust and scalable Next.js dashboard starter template with built-in authentication, JWT token management, pre-configured UI components, and essential dashboard features. This project serves as a solid foundation for quickly bootstrapping new dashboard applications.
 
-First, run the development server:
+## 📑 Table of Contents
+
+- [Key Features](#-key-features)
+- [Tech Stack](#-tech-stack)
+- [Quick Setup](#-quick-setup)
+- [Available Scripts](#-available-scripts)
+- [Project Structure](#-project-structure)
+- [Contributing](#-contributing)
+
+## ✨ Key Features
+
+- **Authentication System**
+
+  - JWT-based authentication
+  - Login/Register functionality
+  - Password reset flow
+  - Email verification
+  - Protected routes
+
+- **Dashboard Features**
+
+  - Responsive layout
+  - Dark/Light theme support
+  - Internationalization ready
+  - Sidebar navigation
+  - User profile management
+
+- **Developer Experience**
+  - TypeScript support
+  - Pre-configured UI components
+  - Form validation with Zod
+  - API integration setup
+  - Storybook documentation
+  - Unit testing setup
+  - ESLint + Prettier configuration
+
+## 🛠 Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:**
+  - Radix UI
+  - Shadcn UI
+  - Custom components
+- **State Management:** React Query
+- **Form Handling:** React Hook Form + Zod
+- **HTTP Client:** Axios
+- **Testing:** Jest + React Testing Library
+- **Documentation:** Storybook
+- **Others:**
+  - next-themes (Dark mode)
+  - next-intl (Internationalization)
+  - dayjs (Date handling)
+
+## 🚦 Quick Setup
+
+1. **Clone the repository**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/arubaya/next-dashboard-base-project.git
+cd next-dashboard-base-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Set up environment variables**
 
-## Learn More
+```bash
+# Copy example env file and modify as needed
+cp .env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+Required environment variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_MAIN_DOMAIN=your-domain
+NEXT_PUBLIC_BASE_API_URL=your-api-url
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Start development server**
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Available Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Development**
+
+```bash
+pnpm dev         # Start development server
+pnpm lint        # Run ESLint
+```
+
+- **Testing**
+
+```bash
+pnpm test        # Run tests
+```
+
+- **Storybook**
+
+```bash
+pnpm storybook   # Start Storybook server
+```
+
+- **Production**
+
+```bash
+pnpm build       # Create production build
+pnpm start       # Start production server
+```
+
+## 📂 Project Structure
+
+```
+├── app/                  # Next.js app router pages
+├── components/          # React components
+│   ├── ui/             # Base UI components
+│   ├── shared/         # Shared components
+│   └── module/         # Feature-specific components
+├── config/             # App configuration
+├── hooks/              # Custom React hooks
+├── services/           # API services
+├── types/              # TypeScript types
+└── utils/              # Utility functions
+```
+
+## 🤝 Contributing
+
+This project is actively maintained and welcomes contributions. Feel free to open issues and pull requests for:
+
+- Bug fixes
+- New features
+- Documentation improvements
+- Performance optimizations
+
+---
+
+Built with ❤️ using Next.js and TypeScript

@@ -2,6 +2,9 @@
   "name": "next-dashboard-base-project",
   "version": "0.1.0",
   "private": true,
+  "repository": "https://github.com/arubaya/next-dashboard-base-project.git",
+  "author": "arubaya",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
