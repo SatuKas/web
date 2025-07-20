@@ -1,9 +1,11 @@
+import { toast } from '@/components/hoc/ToastProvider';
 import { APP_COUNTDOWN_SECONDS } from '@/config/app';
 import { FORGOT_PASSWORD_FORM_DEFAULT_VALUES } from '@/constants/auth';
 import useCountdown from '@/hooks/common/useCountdown';
 import { ForgotPasswordPayload } from '@/types/api/auth';
 import { ForgotPasswordData } from '@/types/client/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import useForgotPasswordMutation from './query/useForgotPasswordMutation';
@@ -17,7 +19,7 @@ const useForgotPasswordForm = () => {
   const { isLoadingForgotPassword, forgotPassword } = useForgotPasswordMutation();
   const { formattedTime, isActive, startCountdown } = useCountdown(APP_COUNTDOWN_SECONDS);
   const [isEmailSent, setIsEmailSent] = useState(false);
-
+  const t = useTranslations();
   // Initialize react-hook-form with zod resolver and default values
   const form = useForm<ForgotPasswordData>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -32,6 +34,7 @@ const useForgotPasswordForm = () => {
       onSuccess: () => {
         startCountdown();
         setIsEmailSent(true);
+        toast.success(t('auth.form.message.toast.successSentForgotPasswordEmail'));
       },
     });
   };
