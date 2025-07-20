@@ -1,5 +1,6 @@
 'use client';
 
+import EmailSent from '@/components/module/auth/EmailSent';
 import Button from '@/components/ui/Button';
 import Form, { FormField } from '@/components/ui/Form';
 import Input from '@/components/ui/Input';
@@ -7,7 +8,6 @@ import Stack from '@/components/ui/Stack';
 import Typography from '@/components/ui/Typography';
 import useForgotPasswordForm from '@/hooks/module/auth/useForgotPasswordForm';
 import { useTranslations } from 'next-intl';
-import EmailSent from './EmailSent';
 
 const ForgotPasswordForm = () => {
   const { form, onSubmit, isLoadingForgotPassword, onError, formattedTime, isActive, isEmailSent, resendEmail } =
@@ -20,7 +20,8 @@ const ForgotPasswordForm = () => {
       countDownTimeData={{ formattedTime, isActive }}
       isLoading={isLoadingForgotPassword}
       resendEmail={resendEmail}
-      email={form.getValues('email') || ''}
+      title={t('auth.sentEmailResetPassword.title')}
+      subtitle={t('auth.sentEmailResetPassword.subtitle', { email: form.getValues('email') || '' })}
     />
   ) : (
     <Form
