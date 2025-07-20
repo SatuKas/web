@@ -37,10 +37,16 @@ export const typographyVariants = cva('text-foreground', {
       bold: 'font-bold',
       extrabold: 'font-extrabold',
     },
+    textAlign: {
+      left: 'text-left',
+      center: 'text-center',
+      right: 'text-right',
+    },
   },
   defaultVariants: {
     variant: 'p',
     weight: 'normal',
+    textAlign: 'left',
   },
 });
 
@@ -88,12 +94,12 @@ const variantElementMap = {
  * - Forwards ref to the rendered element.
  */
 const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
-  ({ className, variant, weight, as, children, ...props }, ref) => {
+  ({ className, variant, weight, as, children, textAlign, ...props }, ref) => {
     // Determine which HTML element to render: use `as` prop if provided, otherwise map from variant, fallback to 'p'
     const Component = as || (variant ? variantElementMap[variant] : 'p');
 
     return (
-      <Component className={cn(typographyVariants({ variant, weight, className }))} ref={ref} {...props}>
+      <Component className={cn(typographyVariants({ variant, weight, className, textAlign }))} ref={ref} {...props}>
         {children}
       </Component>
     );
