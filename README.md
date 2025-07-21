@@ -1,42 +1,37 @@
-# 🚀 Next.js Dashboard Base Project
+# 🚀 SatuKas Web Application
 
-A robust and scalable Next.js dashboard starter template with built-in authentication, JWT token management, pre-configured UI components, and essential dashboard features. This project serves as a solid foundation for quickly bootstrapping new dashboard applications.
+SatuKas is a comprehensive personal finance management web application built with Next.js. It helps users track their expenses, manage budgets, and gain insights into their financial habits through an intuitive dashboard interface.
 
 ## 📑 Table of Contents
 
 - [Key Features](#-key-features)
 - [Tech Stack](#-tech-stack)
-- [Quick Setup](#-quick-setup)
+- [Development Setup](#-development-setup)
 - [Available Scripts](#-available-scripts)
 - [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
 
 ## ✨ Key Features
 
-- **Authentication System**
-
-  - JWT-based authentication
-  - Login/Register functionality
-  - Password reset flow
+- **User Management**
+  - Secure authentication system
+  - User profile customization
+  - Account settings management
   - Email verification
-  - Protected routes
+  - Password recovery
+
+- **Financial Management**
+  - Expense tracking
+  - Income management
+  - Budget planning
+  - Financial reports
+  - Transaction history
 
 - **Dashboard Features**
-
   - Responsive layout
   - Dark/Light theme support
-  - Internationalization ready
-  - Sidebar navigation
-  - User profile management
-
-- **Developer Experience**
-  - TypeScript support
-  - Pre-configured UI components
-  - Form validation with Zod
-  - API integration setup
-  - Storybook documentation
-  - Unit testing setup
-  - ESLint + Prettier configuration
+  - Multi-language support (ID/EN)
+  - Interactive charts
+  - Financial insights
 
 ## 🛠 Tech Stack
 
@@ -51,19 +46,18 @@ A robust and scalable Next.js dashboard starter template with built-in authentic
 - **Form Handling:** React Hook Form + Zod
 - **HTTP Client:** Axios
 - **Testing:** Jest + React Testing Library
-- **Documentation:** Storybook
 - **Others:**
   - next-themes (Dark mode)
   - next-intl (Internationalization)
   - dayjs (Date handling)
 
-## 🚦 Quick Setup
+## 🚦 Development Setup
 
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/arubaya/next-dashboard-base-project.git
-cd next-dashboard-base-project
+git clone https://github.com/SatuKas/web.git
+cd satukas-web
 ```
 
 2. **Install dependencies**
@@ -107,12 +101,6 @@ pnpm lint        # Run ESLint
 pnpm test        # Run tests
 ```
 
-- **Storybook**
-
-```bash
-pnpm storybook   # Start Storybook server
-```
-
 - **Production**
 
 ```bash
@@ -135,15 +123,6 @@ pnpm start       # Start production server
 └── utils/              # Utility functions
 ```
 
-## 🤝 Contributing
-
-This project is actively maintained and welcomes contributions. Feel free to open issues and pull requests for:
-
-- Bug fixes
-- New features
-- Documentation improvements
-- Performance optimizations
-
 ---
 
-Built with ❤️ using Next.js and TypeScript
+Built with ❤️ by SatuKas Team

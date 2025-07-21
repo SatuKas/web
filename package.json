@@ -1,8 +1,8 @@
 {
-  "name": "next-dashboard-base-project",
+  "name": "satukas-web",
   "version": "0.1.0",
   "private": true,
-  "repository": "https://github.com/arubaya/next-dashboard-base-project.git",
+  "repository": "https://github.com/SatuKas/web.git",
   "author": "arubaya",
   "license": "MIT",
   "scripts": {
