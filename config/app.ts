@@ -6,12 +6,12 @@ import { SIDEBAR_MENU_ITEM } from './menu';
 /**
  * The display name of the application.
  */
-export const APP_NAME = 'My Cool App';
+export const APP_NAME = 'SatuKas';
 
 /**
  * Short description for the application, used in meta tags and general info.
  */
-export const APP_DESCRIPTION = 'My Cool App Description';
+export const APP_DESCRIPTION = 'Satu tempat untuk semua kebutuhan finansial Anda';
 
 /**
  * Logo assets for the application.

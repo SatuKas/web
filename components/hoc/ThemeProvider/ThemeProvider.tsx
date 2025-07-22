@@ -16,7 +16,7 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
   // enableSystem: allows switching based on system settings.
   // disableTransitionOnChange: disables CSS transitions when changing themes for smoother UX.
   return (
-    <NextThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <NextThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
       {children}
     </NextThemeProvider>
   );
