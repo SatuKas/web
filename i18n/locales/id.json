@@ -132,10 +132,56 @@
     }
   },
   "landingPage": {
-    "hero": {
+    "heroSection": {
       "title1": "Kayak catatan harian,",
       "title2": "tapi buat keuanganmu.",
       "subtitle": "Gak perlu ribet. Cukup satu aplikasi untuk catat pemasukan dan pengeluaran— buat pribadi, kas organisasi, sampai keperluan freelance."
+    },
+    "featureSection": {
+      "title": "Fitur yang kamu butuhkan",
+      "subtitle": "Semua tools yang kamu perlukan untuk mengelola keuangan dengan lebih baik, dalam satu aplikasi yang powerful.",
+      "feature": {
+        "multiBook": {
+          "title": "Multi-Pembukuan Dalam Satu Akun",
+          "description": "Gak perlu daftar ulang — kamu bisa bikin banyak buku kas terpisah. Mau untuk pribadi, side job, organisasi, sampai kas kelas? Gas!"
+        },
+        "easyToUse": {
+          "title": "Catat Simpel, Hasil Maksimal",
+          "description": "Hanya catat pemasukan & pengeluaran, tapi sudah cukup buat dapat ringkasan keuangan yang rapi dan mudah dimengerti."
+        },
+        "forEveryone": {
+          "title": "Cocok Buat Siapa Aja",
+          "description": "Freelancer, ibu rumah tangga, bendahara kas masjid, admin organisasi, sampe yang lagi nyusun budget hidup. Semua bisa!"
+        },
+        "secureAndTrusted": {
+          "title": "Tampilan Modern, Bebas Gangguan",
+          "description": "Tampilan yang elegan dan mudah digunakan, tanpa perlu khawatir ada gangguan yang membuat kamu kebingungan."
+        }
+      }
+    },
+    "ctaSection": {
+      "title": "Mulai catat uangmu sekarang. Gak ribet, gak bayar.",
+      "subtitle": "Cocok buat kamu yang ingin keuangan lebih jelas — tanpa drama akuntansi."
+    },
+    "footer": {
+      "title": "Satu tempat untuk semua kebutuhan finansial Anda",
+      "product": {
+        "title": "Produk",
+        "feature": "Fitur",
+        "register": "Daftar",
+        "login": "Login"
+      },
+      "company": {
+        "title": "Perusahaan",
+        "about": "Tentang Kami",
+        "contact": "Kontak"
+      },
+      "legal": {
+        "title": "Legal",
+        "privacy": "Privasi",
+        "terms": "Syarat & Ketentuan"
+      },
+      "copyright": "© {year} SatuKas. All rights reserved."
     }
   }
 }
