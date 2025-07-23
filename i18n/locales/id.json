@@ -3,6 +3,7 @@
     "login": "Masuk",
     "logout": "Keluar",
     "register": "Daftar",
+    "noteNow": "Catat Sekarang",
     "back": "Kembali",
     "send": "Kirim",
     "backToLogin": "Kembali ke halaman masuk",
@@ -128,6 +129,13 @@
           "confirmPasswordNotMatch": "Konfirmasi kata sandi tidak cocok"
         }
       }
+    }
+  },
+  "landingPage": {
+    "hero": {
+      "title1": "Kayak catatan harian,",
+      "title2": "tapi buat keuanganmu.",
+      "subtitle": "Gak perlu ribet. Cukup satu aplikasi untuk catat pemasukan dan pengeluaran— buat pribadi, kas organisasi, sampai keperluan freelance."
     }
   }
 }
