@@ -12,6 +12,12 @@ export const LEGAL_PATH_URL = '/legal';
 export const TERMS_PATH_URL = `${LEGAL_PATH_URL}/terms`;
 export const PRIVACY_PATH_URL = `${LEGAL_PATH_URL}/privacy`;
 
+// About Routes
+export const ABOUT_PATH_URL = '/about';
+
+// Contact Routes
+export const CONTACT_PATH_URL = '/contact';
+
 // Auth Routes
 export const AUTH_PATH_URL = '/auth';
 export const LOGIN_PATH_URL = `${AUTH_PATH_URL}/login`;
@@ -28,6 +34,8 @@ export const DUMMY_PATH_URL = '/not-found';
 // Public Routes
 export const PUBLIC_AUTH_ROUTES = [LOGIN_PATH_URL, REGISTER_PATH_URL];
 export const PUBLIC_ROUTES = [
+  ABOUT_PATH_URL,
+  CONTACT_PATH_URL,
   LANDING_PAGE_PATH_URL,
   LEGAL_PATH_URL,
   FORGOT_PASSWORD_PATH_URL,
