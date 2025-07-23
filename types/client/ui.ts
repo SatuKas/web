@@ -105,3 +105,14 @@ export type BreadcrumbLinkItem = {
   title: MenuTranslationKeys; // Translation key for the breadcrumb title
   url?: string; // Optional URL for the breadcrumb link
 };
+
+export type AppLogoIconVariant = 'light' | 'dark' | 'square' | 'color';
+export type AppLogoTextVariant = 'light' | 'dark';
+export type AppLogoType = 'text' | 'icon';
+
+export type AppLogoVariant = AppLogoIconVariant | AppLogoTextVariant;
+
+export type AppLogo = {
+  icon: Record<AppLogoIconVariant, string>;
+  text: Record<AppLogoTextVariant, string>;
+};
