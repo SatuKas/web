@@ -1,4 +1,4 @@
-import AuthImage from '@/assets/image/auth-default-image.svg';
+import AuthImage from '@/assets/image/auth-illustration.jpg';
 import { ForgotPasswordData, LoginData, RegisterData, ResetPasswordData } from '@/types/client/auth';
 
 export const LOGIN_FORM_DEFAULT_VALUES: LoginData = {
