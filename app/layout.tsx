@@ -15,20 +15,22 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const appTitle = `${APP_NAME} | ${APP_DESCRIPTION}`;
+
 export const metadata: Metadata = {
-  title: APP_NAME,
+  title: appTitle,
   description: APP_DESCRIPTION,
   icons: {
-    icon: APP_LOGO.icon,
+    icon: APP_LOGO.icon.square,
   },
   openGraph: {
-    title: APP_NAME,
+    title: appTitle,
     description: APP_DESCRIPTION,
     images: [APP_IMAGE_META],
   },
   twitter: {
     card: 'summary_large_image',
-    title: APP_NAME,
+    title: appTitle,
     description: APP_DESCRIPTION,
     images: [APP_IMAGE_META],
   },
