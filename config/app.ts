@@ -1,6 +1,11 @@
 import ImageMeta from '@/assets/image/image-meta.png';
-import LogoIcon from '@/assets/image/logo-icon.svg';
-import LogoText from '@/assets/image/logo-text.svg';
+import LogoIconColor from '@/assets/image/logo-icon-color.svg';
+import LogoIconDark from '@/assets/image/logo-icon-dark.svg';
+import LogoIconLight from '@/assets/image/logo-icon-light.svg';
+import LogoIconSquare from '@/assets/image/logo-icon-square.svg';
+import LogoTextDark from '@/assets/image/logo-text-dark.svg';
+import LogoTextLight from '@/assets/image/logo-text-light.svg';
+import { AppLogo } from '@/types/client/ui';
 import { SIDEBAR_MENU_ITEM } from './menu';
 
 /**
@@ -11,16 +16,24 @@ export const APP_NAME = 'SatuKas';
 /**
  * Short description for the application, used in meta tags and general info.
  */
-export const APP_DESCRIPTION = 'Satu tempat untuk semua kebutuhan finansial Anda';
+export const APP_DESCRIPTION = 'Satu tempat untuk semua kebutuhan finansial Anda.';
 
 /**
  * Logo assets for the application.
  * @property {string} icon - Path to the logo icon (SVG).
  * @property {string} text - Path to the logo text (SVG).
  */
-export const APP_LOGO = {
-  icon: LogoIcon.src,
-  text: LogoText.src,
+export const APP_LOGO: AppLogo = {
+  icon: {
+    light: LogoIconLight.src,
+    dark: LogoIconDark.src,
+    square: LogoIconSquare.src,
+    color: LogoIconColor.src,
+  },
+  text: {
+    light: LogoTextLight.src,
+    dark: LogoTextDark.src,
+  },
 };
 
 /**
