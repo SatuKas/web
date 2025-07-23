@@ -1,9 +1,10 @@
-import { APP_LOGO, APP_NAME, APP_SIDEBAR_MENU } from '@/config/app';
+import AppLogo from '@/components/shared/AppLogo';
+import { APP_NAME, APP_SIDEBAR_MENU } from '@/config/app';
 import { SIDEBAR_OPTIONAL_MENU_ITEM } from '@/config/menu';
 import { DASHBOARD_PATH_URL } from '@/constants/routes';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import Box from '../Box';
 import NavigationMenu from './NavigationMenu';
 import {
   Sidebar,
@@ -38,7 +39,9 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
             {/* Logo and app name, clicking this navigates to dashboard */}
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <Link href={DASHBOARD_PATH_URL}>
-                <Image src={APP_LOGO.icon} alt="logo" width={20} height={20} />
+                <Box>
+                  <AppLogo type="icon" />
+                </Box>
                 <span className="text-base font-semibold">{APP_NAME}</span>
               </Link>
             </SidebarMenuButton>
