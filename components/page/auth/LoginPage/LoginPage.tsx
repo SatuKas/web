@@ -1,14 +1,9 @@
 'use client';
 
-import AuthFormLayout from '@/components/layout/AuthLayout/AuthFormLayout';
 import LoginForm from '@/components/module/auth/LoginForm';
 
 const LoginPage = () => {
-  return (
-    <AuthFormLayout>
-      <LoginForm />
-    </AuthFormLayout>
-  );
+  return <LoginForm />;
 };
 
 export default LoginPage;
