@@ -73,7 +73,7 @@ export type LoginResponse = TokenResponse & {
  * Response for successful registration
  * Same structure as LoginResponse
  */
-export type RegisterResponse = LoginResponse;
+export type RegisterResponse = Pick<LoginResponse, 'id'>;
 
 /**
  * Response for refreshing access token
