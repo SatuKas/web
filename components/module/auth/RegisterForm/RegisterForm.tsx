@@ -53,10 +53,10 @@ const RegisterForm = () => {
       <Stack gap={6} width="full">
         {/* Title and subtitle */}
         <Stack className="text-center" align="center">
-          <Typography variant={'h3'} className="text-2xl font-bold">
+          <Typography variant={'h3'} className="text-2xl font-bold" textAlign="center">
             {t('auth.register.title')}
           </Typography>
-          <Typography variant={'p'} className="text-muted-foreground text-balance">
+          <Typography variant={'p'} className="text-muted-foreground text-balance" textAlign="center">
             {t('auth.register.subtitle')}
           </Typography>
         </Stack>
@@ -132,7 +132,7 @@ const RegisterForm = () => {
         />
         {/* Submit button */}
         <Button type="submit" className="w-full" disabled={isLoadingRegister} loading={isLoadingRegister}>
-          {t('common.login')}
+          {t('common.register')}
         </Button>
         {/* Link to login page for users who already have an account */}
         <Box className="text-center text-sm">
