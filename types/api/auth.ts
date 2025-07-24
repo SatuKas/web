@@ -2,7 +2,7 @@
  * Payload for login API request
  */
 export type LoginPayload = {
-  email: string; // user's email address
+  username: string; // user's username
   password: string; // user's password
   device_id?: string; // device id
 };

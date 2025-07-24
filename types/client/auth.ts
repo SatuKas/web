@@ -2,7 +2,7 @@
  * Type for user login data.
  */
 export type LoginData = {
-  email: string; // user's email address
+  username: string; // user's username
   password: string; // user's password (plain text, will be handled securely on backend)
 };
 
@@ -25,3 +25,5 @@ export type ResetPasswordData = {
   password: string;
   confirmPassword: string;
 };
+
+export type ResendVerificationEmailData = ForgotPasswordData;

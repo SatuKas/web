@@ -6,6 +6,7 @@
     "noteNow": "Catat Sekarang",
     "back": "Kembali",
     "send": "Kirim",
+    "verify": "Verifikasi",
     "backToLogin": "Kembali ke halaman masuk",
     "resendEmail": "Kirim Ulang Email",
     "resetPassword": "Atur Ulang Kata Sandi",
@@ -66,6 +67,10 @@
     "resetPassword": {
       "title": "Atur Ulang Kata Sandi",
       "subtitle": "Silahkan atur ulang kata sandi Anda"
+    },
+    "resendVerificationEmail": {
+      "title": "Verifikasi Akun",
+      "subtitle": "Masukkan email Anda untuk mendapatkan email verifikasi"
     },
     "verifyEmail": {
       "title": "Memverifikasi email...",
