@@ -3,7 +3,7 @@
 import AppleBrand from '@/assets/icon/AppleBrand';
 import GoogleBrand from '@/assets/icon/GoogleBrand';
 import MetaBrand from '@/assets/icon/MetaBrand';
-import EmailSent from '@/components/module/auth/EmailSent';
+import ResendVerificationEmailForm from '@/components/module/auth/ResendVerificationEmailForm';
 import Box from '@/components/ui/Box';
 import Button from '@/components/ui/Button';
 import Form, { FormField } from '@/components/ui/Form';
@@ -25,28 +25,12 @@ import Link from 'next/link';
  * social login buttons and navigation links for forgot password and registration.
  */
 const LoginForm = () => {
-  const {
-    form,
-    onSubmit,
-    isLoadingLogin,
-    onError,
-    isUserVerified,
-    formattedTime,
-    isActive,
-    resendEmail,
-    isLoadingResendVerificationEmail,
-  } = useLoginForm();
+  const { form, onSubmit, isLoadingLogin, onError, isUserVerified } = useLoginForm();
 
   const t = useTranslations();
 
-  return isUserVerified ? (
-    <EmailSent
-      countDownTimeData={{ formattedTime, isActive }}
-      isLoading={isLoadingResendVerificationEmail}
-      resendEmail={resendEmail}
-      title={t('auth.sentEmailVerification.title')}
-      subtitle={t('auth.sentEmailVerification.subtitle', { email: form.getValues('email') || '' })}
-    />
+  return !isUserVerified ? (
+    <ResendVerificationEmailForm />
   ) : (
     <Form
       onSubmit={onSubmit}
@@ -57,28 +41,30 @@ const LoginForm = () => {
       <Stack gap={6} width="full">
         {/* Title and subtitle */}
         <Stack className="text-center" align="center">
-          <Typography variant={'h3'} className="text-2xl font-bold">
+          <Typography variant={'h3'} className="text-2xl font-bold" textAlign="center">
             {t('auth.login.title')}
           </Typography>
-          <Typography variant={'p'} className="text-muted-foreground text-balance">
+          <Typography variant={'p'} className="text-muted-foreground text-balance" textAlign="center">
             {t('auth.login.subtitle')}
           </Typography>
         </Stack>
-        {/* Email input field */}
+        {/* Username input field */}
+        {/* TECHDEBT: need to add error message to user */}
         <FormField
           control={form.control}
-          name="email"
+          name="username"
           render={({ field }) => (
             <Input
-              type="email"
-              placeholder={t('auth.form.placeholder.email')}
-              label={t('auth.form.label.email')}
+              type="username"
+              placeholder={t('auth.form.placeholder.username')}
+              label={t('auth.form.label.username')}
               required
               {...field}
             />
           )}
         />
         {/* Password input field and forgot password link */}
+        {/* TECHDEBT: need to add error message to user */}
         <Stack gap={2}>
           <FormField
             control={form.control}

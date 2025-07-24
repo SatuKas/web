@@ -41,6 +41,8 @@ const useRegisterForm = () => {
    *
    * @param {RegisterData} data - The form data after validation
    *   email: string // user's email address
+   *   name: string // user's full name
+   *   username: string // unique username for the user
    *   password: string // user's password
    *   confirmPassword: string // confirmation of user's password
    */
