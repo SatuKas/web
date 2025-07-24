@@ -1,29 +1,35 @@
-'use client';
-
 import AuthFormLayout from '@/components/layout/AuthLayout/AuthFormLayout';
-import EmailSent from '@/components/module/auth/EmailSent';
 import Button from '@/components/ui/Button';
 import Form, { FormField } from '@/components/ui/Form';
 import Input from '@/components/ui/Input';
 import Stack from '@/components/ui/Stack';
 import Typography from '@/components/ui/Typography';
 import { LOGIN_PATH_URL } from '@/constants/routes';
-import useForgotPasswordForm from '@/hooks/module/auth/useForgotPasswordForm';
+import useResendVerificationForm from '@/hooks/module/auth/useResendVerificationForm';
 import { useTranslations } from 'next-intl';
+import EmailSent from '../EmailSent';
 
-const ForgotPasswordForm = () => {
-  const { form, onSubmit, isLoadingForgotPassword, onError, formattedTime, isActive, isEmailSent, resendEmail } =
-    useForgotPasswordForm();
+const ResendVerificationEmailForm = () => {
+  const {
+    form,
+    onSubmit,
+    isLoadingResendVerificationEmail,
+    onError,
+    formattedTime,
+    isActive,
+    isEmailSent,
+    resendEmail,
+  } = useResendVerificationForm();
 
   const t = useTranslations();
 
   return isEmailSent ? (
     <EmailSent
       countDownTimeData={{ formattedTime, isActive }}
-      isLoading={isLoadingForgotPassword}
+      isLoading={isLoadingResendVerificationEmail}
       resendEmail={resendEmail}
-      title={t('auth.sentEmailResetPassword.title')}
-      subtitle={t('auth.sentEmailResetPassword.subtitle', { email: form.getValues('email') || '' })}
+      title={t('auth.sentEmailVerification.title')}
+      subtitle={t('auth.sentEmailVerification.subtitle', { email: form.getValues('email') || '' })}
     />
   ) : (
     <AuthFormLayout backButtonUrl={LOGIN_PATH_URL}>
@@ -37,10 +43,10 @@ const ForgotPasswordForm = () => {
           {/* Title and subtitle */}
           <Stack className="text-center" align="center">
             <Typography variant={'h3'} className="text-2xl font-bold" textAlign="center">
-              {t('auth.forgotPassword.title')}
+              {t('auth.resendVerificationEmail.title')}
             </Typography>
             <Typography variant="p" className="text-muted-foreground" textAlign="center">
-              {t('auth.forgotPassword.subtitle')}
+              {t('auth.resendVerificationEmail.subtitle')}
             </Typography>
           </Stack>
           {/* Email input field */}
@@ -58,8 +64,13 @@ const ForgotPasswordForm = () => {
             )}
           />
           {/* Submit button, disabled and shows loading when reset password is in progress */}
-          <Button type="submit" className="w-full" disabled={isLoadingForgotPassword} loading={isLoadingForgotPassword}>
-            {t('common.resetPassword')}
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isLoadingResendVerificationEmail}
+            loading={isLoadingResendVerificationEmail}
+          >
+            {t('common.verify')}
           </Button>
         </Stack>
       </Form>
@@ -67,4 +78,4 @@ const ForgotPasswordForm = () => {
   );
 };
 
-export default ForgotPasswordForm;
+export default ResendVerificationEmailForm;

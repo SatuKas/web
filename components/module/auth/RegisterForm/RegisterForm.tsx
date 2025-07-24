@@ -1,5 +1,6 @@
 'use client';
 
+import AuthFormLayout from '@/components/layout/AuthLayout/AuthFormLayout';
 import EmailSent from '@/components/module/auth/EmailSent';
 import Box from '@/components/ui/Box';
 import Button from '@/components/ui/Button';
@@ -49,102 +50,104 @@ const RegisterForm = () => {
       subtitle={t('auth.sentEmailVerification.subtitle', { email: form.getValues('email') || '' })}
     />
   ) : (
-    <Form onSubmit={onSubmit} className="p-6 md:p-8 w-full flex items-center justify-center" {...form}>
-      <Stack gap={6} width="full">
-        {/* Title and subtitle */}
-        <Stack className="text-center" align="center">
-          <Typography variant={'h3'} className="text-2xl font-bold">
-            {t('auth.register.title')}
-          </Typography>
-          <Typography variant={'p'} className="text-muted-foreground text-balance">
-            {t('auth.register.subtitle')}
-          </Typography>
+    <AuthFormLayout>
+      <Form onSubmit={onSubmit} className="p-6 md:p-8 w-full flex items-center justify-center" {...form}>
+        <Stack gap={6} width="full">
+          {/* Title and subtitle */}
+          <Stack className="text-center" align="center">
+            <Typography variant={'h3'} className="text-2xl font-bold" textAlign="center">
+              {t('auth.register.title')}
+            </Typography>
+            <Typography variant={'p'} className="text-muted-foreground text-balance" textAlign="center">
+              {t('auth.register.subtitle')}
+            </Typography>
+          </Stack>
+          {/* Name input field */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <Input
+                type="text"
+                placeholder={t('auth.form.placeholder.name')}
+                label={t('auth.form.label.name')}
+                required
+                {...field}
+              />
+            )}
+          />
+          {/* Username input field */}
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <Input
+                type="text"
+                placeholder={t('auth.form.placeholder.username')}
+                label={t('auth.form.label.username')}
+                required
+                {...field}
+              />
+            )}
+          />
+          {/* Email input field */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <Input
+                type="email"
+                placeholder={t('auth.form.placeholder.email')}
+                label={t('auth.form.label.email')}
+                required
+                {...field}
+              />
+            )}
+          />
+          {/* Password input field */}
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <Input
+                type="password"
+                placeholder={t('auth.form.placeholder.password')}
+                label={t('auth.form.label.password')}
+                required
+                {...field}
+              />
+            )}
+          />
+          {/* Confirm password input field */}
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <Input
+                type="password"
+                placeholder={t('auth.form.placeholder.confirmPassword')}
+                label={t('auth.form.label.confirmPassword')}
+                required
+                {...field}
+              />
+            )}
+          />
+          {/* Submit button */}
+          <Button type="submit" className="w-full" disabled={isLoadingRegister} loading={isLoadingRegister}>
+            {t('common.register')}
+          </Button>
+          {/* Link to login page for users who already have an account */}
+          <Box className="text-center text-sm">
+            {t('auth.alreadyHaveAccount')}{' '}
+            <Link href={LOGIN_PATH_URL}>
+              <Button variant="link" type="button" size="sm" className="px-0 text-foreground font-normal">
+                {t('common.login')}
+              </Button>
+            </Link>
+          </Box>
         </Stack>
-        {/* Name input field */}
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <Input
-              type="text"
-              placeholder={t('auth.form.placeholder.name')}
-              label={t('auth.form.label.name')}
-              required
-              {...field}
-            />
-          )}
-        />
-        {/* Username input field */}
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <Input
-              type="text"
-              placeholder={t('auth.form.placeholder.username')}
-              label={t('auth.form.label.username')}
-              required
-              {...field}
-            />
-          )}
-        />
-        {/* Email input field */}
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <Input
-              type="email"
-              placeholder={t('auth.form.placeholder.email')}
-              label={t('auth.form.label.email')}
-              required
-              {...field}
-            />
-          )}
-        />
-        {/* Password input field */}
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <Input
-              type="password"
-              placeholder={t('auth.form.placeholder.password')}
-              label={t('auth.form.label.password')}
-              required
-              {...field}
-            />
-          )}
-        />
-        {/* Confirm password input field */}
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <Input
-              type="password"
-              placeholder={t('auth.form.placeholder.confirmPassword')}
-              label={t('auth.form.label.confirmPassword')}
-              required
-              {...field}
-            />
-          )}
-        />
-        {/* Submit button */}
-        <Button type="submit" className="w-full" disabled={isLoadingRegister} loading={isLoadingRegister}>
-          {t('common.login')}
-        </Button>
-        {/* Link to login page for users who already have an account */}
-        <Box className="text-center text-sm">
-          {t('auth.alreadyHaveAccount')}{' '}
-          <Link href={LOGIN_PATH_URL}>
-            <Button variant="link" type="button" size="sm" className="px-0 text-foreground font-normal">
-              {t('common.login')}
-            </Button>
-          </Link>
-        </Box>
-      </Stack>
-    </Form>
+      </Form>
+    </AuthFormLayout>
   );
 };
 

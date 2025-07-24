@@ -2,7 +2,7 @@
  * Payload for login API request
  */
 export type LoginPayload = {
-  email: string; // user's email address
+  username: string; // user's username
   password: string; // user's password
   device_id?: string; // device id
 };
@@ -73,7 +73,7 @@ export type LoginResponse = TokenResponse & {
  * Response for successful registration
  * Same structure as LoginResponse
  */
-export type RegisterResponse = LoginResponse;
+export type RegisterResponse = Pick<LoginResponse, 'id'>;
 
 /**
  * Response for refreshing access token

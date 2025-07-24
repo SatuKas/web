@@ -1,5 +1,5 @@
 import AppLogo from '@/components/shared/AppLogo';
-import { APP_NAME, APP_SIDEBAR_MENU } from '@/config/app';
+import { APP_SIDEBAR_MENU } from '@/config/app';
 import { SIDEBAR_OPTIONAL_MENU_ITEM } from '@/config/menu';
 import { DASHBOARD_PATH_URL } from '@/constants/routes';
 import Link from 'next/link';
@@ -40,9 +40,8 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <Link href={DASHBOARD_PATH_URL}>
                 <Box>
-                  <AppLogo type="icon" />
+                  <AppLogo type="text" />
                 </Box>
-                <span className="text-base font-semibold">{APP_NAME}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

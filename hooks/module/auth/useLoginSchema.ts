@@ -13,14 +13,10 @@ const useLoginSchema = () => {
   // Get translation function for auth form messages
   const t = useTranslations('auth.form.message');
 
+  // TECHDEBT: need to add error message for username
   // Define Zod schema for login form
   const loginSchema = z.object({
-    email: z
-      .string()
-      .nonempty(t('error.emailRequired')) // Email must not be empty
-      .email({
-        message: t('error.invalidEmail'), // Must be a valid email format
-      }),
+    username: z.string().nonempty(t('error.usernameRequired')), // Username must not be empty
     password: z
       .string()
       .nonempty(t('error.passwordRequired')) // Password must not be empty

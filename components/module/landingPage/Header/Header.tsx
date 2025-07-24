@@ -6,7 +6,7 @@ import AppLogo from '@/components/shared/AppLogo';
 import ThemeToggle from '@/components/shared/ThemeToggle';
 import Button from '@/components/ui/Button';
 import Stack from '@/components/ui/Stack';
-import { LOGIN_PATH_URL, REGISTER_PATH_URL } from '@/constants/routes';
+import { LANDING_PAGE_PATH_URL, LOGIN_PATH_URL, REGISTER_PATH_URL } from '@/constants/routes';
 import { cn } from '@/libs/cn';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -41,7 +41,9 @@ const Header = () => {
         justify="between"
         align="center"
       >
-        <AppLogo type="text" />
+        <Link href={LANDING_PAGE_PATH_URL}>
+          <AppLogo type="text" />
+        </Link>
         <Stack direction="row" gap={2} align="center">
           <ThemeToggle />
           <Link href={LOGIN_PATH_URL}>

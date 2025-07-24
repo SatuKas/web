@@ -27,10 +27,10 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
       <Stack gap={6} width="full">
         {/* Title and subtitle */}
         <Stack className="text-center" align="center">
-          <Typography variant={'h3'} className="text-2xl font-bold">
+          <Typography variant={'h3'} className="text-2xl font-bold" textAlign="center">
             {t('auth.resetPassword.title')}
           </Typography>
-          <Typography variant="p" className="text-muted-foreground">
+          <Typography variant="p" className="text-muted-foreground" textAlign="center">
             {t('auth.resetPassword.subtitle')}
           </Typography>
         </Stack>
