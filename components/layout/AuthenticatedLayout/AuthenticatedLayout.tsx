@@ -1,5 +1,3 @@
-import AppSidebar from '@/components/ui/Sidebar';
-import { SidebarInset, SidebarProvider } from '@/components/ui/Sidebar/Sidebar';
 import { UserProvider } from '@/contexts/UserContext';
 import { ReactNode } from 'react';
 
@@ -11,29 +9,10 @@ interface AuthenticatedLayoutProps {
 }
 
 /**
- * AuthenticatedLayout wraps the main content with a sidebar and header.
- *
- * - Uses SidebarProvider to provide sidebar context and custom CSS variables for layout sizing.
- * - AppSidebar is rendered with "inset" variant for authenticated pages.
- * - SidebarInset wraps the children to ensure proper layout with the sidebar.
+ * AuthenticatedLayout wraps the main content with a UserProvider.
  */
 const AuthenticatedLayout = ({ children }: AuthenticatedLayoutProps) => {
-  return (
-    <SidebarProvider
-      // Set custom CSS variables for sidebar width and header height
-      style={
-        {
-          '--sidebar-width': 'calc(var(--spacing) * 72)',
-          '--header-height': 'calc(var(--spacing) * 12)',
-        } as React.CSSProperties
-      }
-    >
-      <UserProvider>
-        <AppSidebar variant="inset" />
-        <SidebarInset>{children}</SidebarInset>
-      </UserProvider>
-    </SidebarProvider>
-  );
+  return <UserProvider>{children}</UserProvider>;
 };
 
 export default AuthenticatedLayout;
