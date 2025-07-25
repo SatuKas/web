@@ -1,7 +1,7 @@
 import AppLogo from '@/components/shared/AppLogo';
 import { APP_SIDEBAR_MENU } from '@/config/app';
 import { SIDEBAR_OPTIONAL_MENU_ITEM } from '@/config/menu';
-import { DASHBOARD_PATH_URL } from '@/constants/routes';
+import { DASHBOARD_BOOKS_PATH_URL } from '@/constants/routes';
 import Link from 'next/link';
 import React from 'react';
 import Box from '../Box';
@@ -38,8 +38,8 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
           <SidebarMenuItem>
             {/* Logo and app name, clicking this navigates to dashboard */}
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <Link href={DASHBOARD_PATH_URL}>
-                <Box>
+              <Link href={DASHBOARD_BOOKS_PATH_URL} className="h-11">
+                <Box className="h-full">
                   <AppLogo type="text" />
                 </Box>
               </Link>

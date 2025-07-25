@@ -1,7 +1,7 @@
 'use client';
 
 import { toast } from '@/components/hoc/ToastProvider';
-import { DASHBOARD_PATH_URL } from '@/constants/routes';
+import { DASHBOARD_BOOKS_PATH_URL } from '@/constants/routes';
 import { useCredentialService } from '@/hooks/common/useCredentialService';
 import { authService } from '@/services/api';
 import { LoginPayload, LoginResponse } from '@/types/api/auth';
@@ -61,7 +61,7 @@ const useLoginMutation = () => {
         });
         toast.success(t('auth.form.message.toast.successLogin'));
         // Redirect user to dashboard after successful login
-        router.push(DASHBOARD_PATH_URL);
+        router.push(DASHBOARD_BOOKS_PATH_URL);
       }
       // Invalidate login query to refresh any related data
       queryClient.invalidateQueries({ queryKey: [LOGIN_QUERY_KEY] });
