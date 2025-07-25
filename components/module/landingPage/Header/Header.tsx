@@ -41,7 +41,7 @@ const Header = () => {
         justify="between"
         align="center"
       >
-        <Link href={LANDING_PAGE_PATH_URL}>
+        <Link href={LANDING_PAGE_PATH_URL} className="h-full">
           <AppLogo type="text" />
         </Link>
         <Stack direction="row" gap={2} align="center">

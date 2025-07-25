@@ -21,7 +21,7 @@ const Footer = () => {
       <Box className="pt-12 mx-auto max-w-7xl ">
         <Box className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 [&_a]:text-sm [&_a]:text-muted-foreground [&_a]:hover:text-primary [&_a]:hover:underline [&_a]:hover:underline-offset-1 sm:px-6 lg:px-8 px-4 ">
           <Box>
-            <Box>
+            <Box className="h-11">
               <AppLogo type="text" />
             </Box>
             <Typography variant="p" className="mt-4 text-sm text-muted-foreground">
