@@ -9,7 +9,7 @@
  * The menu structure is used to render navigation and actions in the sidebar UI.
  */
 
-import { DASHBOARD_PATH_URL, DUMMY_PATH_URL } from '@/constants/routes';
+import { DASHBOARD_BOOKS_PATH_URL, DUMMY_PATH_URL } from '@/constants/routes';
 import { SidebarMenu, SidebarMenuGroup, SidebarTitle } from '@/types/client/ui';
 import { HelpCircle, LayoutGrid, Settings, Shield } from 'lucide-react';
 
@@ -32,7 +32,7 @@ export const SIDEBAR_MENU_ITEM: SidebarMenu = [
     menu: [
       {
         title: SidebarTitle.DASHBOARD, // Dashboard main menu
-        url: DASHBOARD_PATH_URL, // Dashboard route
+        url: DASHBOARD_BOOKS_PATH_URL, // Dashboard route
         icon: <LayoutGrid />, // Dashboard icon
       },
       {

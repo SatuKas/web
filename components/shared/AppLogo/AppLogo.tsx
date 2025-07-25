@@ -44,8 +44,8 @@ const AppLogo = <T extends AppLogoType>({ type, variant }: AppLogoProps<T>) => {
 
   // Prevent hydration mismatch by using a fixed size container
   return (
-    <Box>
-      <Image src={logo} alt="logo" width={100} height={100} className="object-contain" priority />
+    <Box className="relative w-fit h-[inherit]" style={{ aspectRatio: type === 'icon' ? '1' : '3.5' }}>
+      <Image src={logo} alt="logo" fill className="object-contain" priority />
     </Box>
   );
 };

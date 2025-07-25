@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/Sidebar/Sidebar';
-import { PROFILE_PATH_URL } from '@/constants/routes';
+import { ACCOUNT_SETTINGS_PATH_URL } from '@/constants/routes';
 import { useUser } from '@/contexts/UserContext';
 import useLogoutMutation from '@/hooks/module/auth/query/useLogoutMutation';
 import { USER_MOCK } from '@/mocks/user';
@@ -109,7 +109,7 @@ const UserMenuItem = () => {
             <DropdownMenuGroup>
               {/* Link to user profile */}
               <DropdownMenuItem asChild>
-                <Link href={PROFILE_PATH_URL}>
+                <Link href={ACCOUNT_SETTINGS_PATH_URL}>
                   <UserCircleIcon />
                   {t('menu.profile')}
                 </Link>
