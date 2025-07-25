@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookie';
-import { DASHBOARD_PATH_URL, LOGIN_PATH_URL, PUBLIC_AUTH_ROUTES, PUBLIC_ROUTES } from '@/constants/routes';
+import { DASHBOARD_BOOKS_PATH_URL, LOGIN_PATH_URL, PUBLIC_AUTH_ROUTES, PUBLIC_ROUTES } from '@/constants/routes';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import Cookies from 'universal-cookie';
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 
   // Redirect to /dashboard if the user is authenticated
   if (isPublicAuthRoute && isTokenExist && !isPublicRoute) {
-    return NextResponse.redirect(new URL(DASHBOARD_PATH_URL, request.nextUrl));
+    return NextResponse.redirect(new URL(DASHBOARD_BOOKS_PATH_URL, request.nextUrl));
   }
 
   // Proceed with the request if all checks pass

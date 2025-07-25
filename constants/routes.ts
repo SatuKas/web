@@ -27,8 +27,17 @@ export const RESET_PASSWORD_PATH_URL = `${AUTH_PATH_URL}/reset-password`;
 export const VERIFY_EMAIL_PATH_URL = `${AUTH_PATH_URL}/verify-email`;
 
 // Dashboard Routes
-export const DASHBOARD_PATH_URL = '/dashboard';
-export const PROFILE_PATH_URL = '/me';
+export const DASHBOARD_PATH_URL = '/workspace';
+export const DASHBOARD_BOOKS_PATH_URL = `${DASHBOARD_PATH_URL}/books`;
+export const DASHBOARD_ORGANIZATIONS_PATH_URL = `${DASHBOARD_PATH_URL}/organizations`;
+
+// Settings Routes
+export const SETTINGS_PATH_URL = '/settings';
+export const ACCOUNT_SETTINGS_PATH_URL = `${SETTINGS_PATH_URL}/account`;
+
+// Book Routes
+export const BOOK_PATH_URL = '/book';
+
 export const DUMMY_PATH_URL = '/not-found';
 
 // Public Routes

@@ -35,13 +35,21 @@
     "profile": "Profil",
     "help": "Bantuan",
     "privacy": "Privasi",
-    "theme": "Tema Aplikasi"
+    "theme": "Tema Aplikasi",
+    "books": "Buku",
+    "organizations": "Organisasi",
+    "accountSettings": "Pengaturan Akun"
   },
   "notFound": {
     "404": "404",
     "title": "Oops!",
     "subtitle": "Tidak ada halaman yang ditemukan 🙈",
     "button": "Kembali"
+  },
+  "comingSoon": {
+    "title": "Segera Hadir!",
+    "subtitle": "Kita lagi kerja keras buat ngasih sesuatu yang keren banget. Pantengin terus ya buat update selanjutnya!",
+    "button": "Kembali ke Dashboard"
   },
   "auth": {
     "login": {
