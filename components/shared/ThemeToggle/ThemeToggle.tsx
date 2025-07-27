@@ -18,6 +18,8 @@ import {
 interface ThemeToggleProps {
   children?: React.ReactNode; // Optional: custom trigger element for the dropdown
   isMobile?: boolean; // Optional: if true, dropdown opens to bottom, otherwise to the right
+  side?: 'top' | 'bottom' | 'left' | 'right';
+  align?: 'start' | 'center' | 'end';
 }
 
 /**
@@ -43,7 +45,7 @@ export const ThemeIcon = () => {
  * @param {ThemeToggleProps} props - Props for ThemeToggle
  * @returns {JSX.Element}
  */
-function ThemeToggle({ children, isMobile }: ThemeToggleProps) {
+function ThemeToggle({ children, isMobile, side = 'right', align = 'start' }: ThemeToggleProps) {
   const { setTheme, theme } = useTheme();
   const t = useTranslations();
 
@@ -62,8 +64,8 @@ function ThemeToggle({ children, isMobile }: ThemeToggleProps) {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        side={isMobile ? 'bottom' : 'right'} // On mobile, dropdown opens to bottom; otherwise, to the right
-        align={isMobile ? 'end' : 'start'} // Alignment changes based on device
+        side={side || (isMobile ? 'bottom' : 'right')} // On mobile, dropdown opens to bottom; otherwise, to the right
+        align={align || (isMobile ? 'end' : 'start')} // Alignment changes based on device
       >
         <DropdownMenuCheckboxItem checked={theme === 'light'} onCheckedChange={() => setTheme('light')}>
           {t('common.theme.light')}
