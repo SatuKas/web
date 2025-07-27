@@ -1,3 +1,5 @@
+import { AlertDialogProvider } from '@/contexts/AlertDialogContext';
+import { DialogProvider } from '@/contexts/DialogContext';
 import { PropsWithChildren } from 'react';
 import QueryProvider from '../QueryProvider';
 import ThemeProvider from '../ThemeProvider';
@@ -23,7 +25,13 @@ const AppProvider = ({ children }: PropsWithChildren) => {
         {/* QueryProvider enables React Query for data fetching and caching */}
         <QueryProvider>
           {/* TranslationProvider enables i18n translation context */}
-          <TranslationProvider>{children}</TranslationProvider>
+          <TranslationProvider>
+            {/* AlertDialogProvider supplies alert dialog context to the app */}
+            <AlertDialogProvider>
+              {/* DialogProvider supplies dialog context to the app */}
+              <DialogProvider>{children}</DialogProvider>
+            </AlertDialogProvider>
+          </TranslationProvider>
         </QueryProvider>
       </ToastProvider>
     </ThemeProvider>
