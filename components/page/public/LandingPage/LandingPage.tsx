@@ -3,6 +3,7 @@ import FeatureSection from '@/components/module/landingPage/FeatureSection';
 import Footer from '@/components/module/landingPage/Footer';
 import Header from '@/components/module/landingPage/Header';
 import HeroSection from '@/components/module/landingPage/HeroSection';
+import Container from '@/components/ui/Container';
 import Stack from '@/components/ui/Stack';
 
 const LandingPage = () => {
@@ -10,19 +11,21 @@ const LandingPage = () => {
     <Stack className="min-h-screen w-full">
       {/* Header */}
       <Header />
-      <Stack as="main" gap={4} className="mx-auto max-w-screen-2xl px-4 relative py-12 md:py-17">
-        {/* Hero */}
-        <HeroSection />
+      <Container>
+        <Stack as="main" gap={4} className="relative py-12 md:py-17">
+          {/* Hero */}
+          <HeroSection />
 
-        {/* Features */}
-        <FeatureSection />
+          {/* Features */}
+          <FeatureSection />
 
-        {/* CTA */}
-        <CtaSection />
+          {/* CTA */}
+          <CtaSection />
 
-        {/* Footer */}
-        <Footer />
-      </Stack>
+          {/* Footer */}
+          <Footer />
+        </Stack>
+      </Container>
     </Stack>
   );
 };

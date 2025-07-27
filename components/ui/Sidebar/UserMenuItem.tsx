@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/Sidebar/Sidebar';
 import { ACCOUNT_SETTINGS_PATH_URL } from '@/constants/routes';
-import { useUser } from '@/contexts/UserContext';
+import useUser from '@/hooks/common/useUser';
 import useLogoutMutation from '@/hooks/module/auth/query/useLogoutMutation';
 import { USER_MOCK } from '@/mocks/user';
 import { useTranslations } from 'next-intl';

@@ -1,4 +1,5 @@
 import AppLogo from '@/components/shared/AppLogo';
+import ThemeToggle from '@/components/shared/ThemeToggle';
 import Box from '@/components/ui/Box';
 import Stack from '@/components/ui/Stack';
 import Typography from '@/components/ui/Typography';
@@ -18,7 +19,7 @@ const Footer = () => {
 
   return (
     <Box as="footer" className="border-t bg-background">
-      <Box className="pt-12 mx-auto max-w-7xl ">
+      <Box className="pt-12">
         <Box className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 [&_a]:text-sm [&_a]:text-muted-foreground [&_a]:hover:text-primary [&_a]:hover:underline [&_a]:hover:underline-offset-1 sm:px-6 lg:px-8 px-4 ">
           <Box>
             <Box className="h-11">
@@ -57,11 +58,12 @@ const Footer = () => {
             </Stack>
           </Box>
         </Box>
-        <Box className="pt-8 mt-8 border-t">
+        <Stack direction="row" justify="between" align="center" className="pt-8 mt-8 border-t">
           <Typography variant="p" className="text-sm text-muted-foreground">
             {t('landingPage.footer.copyright', { year: new Date().getFullYear() })}
           </Typography>
-        </Box>
+          <ThemeToggle side="left" align="end" />
+        </Stack>
       </Box>
     </Box>
   );

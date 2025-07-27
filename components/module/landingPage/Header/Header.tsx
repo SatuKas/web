@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 
 import AppLogo from '@/components/shared/AppLogo';
-import ThemeToggle from '@/components/shared/ThemeToggle';
 import Button from '@/components/ui/Button';
 import Stack from '@/components/ui/Stack';
 import { LANDING_PAGE_PATH_URL, LOGIN_PATH_URL, REGISTER_PATH_URL } from '@/constants/routes';
@@ -30,7 +29,7 @@ const Header = () => {
   return (
     <Stack
       as="header"
-      className={cn('h-17 sticky top-0 left-0 z-30 w-full transition-all duration-300', {
+      className={cn('h-17 sticky top-0 left-0 z-[60] w-full transition-all duration-300', {
         'bg-background/70 backdrop-blur-md border-b': isScrolled,
         'bg-background': !isScrolled,
       })}
@@ -45,7 +44,6 @@ const Header = () => {
           <AppLogo type="text" />
         </Link>
         <Stack direction="row" gap={2} align="center">
-          <ThemeToggle />
           <Link href={LOGIN_PATH_URL}>
             <Button variant="ghost" size="sm">
               {t('common.login')}

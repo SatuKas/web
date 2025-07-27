@@ -6,6 +6,7 @@
     "noteNow": "Catat Sekarang",
     "back": "Kembali",
     "send": "Kirim",
+    "cancel": "Batal",
     "verify": "Verifikasi",
     "backToLogin": "Kembali ke halaman masuk",
     "resendEmail": "Kirim Ulang Email",
@@ -50,6 +51,20 @@
     "title": "Segera Hadir!",
     "subtitle": "Kita lagi kerja keras buat ngasih sesuatu yang keren banget. Pantengin terus ya buat update selanjutnya!",
     "button": "Kembali ke Dashboard"
+  },
+  "emptyData": {
+    "default": {
+      "title": "Tidak ada data",
+      "description": "Tidak ada data yang ditemukan."
+    },
+    "bookList": {
+      "title": "Tidak ada buku yang ditemukan",
+      "description": "Buat buku baru untuk catatan keuangan Anda"
+    },
+    "sharedBookList": {
+      "title": "Tidak ada buku yang dibagikan",
+      "description": "Silakan minta rekan Anda untuk membagikan buku, atau buat buku baru terlebih dahulu."
+    }
   },
   "auth": {
     "login": {
@@ -195,6 +210,47 @@
         "terms": "Syarat & Ketentuan"
       },
       "copyright": "© {year} SatuKas. All rights reserved."
+    }
+  },
+  "dashboardWorkspace": {
+    "bookList": {
+      "title": "Daftar Buku",
+      "placeholder": {
+        "searchBook": "Cari buku"
+      },
+      "tab": {
+        "myBooks": "Buku Saya",
+        "sharedBooks": "Buku Dibagikan"
+      },
+      "createBook": {
+        "button": "Buat Buku",
+        "title": "Buat Buku",
+        "description": "Buat buku baru untuk catatan keuangan Anda",
+        "form": {
+          "label": {
+            "name": "Nama Buku",
+            "description": "Deskripsi Buku"
+          },
+          "placeholder": {
+            "name": "Masukkan nama buku",
+            "description": "Masukkan deskripsi buku"
+          },
+          "message": {
+            "toast": {
+              "errorCreateBook": "Terjadi kesalahan saat membuat buku",
+              "successCreateBook": "Berhasil membuat buku"
+            },
+            "error": {
+              "nameRequired": "Nama buku wajib diisi"
+            }
+          }
+        }
+      },
+      "deleteBook": {
+        "title": "Hapus Buku",
+        "description": "Apakah Anda yakin ingin menghapus buku ini?",
+        "confirm": "Ya, Hapus Buku Ini"
+      }
     }
   }
 }

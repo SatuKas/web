@@ -7,8 +7,8 @@ const DashboardWorkspaceHeader = () => {
   return (
     <Stack
       as="header"
-      className={cn('sticky h-28 top-0 left-0 z-30 w-full bg-background border-b')}
-      gap={3}
+      className={cn('sticky h-24 top-0 left-0 z-30 w-full bg-background border-b')}
+      gap={1}
       justify="between"
     >
       <Utility />

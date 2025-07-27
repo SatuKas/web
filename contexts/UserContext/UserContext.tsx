@@ -2,7 +2,7 @@
 
 import useGetCurrentUser from '@/hooks/module/user/query/useGetCurrentUserQuery';
 import { UserData } from '@/types/client/user';
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode } from 'react';
 
 interface UserContextType {
   user: UserData | undefined;
@@ -26,12 +26,4 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
-export const useUser = (): UserContextType => {
-  const context = useContext(UserContext);
-
-  if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-
-  return context;
-};
+export default UserContext;

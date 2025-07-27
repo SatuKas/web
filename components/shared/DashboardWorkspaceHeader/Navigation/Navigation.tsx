@@ -1,6 +1,7 @@
 'use client';
 
 import Box from '@/components/ui/Box';
+import Container from '@/components/ui/Container';
 import Stack from '@/components/ui/Stack';
 import Typography from '@/components/ui/Typography';
 import { DASHBOARD_BOOKS_PATH_URL, DASHBOARD_ORGANIZATIONS_PATH_URL, SETTINGS_PATH_URL } from '@/constants/routes';
@@ -34,26 +35,28 @@ const Navigation = () => {
   };
 
   return (
-    <Stack direction="row" className="w-full px-4">
-      <Stack direction="row" gap={2} className="overflow-x-auto scrollbar-none">
-        {navigationItems.map((item) => (
-          <Stack
-            key={item.href}
-            className={cn('pb-2 transition-all border-b-2 border-transparent', {
-              'border-primary': getActiveNavigationItem(item.href),
-            })}
-          >
-            <Link href={item.href}>
-              <Box className="py-1 px-2 hover:bg-muted rounded-sm transition-colors">
-                <Typography variant="p" className="text-md">
-                  {item.label}
-                </Typography>
-              </Box>
-            </Link>
-          </Stack>
-        ))}
+    <Container fullWidth>
+      <Stack direction="row" className="w-full">
+        <Stack direction="row" gap={2} className="overflow-x-auto scrollbar-none">
+          {navigationItems.map((item) => (
+            <Stack
+              key={item.href}
+              className={cn('pb-2 transition-all border-b-2 border-transparent', {
+                'border-primary': getActiveNavigationItem(item.href),
+              })}
+            >
+              <Link href={item.href}>
+                <Box className="py-1 px-2 hover:bg-muted rounded-sm transition-colors">
+                  <Typography variant="p" className="text-md">
+                    {item.label}
+                  </Typography>
+                </Box>
+              </Link>
+            </Stack>
+          ))}
+        </Stack>
       </Stack>
-    </Stack>
+    </Container>
   );
 };
 

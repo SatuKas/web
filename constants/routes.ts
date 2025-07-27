@@ -36,7 +36,8 @@ export const SETTINGS_PATH_URL = '/settings';
 export const ACCOUNT_SETTINGS_PATH_URL = `${SETTINGS_PATH_URL}/account`;
 
 // Book Routes
-export const BOOK_PATH_URL = '/book';
+export const BOOK_PATH_URL = '/book/:username/:bookId';
+export const BOOK_DASHBOARD_PATH_URL = `${BOOK_PATH_URL}/dashboard`;
 
 export const DUMMY_PATH_URL = '/not-found';
 
