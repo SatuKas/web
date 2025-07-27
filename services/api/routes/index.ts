@@ -22,3 +22,10 @@ export const AUTH_RESEND_VERIFICATION_EMAIL_PATH = `${AUTH_PATH}/resend-verifica
 // User Path
 export const USER_PATH = '/user';
 export const USER_CURRENT_PATH = `${USER_PATH}/me`;
+
+// Book Path
+export const BOOK_PATH = '/book';
+export const BOOK_LIST_PATH = `${BOOK_PATH}`;
+export const BOOK_SHARED_LIST_PATH = `${BOOK_PATH}/shared`;
+export const BOOK_CREATE_PATH = `${BOOK_PATH}`;
+export const BOOK_DELETE_PATH = `${BOOK_PATH}/:bookId`;
