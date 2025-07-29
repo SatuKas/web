@@ -6,7 +6,8 @@ import LogoIconSquare from '@/assets/image/logo-icon-square.svg';
 import LogoTextDark from '@/assets/image/logo-text-dark.svg';
 import LogoTextLight from '@/assets/image/logo-text-light.svg';
 import { AppLogo } from '@/types/client/ui';
-import { SIDEBAR_MENU_ITEM } from './menu';
+import { sidebarBookDashboardMenuItem } from './menu/bookDashboardMenu';
+import { SIDEBAR_COMMON_MENU_ITEM } from './menu/commonMenu';
 
 /**
  * The display name of the application.
@@ -57,8 +58,9 @@ export const AUTH_CONFIG = {
 
 /**
  * Sidebar menu items for the application.
- * Imported from config/menu.ts.
+ * Imported from config/menu.
  */
-export const APP_SIDEBAR_MENU = SIDEBAR_MENU_ITEM;
+export const APP_SIDEBAR_BOOK_DASHBOARD_MENU = sidebarBookDashboardMenuItem;
+export const APP_SIDEBAR_COMMON_MENU = SIDEBAR_COMMON_MENU_ITEM;
 
 export const APP_COUNTDOWN_SECONDS = 60;
