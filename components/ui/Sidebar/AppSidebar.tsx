@@ -1,7 +1,7 @@
 import AppLogo from '@/components/shared/AppLogo';
-import { APP_SIDEBAR_MENU } from '@/config/app';
-import { SIDEBAR_OPTIONAL_MENU_ITEM } from '@/config/menu';
+import { APP_SIDEBAR_COMMON_MENU } from '@/config/app';
 import { DASHBOARD_BOOKS_PATH_URL } from '@/constants/routes';
+import { SidebarMenu as SidebarMenuType } from '@/types/client/ui';
 import Link from 'next/link';
 import React from 'react';
 import Box from '../Box';
@@ -18,6 +18,10 @@ import {
 } from './Sidebar';
 import UserMenuItem from './UserMenuItem';
 
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  menuItems: SidebarMenuType;
+}
+
 /**
  * AppSidebar component renders the main sidebar for the application.
  *
@@ -30,7 +34,7 @@ import UserMenuItem from './UserMenuItem';
  * - User menu at the footer, showing user info and actions.
  * - SidebarRail for visual sidebar rail.
  */
-const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+const AppSidebar = ({ menuItems, ...props }: AppSidebarProps) => {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -49,14 +53,14 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
       </SidebarHeader>
       <SidebarContent>
         {/* Render main sidebar menu items */}
-        {APP_SIDEBAR_MENU.map((item, index) => (
+        {menuItems.map((item, index) => (
           <NavigationMenu
             key={`${item.title}-${index}`} // Use title and index to ensure unique key
             items={item} // items: menu group object
           />
         ))}
         {/* Render optional menu items, placed at the bottom using mt-auto */}
-        <NavigationMenu items={SIDEBAR_OPTIONAL_MENU_ITEM} className="mt-auto" />
+        <NavigationMenu items={APP_SIDEBAR_COMMON_MENU} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         {/* User menu section, shows user info and actions */}
