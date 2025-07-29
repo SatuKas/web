@@ -82,16 +82,27 @@ export type SidebarMenu = SidebarMenuGroup[];
  * Enum for all possible sidebar menu titles.
  */
 export enum SidebarTitle {
+  // Common
   DASHBOARD = 'dashboard',
   SETTINGS = 'settings',
-  PROFILE = 'profile',
-  LOGOUT = 'logout',
   HELP = 'help',
-  ABOUT = 'about',
-  CONTACT = 'contact',
-  TERMS = 'terms',
-  PRIVACY = 'privacy',
   THEME = 'theme',
+  PROFILE = 'profile',
+  WORKSPACE = 'workspace',
+
+  // Book
+  SETUP_BOOK = 'setupBook',
+  COA = 'coa',
+  BOOK_SETTINGS = 'bookSettings',
+
+  // Transaction
+  TRANSACTION = 'transaction',
+
+  // Report
+  REPORT = 'report',
+  LEDGER = 'ledger',
+  BALANCE_SHEET = 'balanceSheet',
+  JOURNAL = 'journal',
 }
 
 /**
