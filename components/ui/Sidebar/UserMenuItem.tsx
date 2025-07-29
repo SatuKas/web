@@ -1,6 +1,6 @@
 'use client';
 
-import { LogOutIcon, MoreVerticalIcon, UserCircleIcon } from 'lucide-react';
+import { HelpCircleIcon, LogOutIcon, MoreVerticalIcon, UserCircleIcon } from 'lucide-react';
 
 import Avatar from '@/components/ui/Avatar/Avatar';
 import {
@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/Sidebar/Sidebar';
-import { ACCOUNT_SETTINGS_PATH_URL } from '@/constants/routes';
+import { ACCOUNT_SETTINGS_PATH_URL, HELP_PATH_URL } from '@/constants/routes';
 import useUser from '@/hooks/common/useUser';
 import useLogoutMutation from '@/hooks/module/auth/query/useLogoutMutation';
 import { USER_MOCK } from '@/mocks/user';
@@ -112,6 +112,16 @@ const UserMenuItem = () => {
                 <Link href={ACCOUNT_SETTINGS_PATH_URL}>
                   <UserCircleIcon />
                   {t('menu.profile')}
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              {/* Link to help */}
+              <DropdownMenuItem asChild>
+                <Link href={HELP_PATH_URL}>
+                  <HelpCircleIcon />
+                  {t('menu.help')}
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>

@@ -7,9 +7,9 @@ import { BreadcrumbLinkItem, MenuTranslationKeys } from '@/types/client/ui';
  * @param url - (Optional) The URL for the breadcrumb link. If not provided, the breadcrumb will not be clickable.
  * @returns BreadcrumbLinkItem - An object representing a single breadcrumb link.
  */
-export const breadcrumbHelper = (
+export const breadcrumbHelper = <T extends string | undefined>(
   title: MenuTranslationKeys, // the translation key for the breadcrumb label
-  url?: string // optional URL for the breadcrumb link
+  url?: T // optional URL for the breadcrumb link
 ): BreadcrumbLinkItem => {
   return {
     title, // MenuTranslationKeys: used for displaying the breadcrumb label

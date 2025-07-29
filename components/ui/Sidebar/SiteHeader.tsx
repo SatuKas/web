@@ -1,15 +1,13 @@
 import Box from '@/components/ui/Box';
-import Breadcrumb from '@/components/ui/Breadcrumb';
 import Separator from '@/components/ui/Separator';
 import { SidebarTrigger } from '@/components/ui/Sidebar/Sidebar';
 import Stack from '@/components/ui/Stack';
-import { BreadcrumbLinkItem } from '@/types/client/ui';
 
 /**
  * Props for SiteHeader component.
  */
 interface SiteHeaderProps {
-  breadcrumb: BreadcrumbLinkItem[]; // Array of breadcrumb link items to display in the header
+  breadcrumbComponent: React.ReactNode; // Breadcrumb component to display in the header
 }
 
 /**
@@ -18,7 +16,7 @@ interface SiteHeaderProps {
  *
  * @param breadcrumb - Array of breadcrumb link items for navigation
  */
-export function SiteHeader({ breadcrumb }: SiteHeaderProps) {
+export function SiteHeader({ breadcrumbComponent }: SiteHeaderProps) {
   return (
     <Box
       as="header"
@@ -30,7 +28,7 @@ export function SiteHeader({ breadcrumb }: SiteHeaderProps) {
         {/* Separator visually separates the trigger from the breadcrumb */}
         <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
         {/* Breadcrumb displays the current navigation path */}
-        <Breadcrumb items={breadcrumb} />
+        {breadcrumbComponent}
       </Stack>
     </Box>
   );

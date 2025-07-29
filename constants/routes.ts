@@ -18,6 +18,9 @@ export const ABOUT_PATH_URL = '/about';
 // Contact Routes
 export const CONTACT_PATH_URL = '/contact';
 
+// Help Routes
+export const HELP_PATH_URL = '/help';
+
 // Auth Routes
 export const AUTH_PATH_URL = '/auth';
 export const LOGIN_PATH_URL = `${AUTH_PATH_URL}/login`;
@@ -38,6 +41,13 @@ export const ACCOUNT_SETTINGS_PATH_URL = `${SETTINGS_PATH_URL}/account`;
 // Book Routes
 export const BOOK_PATH_URL = '/book/:username/:bookId';
 export const BOOK_DASHBOARD_PATH_URL = `${BOOK_PATH_URL}/dashboard`;
+export const BOOK_SETTINGS_PATH_URL = `${BOOK_PATH_URL}/settings`;
+export const BOOK_COA_PATH_URL = `${BOOK_PATH_URL}/coa`;
+export const BOOK_TRANSACTION_PATH_URL = `${BOOK_PATH_URL}/transaction`;
+export const BOOK_REPORT_PATH_URL = `${BOOK_PATH_URL}/report`;
+export const BOOK_REPORT_JOURNAL_PATH_URL = `${BOOK_REPORT_PATH_URL}/journal`;
+export const BOOK_REPORT_LEDGER_PATH_URL = `${BOOK_REPORT_PATH_URL}/ledger`;
+export const BOOK_REPORT_BALANCE_SHEET_PATH_URL = `${BOOK_REPORT_PATH_URL}/balance-sheet`;
 
 export const DUMMY_PATH_URL = '/not-found';
 
@@ -51,4 +61,5 @@ export const PUBLIC_ROUTES = [
   FORGOT_PASSWORD_PATH_URL,
   RESET_PASSWORD_PATH_URL,
   VERIFY_EMAIL_PATH_URL,
+  HELP_PATH_URL,
 ];
