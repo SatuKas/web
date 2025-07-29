@@ -1,5 +1,6 @@
 import AppSidebar from '@/components/ui/Sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/Sidebar/Sidebar';
+import { SidebarMenu as SidebarMenuType } from '@/types/client/ui';
 import { ReactNode } from 'react';
 
 /**
@@ -7,6 +8,7 @@ import { ReactNode } from 'react';
  */
 interface DashboardLayoutProps {
   children: ReactNode; // React children elements to be rendered inside the layout
+  menuItems: SidebarMenuType;
 }
 
 /**
@@ -16,7 +18,7 @@ interface DashboardLayoutProps {
  * - AppSidebar is rendered with "inset" variant for authenticated pages.
  * - SidebarInset wraps the children to ensure proper layout with the sidebar.
  */
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, menuItems }: DashboardLayoutProps) => {
   return (
     <SidebarProvider
       // Set custom CSS variables for sidebar width and header height
@@ -27,7 +29,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <AppSidebar variant="inset" menuItems={menuItems} />
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );

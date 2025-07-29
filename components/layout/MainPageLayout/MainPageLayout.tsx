@@ -1,6 +1,5 @@
 import { SiteHeader } from '@/components/ui/Sidebar/SiteHeader';
 import Stack from '@/components/ui/Stack';
-import { BreadcrumbLinkItem } from '@/types/client/ui';
 import { ReactNode } from 'react';
 
 /**
@@ -8,7 +7,7 @@ import { ReactNode } from 'react';
  */
 interface MainPageLayoutProps {
   children: ReactNode; // Content to be rendered inside the layout
-  breadcrumb: BreadcrumbLinkItem[]; // Array of breadcrumb items for navigation
+  breadcrumbComponent: React.ReactNode; // Breadcrumb component to display in the header
 }
 
 /**
@@ -17,11 +16,11 @@ interface MainPageLayoutProps {
  *
  * @param {MainPageLayoutProps} props - Props containing children and breadcrumb
  */
-const MainPageLayout = ({ children, breadcrumb }: MainPageLayoutProps) => {
+const MainPageLayout = ({ children, breadcrumbComponent }: MainPageLayoutProps) => {
   return (
     <>
       {/* Render the site header with breadcrumb navigation */}
-      <SiteHeader breadcrumb={breadcrumb} />
+      <SiteHeader breadcrumbComponent={breadcrumbComponent} />
       {/* Wrap children with Stack component and apply padding */}
       <Stack className="p-4">{children}</Stack>
     </>
