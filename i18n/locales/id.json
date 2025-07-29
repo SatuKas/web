@@ -29,17 +29,23 @@
     }
   },
   "menu": {
+    "workspace": "Ruang Kerja",
     "dashboard": "Dashboard",
     "settings": "Pengaturan",
-    "about": "Tentang",
-    "contact": "Kontak",
     "profile": "Profil",
     "help": "Bantuan",
-    "privacy": "Privasi",
     "theme": "Tema Aplikasi",
     "books": "Buku",
     "organizations": "Organisasi",
-    "accountSettings": "Pengaturan Akun"
+    "accountSettings": "Pengaturan Akun",
+    "setupBook": "Persiapan",
+    "coa": "COA",
+    "report": "Laporan",
+    "ledger": "Buku Besar",
+    "balanceSheet": "Laporan Neraca",
+    "journal": "Jurnal",
+    "transaction": "Transaksi",
+    "bookSettings": "Pengaturan Buku"
   },
   "notFound": {
     "404": "404",
