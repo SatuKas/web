@@ -14,3 +14,13 @@ export type BookListData = {
     username: string;
   };
 };
+
+export type BookByIdData = {
+  id: string;
+  name: string;
+  description?: string;
+  createdAt: string;
+  owner: {
+    id: string;
+  };
+};
