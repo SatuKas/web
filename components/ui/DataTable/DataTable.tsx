@@ -22,6 +22,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   pagination?: boolean;
   paginationList?: number[];
+  emptyState?: React.ReactNode | string;
 }
 
 function DataTable<TData, TValue>({
@@ -29,6 +30,7 @@ function DataTable<TData, TValue>({
   data,
   pagination = true,
   paginationList = [10, 20, 25, 30, 40, 50],
+  emptyState = null,
 }: DataTableProps<TData, TValue>) {
   const t = useTranslations();
 
@@ -88,7 +90,7 @@ function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  {t('common.table.noData')}
+                  {emptyState || t('common.table.noData')}
                 </TableCell>
               </TableRow>
             )}
