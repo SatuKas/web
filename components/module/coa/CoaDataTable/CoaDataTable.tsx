@@ -7,71 +7,11 @@ import Input from '@/components/ui/Input';
 import Stack from '@/components/ui/Stack';
 import useBookDetail from '@/hooks/common/useBookDetail';
 import useAccountQuery from '@/hooks/module/coa/query/useAccountQuery';
-import { AccountCategory, AccountListData, AccountType } from '@/types/client/coa';
+import { AccountCategory, AccountListData, AccountPosition, AccountType } from '@/types/client/coa';
 import { ColumnDef } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import EmptyData from './EmptyData/EmptyData';
-
-type CoaData = {
-  id: string;
-  code: string;
-  name: string;
-  type: AccountType;
-  category: AccountCategory;
-  isActive: boolean;
-};
-
-const dummyData: CoaData[] = [
-  {
-    id: '1',
-    code: '1-1000',
-    name: 'Kas',
-    type: AccountType.CRAS,
-    category: AccountCategory.ASSET,
-    isActive: true,
-  },
-  {
-    id: '2',
-    code: '1-2000',
-    name: 'Bank BCA',
-    type: AccountType.CRAS,
-    category: AccountCategory.ASSET,
-    isActive: true,
-  },
-  {
-    id: '3',
-    code: '2-1000',
-    name: 'Hutang Usaha',
-    type: AccountType.CRLI,
-    category: AccountCategory.LIABILITY,
-    isActive: true,
-  },
-  {
-    id: '4',
-    code: '3-1000',
-    name: 'Modal Usaha',
-    type: AccountType.CAPT,
-    category: AccountCategory.EQUITY,
-    isActive: true,
-  },
-  {
-    id: '5',
-    code: '4-1000',
-    name: 'Pendapatan Jasa',
-    type: AccountType.OPIN,
-    category: AccountCategory.INCOME,
-    isActive: true,
-  },
-  {
-    id: '6',
-    code: '5-1000',
-    name: 'Beban Operasional',
-    type: AccountType.OPEX,
-    category: AccountCategory.EXPENSE,
-    isActive: false,
-  },
-];
 
 const CoaDataTable = () => {
   const t = useTranslations('coa.table');
@@ -104,6 +44,14 @@ const CoaDataTable = () => {
         cell: ({ row }) => {
           const category = row.getValue('category') as AccountCategory;
           return tCommon(`accountCategory.${category}`);
+        },
+      },
+      {
+        accessorKey: 'position',
+        header: t('column.position'),
+        cell: ({ row }) => {
+          const position = row.getValue('position') as AccountPosition;
+          return tCommon(`accountPosition.${position}`);
         },
       },
       // {
@@ -139,7 +87,7 @@ const CoaDataTable = () => {
         <Input type="text" placeholder={t('placeholder.search')} />
         <AddAccount onSuccess={refetchAccountList} accountList={accountList} />
       </Stack>
-      <DataTable columns={columns} data={accountList} emptyState={<EmptyData />} />
+      <DataTable columns={columns} data={accountList} emptyState={<EmptyData />} isLoading={accountListLoading} />
     </Stack>
   );
 };
