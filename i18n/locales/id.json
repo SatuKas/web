@@ -49,26 +49,30 @@
       "EXPENSE": "Beban"
     },
     "accountType": {
-      "CRAS": "Aset Lancar",
-      "FXAS": "Aset Tetap",
-      "INAS": "Aset Tidak Lancar",
-      "IVAS": "Aset Investasi",
-      "OTAS": "Aset Lainnya",
-      "CRLI": "Hutang Lancar",
-      "LTLI": "Hutang Jangka Panjang",
-      "OTLI": "Hutang Lainnya",
-      "CAPT": "Modal",
-      "RTER": "Laba Ditahan",
-      "DRAW": "Penarikan Modal",
-      "RESV": "Cadangan",
-      "OPIN": "Pendapatan Operasional",
-      "NOIN": "Pendapatan Non Operasional",
-      "OTIN": "Pendapatan Lainnya",
-      "COGS": "Biaya Operasional",
-      "OPEX": "Biaya Operasional",
-      "FIEX": "Biaya Finansial",
-      "TAXE": "Biaya Pajak",
-      "OTEX": "Biaya Lainnya"
+      "CRAS": "Aset Lancar (CRAS)",
+      "FXAS": "Aset Tetap (FXAS)",
+      "INAS": "Aset Tidak Lancar (INAS)",
+      "IVAS": "Aset Investasi (IVAS)",
+      "OTAS": "Aset Lainnya (OTAS)",
+      "CRLI": "Hutang Lancar (CRLI)",
+      "LTLI": "Hutang Jangka Panjang (LTLI)",
+      "OTLI": "Hutang Lainnya (OTLI)",
+      "CAPT": "Modal (CAPT)",
+      "RTER": "Laba Ditahan (RTER)",
+      "DRAW": "Penarikan Modal (DRAW)",
+      "RESV": "Cadangan (RESV)",
+      "OPIN": "Pendapatan Operasional (OPIN)",
+      "NOIN": "Pendapatan Non Operasional (NOIN)",
+      "OTIN": "Pendapatan Lainnya (OTIN)",
+      "COGS": "Biaya Operasional (COGS)",
+      "OPEX": "Biaya Operasional (OPEX)",
+      "FIEX": "Biaya Finansial (FIEX)",
+      "TAXE": "Biaya Pajak (TAXE)",
+      "OTEX": "Biaya Lainnya (OTEX)"
+    },
+    "accountPosition": {
+      "DEBIT": "Debet",
+      "CREDIT": "Kredit"
     }
   },
   "menu": {
@@ -311,7 +315,8 @@
         "type": "Tipe",
         "balance": "Saldo",
         "status": "Status",
-        "category": "Kategori"
+        "category": "Kategori",
+        "position": "Posisi"
       },
       "placeholder": {
         "search": "Cari akun"
@@ -358,7 +363,8 @@
             "nameRequired": "Nama akun wajib diisi",
             "codeRequired": "Kode akun wajib diisi",
             "typeRequired": "Tipe akun wajib diisi",
-            "categoryRequired": "Kategori akun wajib diisi"
+            "categoryRequired": "Kategori akun wajib diisi",
+            "codeInvalid": "Kode akun tidak valid"
           }
         }
       }
