@@ -1,5 +1,4 @@
 import { ADD_ACCOUNT_FORM_DEFAULT_VALUES } from '@/constants/coa';
-import useBookDetail from '@/hooks/common/useBookDetail';
 import useDialog from '@/hooks/common/useDialog';
 import { CreateAccountPayload } from '@/types/api/coa';
 import { AddAccountData } from '@/types/client/coa';
@@ -11,11 +10,11 @@ import useAddAccountSchema from './useAddAccountSchema';
 
 interface UseAddAccountFormProps {
   onSuccess?: () => void;
+  bookId: string;
 }
 
-const useAddAccountForm = ({ onSuccess }: UseAddAccountFormProps) => {
+const useAddAccountForm = ({ onSuccess, bookId }: UseAddAccountFormProps) => {
   const { closeDialog } = useDialog();
-  const { book } = useBookDetail();
 
   const { createAccount, isLoadingCreateAccount } = useAccountMutation();
   const { addAccountSchema } = useAddAccountSchema();
@@ -28,7 +27,7 @@ const useAddAccountForm = ({ onSuccess }: UseAddAccountFormProps) => {
 
   const onSubmit: SubmitHandler<AddAccountData> = (data) => {
     const payload: CreateAccountPayload = {
-      book_id: book?.id as string,
+      book_id: bookId,
       name: data.name,
       description: data.description,
       code: data.code,
@@ -36,19 +35,16 @@ const useAddAccountForm = ({ onSuccess }: UseAddAccountFormProps) => {
       balance: data.balance,
       parent_id: data.parentAccount,
     };
-    console.log({ data, payload });
 
-    closeDialog();
-
-    // createAccount(payload, {
-    //   onSuccess: () => {
-    //     onSuccess?.();
-    //     closeDialog();
-    //   },
-    //   onError: (error) => {
-    //     console.log({ error });
-    //   },
-    // });
+    createAccount(payload, {
+      onSuccess: () => {
+        onSuccess?.();
+        closeDialog();
+      },
+      onError: (error) => {
+        console.log({ error });
+      },
+    });
   };
 
   const onError: SubmitErrorHandler<AddAccountData> = (errors) => {

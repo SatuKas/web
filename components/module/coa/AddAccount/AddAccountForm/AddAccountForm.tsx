@@ -1,4 +1,5 @@
 import Button from '@/components/ui/Button';
+import Combobox from '@/components/ui/Combobox';
 import Form, { FormField } from '@/components/ui/Form';
 import Input from '@/components/ui/Input';
 import Select from '@/components/ui/Select';
@@ -14,29 +15,31 @@ import {
 } from '@/constants/coa';
 import useAddAccountForm from '@/hooks/module/coa/useAddAccountForm';
 import { AccountCategory, AccountListData } from '@/types/client/coa';
+import { generateAccountCode } from '@/utils/coa';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 interface AddAccountFormProps {
   onSuccess?: () => void;
   accountList?: AccountListData[];
+  bookId: string;
 }
 
-const AddAccountForm = ({ onSuccess, accountList }: AddAccountFormProps) => {
+const AddAccountForm = ({ onSuccess, accountList, bookId }: AddAccountFormProps) => {
   const t = useTranslations('coa');
   const tCommon = useTranslations('common');
-  const { form, onSubmit, onError } = useAddAccountForm({ onSuccess });
+  const { form, onSubmit, onError, isLoadingCreateAccount } = useAddAccountForm({ onSuccess, bookId });
 
   const accountCategory = form.watch('category');
-  const parentAccount = form.watch('parentAccount');
+  const parentAccountId = form.watch('parentAccount');
 
-  const isOpenAccountBalance = useMemo(() => {
-    return (
-      accountCategory === AccountCategory.ASSET ||
-      accountCategory === AccountCategory.LIABILITY ||
-      accountCategory === AccountCategory.EQUITY
-    );
-  }, [accountCategory]);
+  // const isOpenAccountBalance = useMemo(() => {
+  //   return (
+  //     accountCategory === AccountCategory.ASSET ||
+  //     accountCategory === AccountCategory.LIABILITY ||
+  //     accountCategory === AccountCategory.EQUITY
+  //   );
+  // }, [accountCategory]);
 
   const accountTypeOptions = useMemo(() => {
     if (accountCategory === AccountCategory.ASSET) {
@@ -87,13 +90,35 @@ const AddAccountForm = ({ onSuccess, accountList }: AddAccountFormProps) => {
   }, [accountList]);
 
   const currentParentAccount = useMemo(() => {
-    const getParentAccount = accountList?.find((account) => account.id === parentAccount);
+    const getParentAccount = accountList?.find((account) => account.id === parentAccountId);
     if (getParentAccount) {
-      form.setValue('category', getParentAccount.category);
       return getParentAccount;
     }
     return undefined;
-  }, [accountList, form, parentAccount]);
+  }, [accountList, parentAccountId]);
+
+  const getAccountChild = useCallback(
+    (parentAccountId: string) => {
+      return accountList?.filter((account) => account.parentId === parentAccountId);
+    },
+    [accountList]
+  );
+
+  useEffect(() => {
+    if (currentParentAccount) {
+      form.setValue('category', currentParentAccount.category);
+      form.setValue(
+        'code',
+        generateAccountCode(currentParentAccount.code, getAccountChild(currentParentAccount.id)?.[0]?.code)
+      );
+    }
+  }, [currentParentAccount, form, getAccountChild]);
+
+  useEffect(() => {
+    if (accountCategory) {
+      form.setValue('type', accountTypeOptions[0].value);
+    }
+  }, [accountCategory, accountTypeOptions, form]);
 
   return (
     <Form
@@ -123,7 +148,7 @@ const AddAccountForm = ({ onSuccess, accountList }: AddAccountFormProps) => {
           control={form.control}
           name="parentAccount"
           render={({ field }) => (
-            <Select
+            <Combobox
               placeholder={t('createAccount.form.placeholder.parentAccount')}
               label={t('createAccount.form.label.parentAccount')}
               options={parentAccountOptions}
@@ -212,7 +237,7 @@ const AddAccountForm = ({ onSuccess, accountList }: AddAccountFormProps) => {
           )}
         />
         <Stack justify="end" direction="row">
-          <Button type="submit" className="w-fit">
+          <Button type="submit" className="w-fit" loading={isLoadingCreateAccount}>
             {t('createAccount.form.saveAccount')}
           </Button>
         </Stack>

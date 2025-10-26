@@ -9,7 +9,10 @@ const useAddAccountSchema = () => {
   // Define Zod schema for login form
   const addAccountSchema = z.object({
     name: z.string().nonempty(t('coa.createAccount.form.message.error.nameRequired')),
-    code: z.string().nonempty(t('coa.createAccount.form.message.error.codeRequired')),
+    code: z
+      .string()
+      .nonempty(t('coa.createAccount.form.message.error.codeRequired'))
+      .regex(/^[0-9\.]+$/, t('coa.createAccount.form.message.error.codeInvalid')),
     type: z.nativeEnum(AccountType, {
       required_error: t('coa.createAccount.form.message.error.typeRequired'),
     }),

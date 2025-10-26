@@ -1,4 +1,5 @@
 import Button from '@/components/ui/Button';
+import useBookDetail from '@/hooks/common/useBookDetail';
 import useDialog from '@/hooks/common/useDialog';
 import { AccountListData } from '@/types/client/coa';
 import { PlusIcon } from 'lucide-react';
@@ -13,12 +14,13 @@ interface AddAccountProps {
 const AddAccount = ({ onSuccess, accountList }: AddAccountProps) => {
   const t = useTranslations('coa');
   const { openDialog } = useDialog();
+  const { bookId } = useBookDetail();
 
   const handleAddAccount = () => {
     openDialog({
       title: t('createAccount.title'),
       description: t('createAccount.description'),
-      children: <AddAccountForm onSuccess={onSuccess} accountList={accountList} />,
+      children: <AddAccountForm onSuccess={onSuccess} accountList={accountList} bookId={bookId} />,
     });
   };
 

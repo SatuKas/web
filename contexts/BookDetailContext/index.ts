@@ -1,1 +1,1 @@
-export { BookRouteProvider, default } from './BookDetailContext';
+export { BookDetailProvider, default } from './BookDetailContext';

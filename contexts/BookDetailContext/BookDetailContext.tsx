@@ -12,11 +12,13 @@ import { createContext, ReactNode } from 'react';
 type BookDetailContextType = {
   book: BookByIdData | undefined;
   isLoadingBook: boolean;
+  bookId: string;
 };
 
 const BookDetailContext = createContext<BookDetailContextType>({
   book: undefined,
   isLoadingBook: true,
+  bookId: '',
 });
 
 interface BookDetailProviderProps {
@@ -32,6 +34,7 @@ export const BookDetailProvider = ({ children, params }: BookDetailProviderProps
   const value: BookDetailContextType = {
     book: bookById,
     isLoadingBook: bookByIdLoading,
+    bookId: bookId,
   };
 
   // TECHDEBT: add loading state
