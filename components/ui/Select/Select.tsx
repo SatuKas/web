@@ -172,6 +172,8 @@ export interface SelectProps {
   fullWidth?: boolean;
   /** Custom class name */
   className?: string;
+  /** Name of the select */
+  name?: string;
 }
 
 export interface SelectOption {
@@ -198,6 +200,7 @@ const Select = ({
   error,
   fullWidth,
   className,
+  name,
 }: SelectProps) => {
   const isGrouped = (options: SelectOption[] | SelectOptionGroup[]): options is SelectOptionGroup[] => {
     return options.length > 0 && 'options' in options[0];
@@ -216,6 +219,7 @@ const Select = ({
       value={value ? String(value) : undefined}
       onValueChange={(value) => onChange?.(value)}
       disabled={disabled}
+      name={name}
     >
       <SelectTrigger className={cn(fullWidth && 'w-full', error && 'border-destructive', className)} size={size}>
         <SelectValue placeholder={placeholder} />
