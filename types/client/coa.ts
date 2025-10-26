@@ -61,7 +61,7 @@ export interface AccountListData {
   type: AccountType;
   category: AccountCategory;
   isActive: boolean;
-  parentAccount: string;
+  parentId: string;
   description: string;
   isParentGroup: boolean;
   level: number;
