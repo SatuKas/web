@@ -24,8 +24,16 @@ export const USER_PATH = '/user';
 export const USER_CURRENT_PATH = `${USER_PATH}/me`;
 
 // Book Path
-export const BOOK_PATH = '/book';
+export const BOOK_PATH = '/books';
 export const BOOK_LIST_PATH = `${BOOK_PATH}`;
 export const BOOK_SHARED_LIST_PATH = `${BOOK_PATH}/shared`;
+export const BOOK_GET_BY_ID_PATH = `${BOOK_PATH}/:bookId`;
 export const BOOK_CREATE_PATH = `${BOOK_PATH}`;
 export const BOOK_DELETE_PATH = `${BOOK_PATH}/:bookId`;
+
+// Coa Path
+export const COA_PATH = '/accounts';
+export const COA_LIST_PATH = `${COA_PATH}`;
+export const COA_CREATE_PATH = `${COA_PATH}`;
+export const COA_UPDATE_PATH = `${COA_PATH}/:accountId`;
+export const COA_DELETE_PATH = `${COA_PATH}/:accountId`;

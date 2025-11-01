@@ -1,4 +1,5 @@
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from '@/components/ui/Form/Form';
+import Stack from '@/components/ui/Stack';
 import { DefaultInputProps } from '@/types/client/ui';
 import { PropsWithChildren } from 'react';
 
@@ -21,20 +22,27 @@ type FormInputWraperProps = PropsWithChildren<DefaultInputProps>;
  * @param {FormInputWraperProps} props - The props for the component.
  * @returns {JSX.Element} The wrapped form input with label, description, and error message.
  */
-const FormInputWraper = ({ label, children, name, description, required }: FormInputWraperProps) => {
+const FormInputWraper = ({ label, children, name, description, required, labelDirection }: FormInputWraperProps) => {
   // Render the label if provided, and show a red asterisk if the field is required
   // The htmlFor attribute on FormLabel helps with accessibility by linking the label to the input
 
   return (
     <FormItem>
-      {label && (
-        <FormLabel className="gap-1" htmlFor={name}>
-          {label}
-          {required && <span className="text-red-500">*</span>}
-        </FormLabel>
-      )}
-      {/* Render the input or child component */}
-      <FormControl>{children}</FormControl>
+      <Stack
+        direction={labelDirection === 'horizontal' ? 'row' : 'column'}
+        justify={labelDirection === 'horizontal' ? 'between' : 'start'}
+        align={labelDirection === 'horizontal' ? 'center' : 'stretch'}
+        className={labelDirection === 'horizontal' ? 'gap-4' : 'gap-1'}
+      >
+        {label && (
+          <FormLabel className="gap-1" htmlFor={name}>
+            {label}
+            {required && <span className="text-red-500">*</span>}
+          </FormLabel>
+        )}
+        {/* Render the input or child component */}
+        <FormControl>{children}</FormControl>
+      </Stack>
       {/* Show description if provided */}
       {description && <FormDescription>{description}</FormDescription>}
       {/* Always render the form message for validation feedback */}

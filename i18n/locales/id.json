@@ -13,6 +13,8 @@
     "resetPassword": "Atur Ulang Kata Sandi",
     "saveNewPassword": "Simpan Kata Sandi Baru",
     "emailNotReceived": "Email tidak diterima?",
+    "active": "Aktif",
+    "inactive": "Non-aktif",
     "message": {
       "error": {
         "maxCharacter": "Maksimal {max} karakter",
@@ -26,6 +28,51 @@
       "light": "Terang",
       "dark": "Gelap",
       "system": "Sistem"
+    },
+    "table": {
+      "pagination": {
+        "rowsPerPage": "Baris per halaman",
+        "pageOf": "Halaman {page} dari {totalPages}",
+        "rowsSelected": "{rowsSelected} dari {rowsTotal} baris terpilih",
+        "goToFirstPage": "Pergi ke halaman pertama",
+        "goToPreviousPage": "Pergi ke halaman sebelumnya",
+        "goToNextPage": "Pergi ke halaman selanjutnya",
+        "goToLastPage": "Pergi ke halaman terakhir"
+      },
+      "noData": "Tidak ada data"
+    },
+    "accountCategory": {
+      "ASSET": "Aset",
+      "LIABILITY": "Hutang",
+      "EQUITY": "Modal",
+      "INCOME": "Pendapatan",
+      "EXPENSE": "Beban"
+    },
+    "accountType": {
+      "CRAS": "Aset Lancar (CRAS)",
+      "FXAS": "Aset Tetap (FXAS)",
+      "INAS": "Aset Tidak Lancar (INAS)",
+      "IVAS": "Aset Investasi (IVAS)",
+      "OTAS": "Aset Lainnya (OTAS)",
+      "CRLI": "Hutang Lancar (CRLI)",
+      "LTLI": "Hutang Jangka Panjang (LTLI)",
+      "OTLI": "Hutang Lainnya (OTLI)",
+      "CAPT": "Modal (CAPT)",
+      "RTER": "Laba Ditahan (RTER)",
+      "DRAW": "Penarikan Modal (DRAW)",
+      "RESV": "Cadangan (RESV)",
+      "OPIN": "Pendapatan Operasional (OPIN)",
+      "NOIN": "Pendapatan Non Operasional (NOIN)",
+      "OTIN": "Pendapatan Lainnya (OTIN)",
+      "COGS": "Biaya Operasional (COGS)",
+      "OPEX": "Biaya Operasional (OPEX)",
+      "FIEX": "Biaya Finansial (FIEX)",
+      "TAXE": "Biaya Pajak (TAXE)",
+      "OTEX": "Biaya Lainnya (OTEX)"
+    },
+    "accountPosition": {
+      "DEBIT": "Debet",
+      "CREDIT": "Kredit"
     }
   },
   "menu": {
@@ -39,7 +86,7 @@
     "organizations": "Organisasi",
     "accountSettings": "Pengaturan Akun",
     "setupBook": "Persiapan",
-    "coa": "COA",
+    "coa": "Daftar Akun",
     "report": "Laporan",
     "ledger": "Buku Besar",
     "balanceSheet": "Laporan Neraca",
@@ -256,6 +303,100 @@
         "title": "Hapus Buku",
         "description": "Apakah Anda yakin ingin menghapus buku ini?",
         "confirm": "Ya, Hapus Buku Ini"
+      }
+    }
+  },
+  "coa": {
+    "button": {
+      "addAccount": "Tambah Akun",
+      "editAccount": "Ubah Akun"
+    },
+    "table": {
+      "column": {
+        "code": "Kode",
+        "name": "Nama Akun",
+        "type": "Tipe",
+        "balance": "Saldo",
+        "status": "Status",
+        "category": "Kategori",
+        "position": "Posisi",
+        "action": "Aksi"
+      },
+      "placeholder": {
+        "search": "Cari akun"
+      },
+      "button": {
+        "delete": "Hapus Akun",
+        "edit": "Edit Akun"
+      },
+      "empty": {
+        "title": "Tidak ada akun yang ditemukan",
+        "description": "Anda belum membuat akun apapun. Silakan buat akun baru terlebih dahulu."
+      }
+    },
+    "createAccount": {
+      "title": "Buat Akun",
+      "description": "Buat akun baru untuk catatan keuangan Anda",
+      "form": {
+        "saveAccount": "Simpan Akun",
+        "label": {
+          "name": "Nama Akun",
+          "code": "Kode Akun",
+          "type": "Tipe Akun",
+          "balance": "Saldo Akun",
+          "parentAccount": "Akun Induk",
+          "category": "Kategori",
+          "description": "Deskripsi Akun",
+          "isParentGroup": "Atur sebagai Akun Induk Group?"
+        },
+        "placeholder": {
+          "name": "Masukkan nama akun",
+          "code": "Masukkan kode akun",
+          "type": "Pilih tipe akun",
+          "balance": "Masukkan saldo akun",
+          "parentAccount": "Pilih akun induk",
+          "category": "Pilih kategori",
+          "description": "Masukkan deskripsi akun"
+        },
+        "message": {
+          "toast": {
+            "errorCreateAccount": "Terjadi kesalahan saat membuat akun",
+            "successCreateAccount": "Berhasil membuat akun"
+          },
+          "error": {
+            "nameRequired": "Nama akun wajib diisi",
+            "codeRequired": "Kode akun wajib diisi",
+            "typeRequired": "Tipe akun wajib diisi",
+            "categoryRequired": "Kategori akun wajib diisi",
+            "codeInvalid": "Kode akun tidak valid"
+          }
+        }
+      }
+    },
+    "editAccount": {
+      "title": "Ubah Akun",
+      "description": "Ubah akun untuk catatan keuangan Anda",
+      "form": {
+        "saveAccount": "Simpan Akun",
+        "label": {
+          "name": "Nama Akun",
+          "isActive": "Status Aktif",
+          "description": "Deskripsi Akun"
+        },
+        "placeholder": {
+          "name": "Masukkan nama akun",
+          "isActive": "Pilih status aktif",
+          "description": "Masukkan deskripsi akun"
+        },
+        "message": {
+          "toast": {
+            "errorEditAccount": "Terjadi kesalahan saat mengubah akun",
+            "successEditAccount": "Berhasil mengubah akun"
+          },
+          "error": {
+            "nameRequired": "Nama akun wajib diisi"
+          }
+        }
       }
     }
   }

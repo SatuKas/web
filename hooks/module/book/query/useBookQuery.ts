@@ -1,20 +1,22 @@
 'use client';
 
 import { bookService } from '@/services/api';
-import { BookListData } from '@/types/client/book';
+import { BookByIdData, BookListData } from '@/types/client/book';
 import { mapSnakeCaseToCamelCase } from '@/utils/data';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 const BOOK_LIST_QUERY_KEY = 'book-list';
 const BOOK_SHARED_LIST_QUERY_KEY = 'book-shared-list';
+const BOOK_GET_BY_ID_QUERY_KEY = 'book-get-by-id';
 
 export enum BookQueryType {
   LIST = 'list',
   SHARED_LIST = 'shared-list',
+  GET_BY_ID = 'get-by-id',
 }
 
-const useBookQuery = (queryType: BookQueryType) => {
+const useBookQuery = (queryType: BookQueryType, bookId?: string) => {
   const {
     data: bookListData,
     isLoading: bookListLoading,
@@ -35,6 +37,16 @@ const useBookQuery = (queryType: BookQueryType) => {
     enabled: queryType === BookQueryType.SHARED_LIST,
   });
 
+  const {
+    data: bookByIdData,
+    isLoading: bookByIdLoading,
+    refetch: refetchBookById,
+  } = useQuery({
+    queryKey: [BOOK_GET_BY_ID_QUERY_KEY],
+    queryFn: () => bookService.getBookById(bookId as string),
+    enabled: queryType === BookQueryType.GET_BY_ID && !!bookId,
+  });
+
   const bookList = useMemo(() => {
     if (bookListData) {
       return mapSnakeCaseToCamelCase(bookListData) as BookListData[];
@@ -49,7 +61,24 @@ const useBookQuery = (queryType: BookQueryType) => {
     return undefined;
   }, [bookSharedListData]);
 
-  return { bookList, bookListLoading, bookSharedList, bookSharedListLoading, refetchBookList, refetchBookSharedList };
+  const bookById = useMemo(() => {
+    if (bookByIdData) {
+      return mapSnakeCaseToCamelCase(bookByIdData) as BookByIdData;
+    }
+    return undefined;
+  }, [bookByIdData]);
+
+  return {
+    bookList,
+    bookListLoading,
+    bookSharedList,
+    bookSharedListLoading,
+    bookById,
+    bookByIdLoading,
+    refetchBookList,
+    refetchBookSharedList,
+    refetchBookById,
+  };
 };
 
 export default useBookQuery;
