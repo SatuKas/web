@@ -1,4 +1,4 @@
-import { AccountCategory, AccountPosition, AccountType, AddAccountData } from '@/types/client/coa';
+import { AccountCategory, AccountPosition, AccountType, AddAccountData, EditAccountData } from '@/types/client/coa';
 
 export const ADD_ACCOUNT_FORM_DEFAULT_VALUES: AddAccountData = {
   name: '',
@@ -9,6 +9,12 @@ export const ADD_ACCOUNT_FORM_DEFAULT_VALUES: AddAccountData = {
   category: AccountCategory.ASSET,
   description: undefined,
   isParentGroup: false,
+};
+
+export const EDIT_ACCOUNT_FORM_DEFAULT_VALUES: EditAccountData = {
+  name: '',
+  description: undefined,
+  isActive: false,
 };
 
 export const ACCOUNT_ASSET_TYPES = [
