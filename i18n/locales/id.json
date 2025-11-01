@@ -307,7 +307,10 @@
     }
   },
   "coa": {
-    "addAccount": "Tambah Akun",
+    "button": {
+      "addAccount": "Tambah Akun",
+      "editAccount": "Ubah Akun"
+    },
     "table": {
       "column": {
         "code": "Kode",
@@ -316,7 +319,8 @@
         "balance": "Saldo",
         "status": "Status",
         "category": "Kategori",
-        "position": "Posisi"
+        "position": "Posisi",
+        "action": "Aksi"
       },
       "placeholder": {
         "search": "Cari akun"
@@ -365,6 +369,32 @@
             "typeRequired": "Tipe akun wajib diisi",
             "categoryRequired": "Kategori akun wajib diisi",
             "codeInvalid": "Kode akun tidak valid"
+          }
+        }
+      }
+    },
+    "editAccount": {
+      "title": "Ubah Akun",
+      "description": "Ubah akun untuk catatan keuangan Anda",
+      "form": {
+        "saveAccount": "Simpan Akun",
+        "label": {
+          "name": "Nama Akun",
+          "isActive": "Status Aktif",
+          "description": "Deskripsi Akun"
+        },
+        "placeholder": {
+          "name": "Masukkan nama akun",
+          "isActive": "Pilih status aktif",
+          "description": "Masukkan deskripsi akun"
+        },
+        "message": {
+          "toast": {
+            "errorEditAccount": "Terjadi kesalahan saat mengubah akun",
+            "successEditAccount": "Berhasil mengubah akun"
+          },
+          "error": {
+            "nameRequired": "Nama akun wajib diisi"
           }
         }
       }

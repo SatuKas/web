@@ -26,7 +26,7 @@ const AddAccount = ({ onSuccess, accountList }: AddAccountProps) => {
 
   return (
     <Button onClick={handleAddAccount}>
-      <PlusIcon /> {t('addAccount')}
+      <PlusIcon /> {t('button.addAccount')}
     </Button>
   );
 };
