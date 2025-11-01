@@ -26,3 +26,11 @@ export interface CreateAccountPayload {
   is_parent_group?: boolean;
   position?: AccountPosition;
 }
+
+export interface UpdateAccountPayload {
+  id: string;
+  book_id: string;
+  name: string;
+  description?: string;
+  is_active?: boolean;
+}

@@ -35,4 +35,5 @@ export const BOOK_DELETE_PATH = `${BOOK_PATH}/:bookId`;
 export const COA_PATH = '/accounts';
 export const COA_LIST_PATH = `${COA_PATH}`;
 export const COA_CREATE_PATH = `${COA_PATH}`;
+export const COA_UPDATE_PATH = `${COA_PATH}/:accountId`;
 export const COA_DELETE_PATH = `${COA_PATH}/:accountId`;

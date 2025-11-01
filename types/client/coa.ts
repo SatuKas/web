@@ -9,6 +9,12 @@ export type AddAccountData = {
   isParentGroup?: boolean;
 };
 
+export type EditAccountData = {
+  name: string;
+  description?: string;
+  isActive?: boolean;
+};
+
 export enum AccountCategory {
   ASSET = 'ASSET',
   LIABILITY = 'LIABILITY',
