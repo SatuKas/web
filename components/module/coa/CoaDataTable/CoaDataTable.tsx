@@ -11,6 +11,7 @@ import { AccountCategory, AccountListData, AccountPosition, AccountType } from '
 import { ColumnDef } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
+import EditAccount from '../EditAccount';
 import EmptyData from './EmptyData/EmptyData';
 
 const CoaDataTable = () => {
@@ -75,6 +76,14 @@ const CoaDataTable = () => {
               {isActive ? tCommon('active') : tCommon('inactive')}
             </Badge>
           );
+        },
+      },
+      {
+        accessorKey: 'action',
+        header: t('column.action'),
+        size: 100,
+        cell: ({ row }) => {
+          return <EditAccount accountData={row.original} onSuccess={refetchAccountList} />;
         },
       },
     ],
