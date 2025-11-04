@@ -106,10 +106,11 @@ const AddAccountForm = ({ onSuccess, accountList, bookId }: AddAccountFormProps)
 
   useEffect(() => {
     if (currentParentAccount) {
+      const accountChild = getAccountChild(currentParentAccount.id);
       form.setValue('category', currentParentAccount.category);
       form.setValue(
         'code',
-        generateAccountCode(currentParentAccount.code, getAccountChild(currentParentAccount.id)?.[0]?.code)
+        generateAccountCode(currentParentAccount.code, accountChild?.[accountChild.length - 1]?.code)
       );
     }
   }, [currentParentAccount, form, getAccountChild]);
