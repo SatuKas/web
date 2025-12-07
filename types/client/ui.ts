@@ -97,6 +97,7 @@ export enum SidebarTitle {
 
   // Transaction
   TRANSACTION = 'transaction',
+  TRANSACTION_ENTRY = 'transactionEntry',
 
   // Report
   REPORT = 'report',
