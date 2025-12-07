@@ -51,7 +51,7 @@ export const sidebarBookDashboardMenuItem = (username: string, bookId: string): 
       title: SidebarTitle.TRANSACTION, // Transaction menu group title
       menu: [
         {
-          title: SidebarTitle.TRANSACTION, // COA menu item
+          title: SidebarTitle.TRANSACTION_ENTRY, // COA menu item
           url: getBookRouteUrl(username, bookId).bookTransactionPath,
           icon: <ArrowLeftRight />,
         },

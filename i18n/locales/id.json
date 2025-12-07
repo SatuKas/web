@@ -73,6 +73,35 @@
     "accountPosition": {
       "DEBIT": "Debet",
       "CREDIT": "Kredit"
+    },
+    "journalType": {
+      "GENERAL": "Umum",
+      "ADJUSTMENT": "Penyesuaian",
+      "REVERSAL": "Pembatalan",
+      "CORRECTION": "Koreksi",
+      "CLOSING": "Penutupan",
+      "OPENING": "Pembukaan",
+      "RECONCILIATION": "Rekonsiliasi"
+    },
+    "bookModule": {
+      "EXPENSE": "Pengeluaran",
+      "INCOME": "Pendapatan",
+      "TRANSFER": "Transfer",
+      "SAVING": "Tabungan",
+      "INVESTMENT": "Investasi",
+      "DEBT": "Hutang",
+      "ASSET": "Aset",
+      "LIABILITY": "Hutang",
+      "PROCUREMENT": "Pembelian",
+      "RECEIPT": "Penerimaan",
+      "PAYMENT": "Pembayaran",
+      "RECONCILIATION": "Rekonsiliasi",
+      "PURCHASING": "Pembelian",
+      "INVENTORY": "Persediaan",
+      "SALES": "Penjualan",
+      "CUSTOMER": "Pelanggan",
+      "VENDOR": "Vendor",
+      "EMPLOYEE": "Karyawan"
     }
   },
   "menu": {
@@ -92,6 +121,7 @@
     "balanceSheet": "Laporan Neraca",
     "journal": "Jurnal",
     "transaction": "Transaksi",
+    "transactionEntry": "Entry Transaksi",
     "bookSettings": "Pengaturan Buku"
   },
   "notFound": {
@@ -395,6 +425,57 @@
           },
           "error": {
             "nameRequired": "Nama akun wajib diisi"
+          }
+        }
+      }
+    }
+  },
+  "transaction": {
+    "createTransaction": {
+      "title": "Buat Transaksi",
+      "description": "Buat transaksi baru untuk catatan keuangan Anda",
+      "form": {
+        "button": {
+          "submit": "Simpan Transaksi",
+          "addEntry": "Tambah Entry"
+        },
+        "label": {
+          "description": "Deskripsi",
+          "date": "Tanggal",
+          "type": "Tipe Transaksi",
+          "refType": "Jenis Referensi",
+          "entries": "Entry Transaksi",
+          "entry": "Entry",
+          "account": "Akun",
+          "accountPosition": "Posisi Akun",
+          "amount": "Jumlah",
+          "totalDebit": "Total Debet",
+          "totalCredit": "Total Kredit"
+        },
+        "placeholder": {
+          "description": "Masukkan deskripsi transaksi",
+          "date": "Pilih tanggal transaksi",
+          "type": "Pilih tipe transaksi",
+          "refType": "Pilih jenis referensi",
+          "account": "Pilih akun",
+          "accountPosition": "Pilih posisi akun",
+          "amount": "Masukkan jumlah"
+        },
+        "message": {
+          "toast": {
+            "errorCreateTransaction": "Terjadi kesalahan saat membuat transaksi",
+            "successCreateTransaction": "Berhasil membuat transaksi"
+          },
+          "error": {
+            "descriptionRequired": "Deskripsi wajib diisi",
+            "dateRequired": "Tanggal wajib diisi",
+            "typeRequired": "Tipe transaksi wajib diisi",
+            "refTypeRequired": "Jenis referensi wajib diisi",
+            "accountRequired": "Akun wajib diisi",
+            "entriesMin": "Minimal 2 entry diperlukan",
+            "balanceNotEqual": "Total debet dan kredit harus sama",
+            "accountPositionRequired": "Posisi akun wajib diisi",
+            "amountRequired": "Jumlah wajib diisi"
           }
         }
       }

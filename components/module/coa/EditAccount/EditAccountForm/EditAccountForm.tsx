@@ -61,6 +61,11 @@ const EditAccountForm = ({ onSuccess, accountData, bookId }: EditAccountFormProp
               placeholder={t('editAccount.form.placeholder.description')}
               label={t('editAccount.form.label.description')}
               {...field}
+              value={field.value || ''}
+              onChange={(e) => {
+                const value = e.target.value ? e.target.value : null;
+                field.onChange(value);
+              }}
             />
           )}
         />

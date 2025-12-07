@@ -37,3 +37,7 @@ export const COA_LIST_PATH = `${COA_PATH}`;
 export const COA_CREATE_PATH = `${COA_PATH}`;
 export const COA_UPDATE_PATH = `${COA_PATH}/:accountId`;
 export const COA_DELETE_PATH = `${COA_PATH}/:accountId`;
+
+// Transaction Path
+export const TRANSACTION_PATH = '/transactions';
+export const TRANSACTION_ENTRY_PATH = `${TRANSACTION_PATH}/entry`;
