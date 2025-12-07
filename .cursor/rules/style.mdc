@@ -1,0 +1,24 @@
+---
+alwaysApply: true
+---
+
+Follow these coding standards:
+
+- Use Prettier for formatting and ESLint (custom rules in repo).
+- Use "use client" on the top of the file when using client-side states like useState, useEffect, etc.
+- Naming:
+  - Variables/functions: camelCase
+  - Components/interfaces/types: PascalCase
+  - Constants/enums: CONSTANT_CASE
+  - Component file: PascalCase
+  - Hooks file: camelCase
+  - Folder names: PascalCase for wrapped components, otherwise camelCase
+- Folder structure:
+  - Components: component > ComponentFolder > ComponentFile (with optional tests/mocks in same folder)
+  - Modular components; split complex logic into separate hooks (validation, schema, query hooks separated)
+  - Each component folder should have an `index.ts` file that exports the component: `export { default } from './ComponentName';`
+- Exports:
+  - Default export for main component
+  - Named export for utilities, interfaces, and types
+- Styling:
+  - Use taiwlwind and ShadcnUI for styling; follow its recommended patterns

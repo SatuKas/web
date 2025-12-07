@@ -1,0 +1,73 @@
+---
+alwaysApply: true
+---
+
+# Product Overview
+
+**SatuKas** is a comprehensive personal finance management web application built with Next.js. It helps users track their expenses, manage budgets, and gain insights into their financial habits through an intuitive dashboard interface.
+
+**Tagline**: "Satu tempat untuk semua kebutuhan finansial Anda."
+
+## Core Features
+
+- **Multi-Book Management**
+
+  - Users can create multiple separate accounting books within a single account
+  - Supports personal finance, side jobs, organizations, and group finances
+  - Each book has its own Chart of Accounts (COA), transactions, and reports
+
+- **Financial Management**
+
+  - Transaction entry and tracking (expense, income, transfer, saving, investment, debt, etc.)
+  - Chart of Accounts (COA) management
+  - Financial reports (Journal, Ledger, Balance Sheet)
+  - Transaction history and reconciliation
+
+- **User Management**
+
+  - Secure authentication system (login, register, email verification)
+  - Password recovery (forgot/reset password)
+  - User profile and account settings
+  - Workspace management (books and organizations)
+
+- **Dashboard & UI**
+  - Responsive layout with dark/light theme support
+  - Multi-language support (Indonesian/English)
+  - Interactive financial insights and charts
+  - Modern, clean interface built with Shadcn UI
+
+## Architecture & Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI, Shadcn UI, Custom components
+- **State Management**: React Query (TanStack Query)
+- **Form Handling**: React Hook Form + Zod
+- **HTTP Client**: Axios
+- **Internationalization**: next-intl
+- **Theme**: next-themes
+- **Testing**: Jest + React Testing Library
+
+## Project Structure
+
+- **Single Frontend Application**: This is a standalone Next.js application (not part of a monorepo)
+- **Component Organization**:
+  - `components/ui/` - Base UI components (Shadcn UI)
+  - `components/shared/` - Shared components across modules
+  - `components/module/` - Feature-specific components (auth, book, coa, transaction, etc.)
+  - `components/layout/` - Layout components
+  - `components/page/` - Page-level components
+- **Services**: API services organized by domain (AuthService, BookService, CoaService, TransactionService, etc.)
+- **Hooks**: Custom React hooks organized by module
+- **Types**: TypeScript types separated by API and client-side types
+
+## Scope of This Context
+
+This file serves to inform AI that:
+
+- This is a **standalone application** for personal finance management
+- Focus on reusing existing components from `components/ui/` and `components/shared/` before creating new ones
+- Follow the established patterns for modules (components, hooks, services, types)
+- Consider the multi-book architecture when implementing features
+- Ensure consistency with existing UI patterns and design system
