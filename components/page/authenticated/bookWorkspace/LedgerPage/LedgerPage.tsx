@@ -1,12 +1,12 @@
 import BookWorkspacePageLayout from '@/components/layout/BookWorkspacePageLayout';
-import ComingSoon from '@/components/shared/ComingSoon';
+import LedgerDataTable from '@/components/module/ledger/LedgerDataTable';
 import { BookRoutePathType } from '@/types/client/url';
 import { breadcrumbHelper } from '@/utils/ui';
 
 const LedgerPage = () => {
   return (
     <BookWorkspacePageLayout breadcrumb={[breadcrumbHelper('menu.ledger', BookRoutePathType.BOOK_REPORT_LEDGER)]}>
-      <ComingSoon />
+      <LedgerDataTable />
     </BookWorkspacePageLayout>
   );
 };
