@@ -480,5 +480,50 @@
         }
       }
     }
+  },
+  "ledger": {
+    "filter": {
+      "form": {
+        "label": {
+          "account": "Akun",
+          "startDate": "Tanggal Mulai",
+          "endDate": "Tanggal Akhir"
+        },
+        "placeholder": {
+          "account": "Pilih akun",
+          "startDate": "Pilih tanggal mulai",
+          "endDate": "Pilih tanggal akhir"
+        },
+        "button": {
+          "apply": "Terapkan",
+          "reset": "Reset"
+        }
+      }
+    },
+    "table": {
+      "column": {
+        "date": "Tanggal",
+        "description": "Deskripsi",
+        "ref": "Referensi",
+        "debit": "Debet",
+        "credit": "Kredit",
+        "balance": "Saldo"
+      },
+      "empty": "Tidak ada data transaksi"
+    },
+    "report": {
+      "accountInfo": "Informasi Akun",
+      "accountCode": "Kode Akun",
+      "accountName": "Nama Akun",
+      "accountPosition": "Posisi Akun",
+      "openingBalance": "Saldo Awal",
+      "totalDebit": "Total Debet",
+      "totalCredit": "Total Kredit",
+      "closingBalance": "Saldo Akhir"
+    },
+    "empty": {
+      "title": "Belum Ada Filter",
+      "description": "Silakan pilih akun dan periode untuk melihat laporan buku besar"
+    }
   }
 }
