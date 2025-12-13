@@ -1,6 +1,7 @@
 import { AuthService } from '@/services/api/AuthService';
 import { BookService } from '@/services/api/BookService';
 import { CoaService } from '@/services/api/CoaService';
+import { LedgerService } from '@/services/api/LedgerService';
 import { TransactionService } from '@/services/api/TransactionService';
 import { UserService } from '@/services/api/UserService';
 
@@ -17,5 +18,9 @@ export const coaService = new CoaService({
 });
 
 export const transactionService = new TransactionService({
+  withCredential: true,
+});
+
+export const ledgerService = new LedgerService({
   withCredential: true,
 });
