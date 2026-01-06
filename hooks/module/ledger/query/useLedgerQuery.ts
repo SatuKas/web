@@ -1,6 +1,6 @@
 'use client';
 
-import { ledgerService } from '@/services/api';
+import { reportService } from '@/services/api';
 import { LedgerQueryParams, LedgerResponse } from '@/types/api/report';
 import { mapSnakeCaseToCamelCase } from '@/utils/data';
 import { useQuery } from '@tanstack/react-query';
@@ -15,7 +15,7 @@ const useLedgerQuery = (params: LedgerQueryParams, enabled: boolean = false) => 
     refetch: refetchLedger,
   } = useQuery({
     queryKey: [LEDGER_QUERY_KEY, params],
-    queryFn: () => ledgerService.getLedgerReport(params),
+    queryFn: () => reportService.getLedgerReport(params),
     enabled: enabled && !!params.book_id,
   });
 

@@ -3,3 +3,7 @@ export interface LedgerFilterFormData {
   startDate?: string;
   endDate?: string;
 }
+
+export interface BalanceSheetFilterFormData {
+  date?: string;
+}
