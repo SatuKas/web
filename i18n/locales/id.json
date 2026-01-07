@@ -525,5 +525,59 @@
       "title": "Belum Ada Filter",
       "description": "Silakan pilih akun dan periode untuk melihat laporan buku besar"
     }
+  },
+  "balanceSheet": {
+    "filter": {
+      "form": {
+        "label": {
+          "date": "Tanggal"
+        },
+        "placeholder": {
+          "date": "Pilih tanggal"
+        },
+        "button": {
+          "apply": "Terapkan",
+          "reset": "Reset"
+        }
+      }
+    },
+    "table": {
+      "column": {
+        "code": "Kode",
+        "name": "Nama",
+        "balance": "Saldo"
+      },
+      "empty": "Tidak ada data"
+    },
+    "report": {
+      "assets": {
+        "title": "Aset",
+        "currentAssets": "Aset Lancar",
+        "fixedAssets": "Aset Tetap",
+        "totalAssets": "Total Aset"
+      },
+      "liabilities": {
+        "title": "Kewajiban",
+        "currentLiabilities": "Kewajiban Lancar",
+        "totalLiabilities": "Total Kewajiban"
+      },
+      "equity": {
+        "title": "Ekuitas",
+        "equityAccounts": "Akun Ekuitas",
+        "totalEquity": "Total Ekuitas"
+      },
+      "check": {
+        "title": "Pemeriksaan",
+        "assets": "Total Aset",
+        "liabilitiesPlusEquity": "Kewajiban + Ekuitas",
+        "status": "Status",
+        "balanced": "Seimbang",
+        "notBalanced": "Tidak Seimbang"
+      }
+    },
+    "empty": {
+      "title": "Belum Ada Filter",
+      "description": "Silakan pilih tanggal untuk melihat laporan neraca"
+    }
   }
 }
