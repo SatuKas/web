@@ -1,4 +1,5 @@
 import { AccountPosition } from '@/types/client/coa';
+import { PaginationQueryParams } from './common';
 
 export interface LedgerAccount {
   id: string;
@@ -71,4 +72,30 @@ export interface BalanceSheetResponse {
 export interface BalanceSheetQueryParams {
   book_id: string;
   date?: string;
+}
+
+export interface JournalResponse {
+  id: string;
+  date: string;
+  description: string;
+  total_amount: string;
+  type: string;
+  ref_type: string;
+  ref_id: string;
+  entries: {
+    id: string;
+    amount: string;
+    account: {
+      id: string;
+      code: string;
+      name: string;
+    };
+    debit: string | null;
+    credit: string | null;
+    position: number;
+  }[];
+}
+
+export interface JournalQueryParams extends PaginationQueryParams {
+  book_id: string;
 }
