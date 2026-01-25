@@ -3,11 +3,15 @@
 import {
   ColumnDef,
   ColumnFiltersState,
+  ExpandedState,
   flexRender,
   getCoreRowModel,
+  getExpandedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  OnChangeFn,
+  PaginationState,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
@@ -24,7 +28,9 @@ interface DataTableProps<TData, TValue> {
   /** Data to be displayed in the table */
   data: TData[];
   /** Whether to show pagination controls */
-  pagination?: boolean;
+  enablePagination?: boolean;
+  /** Whether to use manual pagination */
+  manualPagination?: boolean;
   /** List of page size options */
   paginationList?: number[];
   /** Custom empty state content */
@@ -33,15 +39,25 @@ interface DataTableProps<TData, TValue> {
   isLoading?: boolean;
   /** Custom loading text for screen readers */
   loadingText?: string;
+  /** Total number of pages */
+  pageCount?: number;
+
+  pagination?: PaginationState;
+
+  onPaginationChange?: OnChangeFn<PaginationState>;
 }
 
 function DataTable<TData, TValue>({
   columns,
   data,
-  pagination = true,
+  pagination,
   paginationList = [10, 20, 25, 30, 40, 50],
   emptyState = null,
   isLoading = false,
+  pageCount,
+  manualPagination = false,
+  onPaginationChange,
+  enablePagination = true,
   loadingText = 'Loading data...',
 }: DataTableProps<TData, TValue>) {
   const t = useTranslations();
@@ -51,25 +67,34 @@ function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const table = useReactTable({
     data,
     columns,
+    pageCount,
+    manualPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getSubRows: (row: any) => (row.subRows ? row.subRows : undefined),
     onRowSelectionChange: setRowSelection,
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
     onColumnFiltersChange: setColumnFilters,
+    onExpandedChange: setExpanded,
+    onPaginationChange,
     state: {
+      pagination,
       rowSelection,
       columnVisibility,
       sorting,
       globalFilter,
       columnFilters,
+      expanded,
     },
   });
 
