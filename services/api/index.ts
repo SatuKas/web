@@ -1,6 +1,7 @@
 import { AuthService } from '@/services/api/AuthService';
 import { BookService } from '@/services/api/BookService';
 import { CoaService } from '@/services/api/CoaService';
+import { JournalService } from '@/services/api/JournalService';
 import { ReportService } from '@/services/api/ReportService';
 import { TransactionService } from '@/services/api/TransactionService';
 import { UserService } from '@/services/api/UserService';
@@ -22,5 +23,9 @@ export const transactionService = new TransactionService({
 });
 
 export const reportService = new ReportService({
+  withCredential: true,
+});
+
+export const journalService = new JournalService({
   withCredential: true,
 });
