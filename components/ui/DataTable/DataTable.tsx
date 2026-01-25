@@ -41,9 +41,9 @@ interface DataTableProps<TData, TValue> {
   loadingText?: string;
   /** Total number of pages */
   pageCount?: number;
-
+  /** Pagination state */
   pagination?: PaginationState;
-
+  /** Callback function for pagination changes */
   onPaginationChange?: OnChangeFn<PaginationState>;
 }
 
@@ -57,7 +57,7 @@ function DataTable<TData, TValue>({
   pageCount,
   manualPagination = false,
   onPaginationChange,
-  enablePagination = true,
+  enablePagination = false,
   loadingText = 'Loading data...',
 }: DataTableProps<TData, TValue>) {
   const t = useTranslations();
@@ -86,15 +86,15 @@ function DataTable<TData, TValue>({
     onGlobalFilterChange: setGlobalFilter,
     onColumnFiltersChange: setColumnFilters,
     onExpandedChange: setExpanded,
-    onPaginationChange,
+    onPaginationChange: manualPagination ? onPaginationChange : undefined,
     state: {
-      pagination,
       rowSelection,
       columnVisibility,
       sorting,
       globalFilter,
       columnFilters,
       expanded,
+      ...(manualPagination ? { pagination } : {}),
     },
   });
 
@@ -145,7 +145,7 @@ function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {pagination && <DataTablePagination table={table} paginationList={paginationList} />}
+      {enablePagination && <DataTablePagination table={table} paginationList={paginationList} />}
     </div>
   );
 }
