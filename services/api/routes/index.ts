@@ -46,3 +46,4 @@ export const TRANSACTION_ENTRY_PATH = `${TRANSACTION_PATH}/entry`;
 export const REPORT_PATH = '/reports';
 export const REPORT_LEDGER_PATH = `${REPORT_PATH}/ledger`;
 export const REPORT_BALANCE_SHEET_PATH = `${REPORT_PATH}/balance-sheet`;
+export const REPORT_JOURNAL_PATH = '/journals';

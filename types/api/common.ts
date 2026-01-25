@@ -94,3 +94,8 @@ export interface ApiResponse<T> extends ResponseData<T> {
   path?: string; // optional API endpoint path for debugging/tracing
   extra_data?: ExtraDataResponse;
 }
+
+export interface PaginationQueryParams {
+  page?: number;
+  page_size?: number;
+}

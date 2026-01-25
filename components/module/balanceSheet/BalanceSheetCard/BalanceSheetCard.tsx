@@ -65,7 +65,6 @@ const BalanceSheetCard = ({ balanceSheet, isLoading }: BalanceSheetCardProps) =>
               columns={accountColumns}
               data={balanceSheet.assets.currentAssets}
               emptyState={t('table.empty')}
-              pagination={false}
             />
           </Stack>
 
@@ -74,12 +73,7 @@ const BalanceSheetCard = ({ balanceSheet, isLoading }: BalanceSheetCardProps) =>
             <Typography variant="h5" className="font-semibold">
               {t('report.assets.fixedAssets')}
             </Typography>
-            <DataTable
-              columns={accountColumns}
-              data={balanceSheet.assets.fixedAssets}
-              emptyState={t('table.empty')}
-              pagination={false}
-            />
+            <DataTable columns={accountColumns} data={balanceSheet.assets.fixedAssets} emptyState={t('table.empty')} />
           </Stack>
 
           {/* Total Assets */}
@@ -108,7 +102,6 @@ const BalanceSheetCard = ({ balanceSheet, isLoading }: BalanceSheetCardProps) =>
               columns={accountColumns}
               data={balanceSheet.liabilities.currentLiabilities}
               emptyState={t('table.empty')}
-              pagination={false}
             />
           </Stack>
 
@@ -138,7 +131,6 @@ const BalanceSheetCard = ({ balanceSheet, isLoading }: BalanceSheetCardProps) =>
               columns={accountColumns}
               data={balanceSheet.equity.equityAccounts}
               emptyState={t('table.empty')}
-              pagination={false}
             />
           </Stack>
 

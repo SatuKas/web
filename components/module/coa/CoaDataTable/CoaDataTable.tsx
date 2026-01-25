@@ -96,7 +96,13 @@ const CoaDataTable = () => {
         <Input type="text" placeholder={t('placeholder.search')} />
         <AddAccount onSuccess={refetchAccountList} accountList={accountList} />
       </Stack>
-      <DataTable columns={columns} data={accountList} emptyState={<EmptyData />} isLoading={accountListLoading} />
+      <DataTable
+        columns={columns}
+        data={accountList}
+        emptyState={<EmptyData />}
+        isLoading={accountListLoading}
+        enablePagination
+      />
     </Stack>
   );
 };

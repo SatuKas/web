@@ -114,7 +114,7 @@ const LedgerDataTable = () => {
             data={ledger?.entries || []}
             emptyState={t('table.empty')}
             isLoading={ledgerLoading}
-            pagination={true}
+            enablePagination
           />
         </>
       )}

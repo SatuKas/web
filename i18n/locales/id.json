@@ -579,5 +579,18 @@
       "title": "Belum Ada Filter",
       "description": "Silakan pilih tanggal untuk melihat laporan neraca"
     }
+  },
+  "journal": {
+    "table": {
+      "column": {
+        "date": "Tanggal",
+        "description": "Deskripsi",
+        "account": "Akun",
+        "debit": "Debet",
+        "credit": "Kredit",
+        "total": "Total"
+      },
+      "empty": "Tidak ada data jurnal"
+    }
   }
 }
