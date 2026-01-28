@@ -19,7 +19,14 @@ const CoaDataTable = () => {
   const tCommon = useTranslations('common');
   const { book } = useBookDetail();
 
-  const { accountList, accountListLoading, refetchAccountList } = useAccountQuery(book?.id);
+  const {
+    accountList,
+    accountListLoading,
+    refetchAccountList,
+    accountListPagination,
+    setAccountListPagination,
+    accountListPaginationResponse,
+  } = useAccountQuery(book?.id);
 
   const columns = useMemo<ColumnDef<AccountListData>[]>(
     () => [
@@ -102,6 +109,10 @@ const CoaDataTable = () => {
         emptyState={<EmptyData />}
         isLoading={accountListLoading}
         enablePagination
+        manualPagination
+        pageCount={accountListPaginationResponse?.totalPages}
+        pagination={accountListPagination}
+        onPaginationChange={setAccountListPagination}
       />
     </Stack>
   );
