@@ -1,4 +1,5 @@
 import { AccountCategory, AccountPosition, AccountType } from '../client/coa';
+import { PaginationQueryParams } from './common';
 
 export interface AccountResponse {
   id: string;
@@ -33,4 +34,12 @@ export interface UpdateAccountPayload {
   name: string;
   description?: string;
   is_active?: boolean;
+}
+
+export interface AccountListQueryParam {
+  book_id: string;
+}
+
+export interface AccountListPaginatedQueryParam extends PaginationQueryParams {
+  book_id: string;
 }
