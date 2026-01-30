@@ -1,2 +1,2 @@
-export * from './useMutate';
+export * from './useMutation';
 export * from './useQuery';

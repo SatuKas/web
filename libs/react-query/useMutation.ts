@@ -15,7 +15,7 @@ import { UseMutationOptions, UseMutationResult, useMutation as useReactQuery } f
  * @param options - Standard TanStack Query mutation options.
  * @returns The mutation result augmented with `data`, `pagination`, and `errorDetails`.
  */
-export const useMutate = <TData, TVariables = unknown, TError = unknown>(
+export const useMutation = <TData, TError = unknown, TVariables = unknown>(
   options: UseMutationOptions<ApiResponse<TData>, TError, TVariables>
 ): Omit<UseMutationResult<ApiResponse<TData>, TError, TVariables>, 'data'> & {
   pagination: PaginationResponse | undefined;
