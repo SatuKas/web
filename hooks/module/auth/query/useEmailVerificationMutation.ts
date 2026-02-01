@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { authService } from '@/services/api';
 import { VerifyEmailPayload } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const useEmailVerificationMutation = () => {
   const EMAIL_VERIFICATION_QUERY_KEY = 'auth-email-verification'; // Query key for register mutation
