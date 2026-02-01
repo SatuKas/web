@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { authService } from '@/services/api';
 import { RegisterPayload, RegisterResponse } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const useRegisterMutation = () => {
   const REGISTER_QUERY_KEY = 'auth-register'; // Query key for register mutation
