@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { coaService } from '@/services/api';
 import { AccountResponse, CreateAccountPayload, UpdateAccountPayload } from '@/types/api/coa';
 import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const CREATE_ACCOUNT_MUTATION_QUERY_KEY = 'create-account-mutation';
 const DELETE_ACCOUNT_MUTATION_QUERY_KEY = 'delete-account-mutation';

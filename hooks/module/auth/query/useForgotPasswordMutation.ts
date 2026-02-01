@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { authService } from '@/services/api';
 import { ForgotPasswordPayload } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const useForgotPasswordMutation = () => {
   const FORGOT_PASSWORD_QUERY_KEY = 'auth-forgot-password'; // Query key for login mutation

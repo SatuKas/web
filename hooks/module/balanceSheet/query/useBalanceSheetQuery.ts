@@ -1,9 +1,9 @@
 'use client';
 
+import { useQuery } from '@/libs/react-query';
 import { reportService } from '@/services/api';
 import { BalanceSheetQueryParams, BalanceSheetResponse } from '@/types/api/report';
 import { mapSnakeCaseToCamelCase } from '@/utils/data';
-import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 const BALANCE_SHEET_QUERY_KEY = 'balance-sheet-report';

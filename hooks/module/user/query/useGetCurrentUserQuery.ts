@@ -1,7 +1,7 @@
+import { useQuery } from '@/libs/react-query';
 import { userService } from '@/services/api';
 import { UserData } from '@/types/client/user';
 import { mapSnakeCaseToCamelCase } from '@/utils/data';
-import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 const USER_CURRENT_QUERY_KEY = 'user-current';

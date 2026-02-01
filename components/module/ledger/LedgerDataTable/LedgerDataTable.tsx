@@ -8,8 +8,7 @@ import Stack from '@/components/ui/Stack';
 import { LEDGER_FILTER_FORM_DEFAULT_VALUES } from '@/constants/ledger';
 import useBookDetail from '@/hooks/common/useBookDetail';
 import useLedgerQuery from '@/hooks/module/ledger/query/useLedgerQuery';
-import { LedgerEntry } from '@/types/api/report';
-import { LedgerFilterFormData } from '@/types/client/report';
+import { LedgerEntry, LedgerFilterFormData } from '@/types/client/report';
 import { ColumnDef } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
@@ -32,9 +31,13 @@ const LedgerDataTable = () => {
 
   const { ledger, ledgerLoading } = useLedgerQuery(queryParams, isFilterApplied);
 
-  const handleFilterChange = (data: LedgerFilterFormData) => {
-    setFilterData(data);
-    setIsFilterApplied(true);
+  const handleFilterChange = (data: LedgerFilterFormData | null) => {
+    if (data) {
+      setFilterData(data);
+      setIsFilterApplied(true);
+      return;
+    }
+    setIsFilterApplied(false);
   };
 
   const formatCurrency = (value: string | number) => {

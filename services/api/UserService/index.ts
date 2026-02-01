@@ -10,6 +10,6 @@ import { UserResponse } from '@/types/api/user';
 export class UserService extends BaseHttpClient {
   async getCurrentUser() {
     // GET request to get current user endpoint
-    return this.get<ApiResponse<UserResponse>>(USER_CURRENT_PATH).then((res) => res.data);
+    return this.get<ApiResponse<UserResponse>>(USER_CURRENT_PATH).then((res) => res);
   }
 }

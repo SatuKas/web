@@ -9,6 +9,6 @@ import { CreateTransactionPayload, TransactionResponse } from '@/types/api/trans
  */
 export class TransactionService extends BaseHttpClient {
   async createTransactionEntry(payload: CreateTransactionPayload) {
-    return this.post<ApiResponse<TransactionResponse>>(TRANSACTION_ENTRY_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<TransactionResponse>>(TRANSACTION_ENTRY_PATH, payload).then((res) => res);
   }
 }

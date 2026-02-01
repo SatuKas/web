@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { transactionService } from '@/services/api';
 import { ApiResponse } from '@/types/api/common';
 import { CreateTransactionPayload, TransactionResponse } from '@/types/api/transaction';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const CREATE_TRANSACTION_MUTATION_QUERY_KEY = 'create-transaction-mutation';
 
