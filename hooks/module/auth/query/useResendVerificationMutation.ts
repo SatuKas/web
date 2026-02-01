@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { authService } from '@/services/api';
 import { ResendVerificationEmailPayload } from '@/types/api/auth';
 import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 /**
  * Custom hook for handling resend verification email mutation.
