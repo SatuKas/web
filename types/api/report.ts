@@ -1,14 +1,14 @@
 import { AccountPosition } from '@/types/client/coa';
 import { PaginationQueryParams } from './common';
 
-export interface LedgerAccount {
+export interface LedgerAccountResponse {
   id: string;
   code: string;
   name: string;
   position: AccountPosition;
 }
 
-export interface LedgerEntry {
+export interface LedgerEntryResponse {
   date: string;
   description: string;
   ref: string;
@@ -18,12 +18,12 @@ export interface LedgerEntry {
 }
 
 export interface LedgerResponse {
-  account: LedgerAccount;
-  openingBalance: string;
-  entries: LedgerEntry[];
-  totalDebit: string;
-  totalCredit: string;
-  closingBalance: string;
+  account: LedgerAccountResponse;
+  opening_balance: string;
+  entries: LedgerEntryResponse[];
+  total_debit: string;
+  total_credit: string;
+  closing_balance: string;
 }
 
 export interface LedgerQueryParams {
