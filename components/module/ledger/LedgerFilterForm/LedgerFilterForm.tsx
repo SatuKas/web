@@ -13,7 +13,7 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 interface LedgerFilterFormProps {
-  onFilterChange?: (data: LedgerFilterFormData) => void;
+  onFilterChange?: (data: LedgerFilterFormData | null) => void;
 }
 
 const LedgerFilterForm = ({ onFilterChange }: LedgerFilterFormProps) => {

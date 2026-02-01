@@ -3,11 +3,11 @@
 import { Card } from '@/components/ui/Card';
 import Stack from '@/components/ui/Stack';
 import Typography from '@/components/ui/Typography';
-import { LedgerResponse } from '@/types/api/report';
+import { LedgerData } from '@/types/client/report';
 import { useTranslations } from 'next-intl';
 
 interface AccountInfoCardProps {
-  ledger: LedgerResponse;
+  ledger: LedgerData;
 }
 
 const AccountInfoCard = ({ ledger }: AccountInfoCardProps) => {
