@@ -9,7 +9,7 @@ import { BalanceSheetQueryParams, BalanceSheetResponse, LedgerQueryParams, Ledge
  */
 export class ReportService extends BaseHttpClient {
   async getLedgerReport(params: LedgerQueryParams) {
-    return this.get<ApiResponse<LedgerResponse>>(REPORT_LEDGER_PATH, { params }).then((res) => res.data);
+    return this.get<ApiResponse<LedgerResponse>>(REPORT_LEDGER_PATH, { params }).then((res) => res);
   }
 
   async getBalanceSheetReport(params: BalanceSheetQueryParams) {
