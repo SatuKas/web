@@ -1,9 +1,10 @@
 'use client';
 
+import { useMutation } from '@/libs/react-query';
 import { bookService } from '@/services/api';
 import { BookResponse, CreateBookPayload } from '@/types/api/book';
 import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const CREATE_BOOK_MUTATION_QUERY_KEY = 'create-book-mutation';
 const DELETE_BOOK_MUTATION_QUERY_KEY = 'delete-book-mutation';
