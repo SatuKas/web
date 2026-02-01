@@ -23,13 +23,13 @@ export class CoaService extends BaseHttpClient {
   }
 
   async createAccount(payload: CreateAccountPayload) {
-    return this.post<ApiResponse<AccountResponse>>(COA_CREATE_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<AccountResponse>>(COA_CREATE_PATH, payload).then((res) => res);
   }
 
   async updateAccount(payload: UpdateAccountPayload) {
     const { id, ...rest } = payload;
     return this.put<ApiResponse<AccountResponse>>(replaceString(COA_UPDATE_PATH, { ':accountId': id }), rest).then(
-      (res) => res.data
+      (res) => res
     );
   }
 

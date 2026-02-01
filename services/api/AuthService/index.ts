@@ -37,22 +37,22 @@ export class AuthService extends BaseHttpClient {
   }
 
   async register(payload: RegisterPayload) {
-    return this.post<ApiResponse<RegisterResponse>>(AUTH_REGISTER_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<RegisterResponse>>(AUTH_REGISTER_PATH, payload).then((res) => res);
   }
 
   async forgotPassword(payload: ForgotPasswordPayload) {
-    return this.post<ApiResponse<null>>(AUTH_FORGOT_PASSWORD_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<null>>(AUTH_FORGOT_PASSWORD_PATH, payload).then((res) => res);
   }
 
   async resetPassword(payload: ResetPasswordPayload) {
-    return this.post<ApiResponse<null>>(AUTH_RESET_PASSWORD_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<null>>(AUTH_RESET_PASSWORD_PATH, payload).then((res) => res);
   }
 
   async resendVerificationEmail(payload: ResendVerificationEmailPayload) {
-    return this.post<ApiResponse<null>>(AUTH_RESEND_VERIFICATION_EMAIL_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<null>>(AUTH_RESEND_VERIFICATION_EMAIL_PATH, payload).then((res) => res);
   }
 
   async verifyEmail(payload: VerifyEmailPayload) {
-    return this.post<ApiResponse<null>>(AUTH_VERIFY_EMAIL_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<null>>(AUTH_VERIFY_EMAIL_PATH, payload).then((res) => res);
   }
 }
