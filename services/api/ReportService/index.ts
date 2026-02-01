@@ -13,6 +13,6 @@ export class ReportService extends BaseHttpClient {
   }
 
   async getBalanceSheetReport(params: BalanceSheetQueryParams) {
-    return this.get<ApiResponse<BalanceSheetResponse>>(REPORT_BALANCE_SHEET_PATH, { params }).then((res) => res.data);
+    return this.get<ApiResponse<BalanceSheetResponse>>(REPORT_BALANCE_SHEET_PATH, { params }).then((res) => res);
   }
 }
