@@ -1,9 +1,10 @@
 'use client';
 
+import { useQuery } from '@/libs/react-query';
 import { reportService } from '@/services/api';
-import { LedgerQueryParams, LedgerResponse } from '@/types/api/report';
+import { LedgerQueryParams } from '@/types/api/report';
+import { LedgerData } from '@/types/client/report';
 import { mapSnakeCaseToCamelCase } from '@/utils/data';
-import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 const LEDGER_QUERY_KEY = 'ledger-report';
@@ -21,7 +22,7 @@ const useLedgerQuery = (params: LedgerQueryParams, enabled: boolean = false) => 
 
   const ledger = useMemo(() => {
     if (ledgerData) {
-      return mapSnakeCaseToCamelCase(ledgerData) as LedgerResponse;
+      return mapSnakeCaseToCamelCase(ledgerData) as LedgerData;
     }
     return null;
   }, [ledgerData]);

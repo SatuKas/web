@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import useLedgerFilterSchema from './useLedgerFilterSchema';
 
 interface UseLedgerFilterFormProps {
-  onFilterChange?: (data: LedgerFilterFormData) => void;
+  onFilterChange?: (data: LedgerFilterFormData | null) => void;
 }
 
 const useLedgerFilterForm = ({ onFilterChange }: UseLedgerFilterFormProps = {}) => {
@@ -22,7 +22,7 @@ const useLedgerFilterForm = ({ onFilterChange }: UseLedgerFilterFormProps = {}) 
 
   const handleReset = () => {
     form.reset();
-    onFilterChange?.(LEDGER_FILTER_FORM_DEFAULT_VALUES);
+    onFilterChange?.(null);
   };
 
   return { form, onSubmit, handleReset };
