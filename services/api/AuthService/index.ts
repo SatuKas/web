@@ -33,7 +33,7 @@ export class AuthService extends BaseHttpClient {
    */
   async login(payload: LoginPayload) {
     // POST request to login endpoint with user credentials
-    return this.post<ApiResponse<LoginResponse>>(AUTH_LOGIN_PATH, payload).then((res) => res.data);
+    return this.post<ApiResponse<LoginResponse>>(AUTH_LOGIN_PATH, payload).then((res) => res);
   }
 
   async register(payload: RegisterPayload) {

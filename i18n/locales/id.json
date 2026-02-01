@@ -224,7 +224,8 @@
           "errorResetPassword": "Terjadi kesalahan saat mengatur ulang kata sandi",
           "successResetPassword": "Berhasil mengatur ulang kata sandi",
           "errorEmailNotVerified": "Email tidak terverifikasi",
-          "successSentForgotPasswordEmail": "Berhasil mengirimkan email reset kata sandi"
+          "successSentForgotPasswordEmail": "Berhasil mengirimkan email reset kata sandi",
+          "errorInvalidCredentials": "Username atau kata sandi salah"
         },
         "error": {
           "emailRequired": "Email wajib diisi",
@@ -237,7 +238,8 @@
           "passwordMaxLength": "Kata sandi maksimal 20 karakter",
           "passwordNotAllowed": "Kata sandi hanya boleh mengandung huruf, angka, dan karakter khusus",
           "confirmPasswordRequired": "Konfirmasi kata sandi wajib diisi",
-          "confirmPasswordNotMatch": "Konfirmasi kata sandi tidak cocok"
+          "confirmPasswordNotMatch": "Konfirmasi kata sandi tidak cocok",
+          "invalidCredentials": "Username atau kata sandi salah"
         }
       }
     }

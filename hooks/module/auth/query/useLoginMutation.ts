@@ -3,10 +3,11 @@
 import { toast } from '@/components/hoc/ToastProvider';
 import { DASHBOARD_BOOKS_PATH_URL } from '@/constants/routes';
 import { useCredentialService } from '@/hooks/common/useCredentialService';
+import { useMutation } from '@/libs/react-query';
 import { authService } from '@/services/api';
 import { LoginPayload, LoginResponse } from '@/types/api/auth';
-import { ApiResponse } from '@/types/api/common';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ApiResponse, ExceptionCode } from '@/types/api/common';
+import { useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -68,7 +69,11 @@ const useLoginMutation = () => {
     },
     onError: (error) => {
       // Log error and show toast notification with error message
-      console.log({ error });
+      if (error.code === ExceptionCode.INVALID_CREDENTIALS) {
+        toast.error(t('auth.form.message.toast.errorInvalidCredentials'));
+      } else if (error.code === ExceptionCode.EMAIL_NOT_VERIFIED) {
+        toast.error(t('auth.form.message.toast.errorEmailNotVerified'));
+      }
     },
   });
 
