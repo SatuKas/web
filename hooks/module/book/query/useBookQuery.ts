@@ -1,9 +1,9 @@
 'use client';
 
+import { useQuery } from '@/libs/react-query';
 import { bookService } from '@/services/api';
 import { BookByIdData, BookListData } from '@/types/client/book';
 import { mapSnakeCaseToCamelCase } from '@/utils/data';
-import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 const BOOK_LIST_QUERY_KEY = 'book-list';
